@@ -1,17 +1,19 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+public final class Main {
+	public static void main(final String[] args) {
+		final Location startLocation = new Location(0, 0);
+		final Player player = new Player(100, 50, 5, 50.0, startLocation);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
-    }
+		final Enums goblin = new Enums(30, 15);
+		System.out.println("Napotkano przeciwnika: " + goblin);
+
+		final Item sword = new Item(20);
+		player.getInventory().setItem(0, sword);
+		player.setItemInHand(sword);
+
+		System.out.println("\nRozpoczynamy walkę!");
+		player.attack(goblin);
+		player.defend(goblin);
+	}
 }

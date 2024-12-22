@@ -1,21 +1,56 @@
 package org.Daty;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
-public class Main {
-	public static void main(final String[] args) {
-		final LocalDateTime now = LocalDateTime.now();
+public class Room {
+	private final String roomId;
+	private final String name;
+	private final String description;
 
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	public Room(final String roomId, final String name, final String description) {
+		if (roomId == null || roomId.isBlank() || name == null || name.isBlank()) {
+			throw new IllegalArgumentException("Room ID and name must not be null or blank");
+		}
+		this.roomId = roomId;
+		this.name = name;
+		this.description = description;
+	}
 
-		//final String dateTimeString = "2024-09-12 14:30:00";
-		//		final LocalDateTime parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
-		//		System.out.println(parsedDateTime);
+	public String getRoomId() {
+		return roomId;
+	}
 
-		// Parsowanie daty z tekstu
-		final String dateTimeString = "2024-09-12 14:30:00";
-		final LocalDateTime parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
-		System.out.println(parsedDateTime);
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public String toString() {
+		return "Room{" +
+				"roomId='" + roomId + '\'' +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				'}';
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		final Room room = (Room) o;
+		return roomId.equals(room.roomId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(roomId, name, description);
 	}
 }
