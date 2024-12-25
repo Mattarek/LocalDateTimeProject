@@ -28,7 +28,7 @@ public class Vehicle {
 		this.color = color;
 	}
 
-	public Boolean isVinCorrect() {
+	public boolean isVinCorrect() {
 		return vin.length() == 17 && !vin.contains("O") && !vin.contains("Q") && !vin.contains("I");
 	}
 
