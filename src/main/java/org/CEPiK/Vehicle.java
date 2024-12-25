@@ -33,11 +33,17 @@ public class Vehicle {
 	}
 
 	public boolean isVinCorrect() {
-		return vin.length() == 17 && !vin.contains("O") && !vin.contains("Q") && !vin.contains("I");
+		return vin.length() == 17 &&
+				!vin.contains("O") &&
+				!vin.contains("Q") &&
+				!vin.contains("I");
 	}
 
 	public boolean isValidRegistrationNumber() {
-		return registrationNumber.length() >= 5 && registrationNumber.length() <= 7 && !Character.isLetter(registrationNumber.charAt(0)) && !Character.isLetter(registrationNumber.charAt(1));
+		return registrationNumber.length() >= 5 &&
+				registrationNumber.length() <= 7 &&
+				!Character.isLetter(registrationNumber.charAt(0)) &&
+				!Character.isLetter(registrationNumber.charAt(1));
 	}
 
 	@Override
@@ -45,7 +51,13 @@ public class Vehicle {
 		if (!(o instanceof final Vehicle vehicle)) {
 			return false;
 		}
-		return Objects.equals(mark, vehicle.mark) && Objects.equals(model, vehicle.model) && Objects.equals(vin, vehicle.vin) && Objects.equals(productionDate, vehicle.productionDate) && Objects.equals(registrationNumber, vehicle.registrationNumber) && Objects.equals(technicalCondition, vehicle.technicalCondition) && Objects.equals(color, vehicle.color);
+		return Objects.equals(mark, vehicle.mark) &&
+				Objects.equals(model, vehicle.model) &&
+				Objects.equals(vin, vehicle.vin) &&
+				Objects.equals(productionDate, vehicle.productionDate) &&
+				Objects.equals(registrationNumber, vehicle.registrationNumber) &&
+				Objects.equals(technicalCondition, vehicle.technicalCondition) &&
+				Objects.equals(color, vehicle.color);
 	}
 
 	@Override
