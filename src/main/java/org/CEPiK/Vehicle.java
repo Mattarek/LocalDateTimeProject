@@ -23,13 +23,21 @@ public class Vehicle {
 		}
 
 		this.productionDate = productionDate;
-		this.registrationNumber = registrationNumber;
+		if (isValidRegistrationNumber()) {
+			this.registrationNumber = registrationNumber;
+		} else {
+			this.registrationNumber = "";
+		}
 		this.technicalCondition = technicalCondition;
 		this.color = color;
 	}
 
 	public boolean isVinCorrect() {
 		return vin.length() == 17 && !vin.contains("O") && !vin.contains("Q") && !vin.contains("I");
+	}
+
+	public boolean isValidRegistrationNumber() {
+		return registrationNumber.length() >= 5 && registrationNumber.length() <= 7 && !Character.isLetter(registrationNumber.charAt(0)) && !Character.isLetter(registrationNumber.charAt(1));
 	}
 
 	@Override
