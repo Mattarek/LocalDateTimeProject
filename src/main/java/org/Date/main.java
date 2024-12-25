@@ -1,4 +1,4 @@
-package org.Daty;
+package org.Date;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,7 +9,7 @@ public class main {
 
 		final Room room1 = new Room("R1", "Sala A", "Sala z projektorem");
 		final Room room2 = new Room("R2", "Sala B", "Sala z tablicą interaktywną");
-		
+
 		manager.addRoom(room1);
 		manager.addRoom(room2);
 

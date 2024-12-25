@@ -1,4 +1,4 @@
-package org.Daty;
+package org.Date;
 
 import java.util.Objects;
 

@@ -61,22 +61,24 @@ public class main {
 		while (true) {
 			System.out.println("Podaj liczbę:");
 			final String value = scanner.next();
+
 			if (isCorrect(value)) {
 				return Integer.parseInt(value);
 			}
-			System.out.println("Niepoprawna wartość! Nie wykonam obliczenia!");
-			return 0;
+			System.out.println("To nie jest liczba!");
 		}
 	}
 
 	public static boolean isCorrect(final String value) {
-		if (value.matches("[0-9]+") && value.length() < 11) {
-			int valueInt = 0;
-			for (int i = 0; i < value.length(); i++) {
-				valueInt += Character.getNumericValue(value.charAt(i));
-			}
-			return valueInt > 0;
+		if (value.length() >= 11) {
+			return false;
 		}
-		return false;
+		for (int i = 0; i < value.length(); i++) {
+			final char addValue = value.charAt(i);
+			if (!Character.isDigit(addValue)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
