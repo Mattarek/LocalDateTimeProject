@@ -4,31 +4,32 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Vehicle {
-	final String mark;
-	final String model;
-	final String vin;
-	final LocalDateTime productionDate;
-	final String registrationNumber;
-	final String technicalCondition;
-	final String color;
+	private final String mark;
+	private final String model;
+	private final LocalDateTime productionDate;
+	private final String registrationNumber;
+	private final String technicalCondition;
+	private final String color;
+	private final String vin;
 
 	public Vehicle(final String model, final String vin, final String mark, final LocalDateTime productionDate,
 				   final String registrationNumber, final String technicalCondition, final String color) {
 		this.model = model;
 		this.mark = mark;
-		this.vin = isVinCorrect(vin);
+		if (isVinCorrect()) {
+			this.vin = vin;
+		} else {
+			this.vin = "";
+		}
+
 		this.productionDate = productionDate;
 		this.registrationNumber = registrationNumber;
 		this.technicalCondition = technicalCondition;
 		this.color = color;
 	}
 
-	public String isVinCorrect(final String vin) {
-		if (vin.length() != 17 || vin.contains("O") || vin.contains("Q") || vin.contains("I")) {
-			return "Vin is incorrect!";
-		}
-
-		return vin;
+	public Boolean isVinCorrect() {
+		return vin.length() == 17 && !vin.contains("O") && !vin.contains("Q") && !vin.contains("I");
 	}
 
 	@Override
