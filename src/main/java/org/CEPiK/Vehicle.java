@@ -16,14 +16,14 @@ public class Vehicle {
 				   final String registrationNumber, final String technicalCondition, final String color) {
 		this.model = model;
 		this.mark = mark;
-		if (isVinCorrect()) {
+		if (isVinCorrect(vin)) {
 			this.vin = vin;
 		} else {
 			this.vin = "";
 		}
 
 		this.productionDate = productionDate;
-		if (isValidRegistrationNumber()) {
+		if (isValidRegistrationNumber(registrationNumber)) {
 			this.registrationNumber = registrationNumber;
 		} else {
 			this.registrationNumber = "";
@@ -32,18 +32,31 @@ public class Vehicle {
 		this.color = color;
 	}
 
-	public boolean isVinCorrect() {
+	public boolean isVinCorrect(final String vin) {
 		return vin.length() == 17 &&
 				!vin.contains("O") &&
 				!vin.contains("Q") &&
 				!vin.contains("I");
 	}
 
-	public boolean isValidRegistrationNumber() {
+	public boolean isValidRegistrationNumber(final String registrationNumber) {
 		return registrationNumber.length() >= 5 &&
 				registrationNumber.length() <= 7 &&
-				!Character.isLetter(registrationNumber.charAt(0)) &&
-				!Character.isLetter(registrationNumber.charAt(1));
+				Character.isLetter(registrationNumber.charAt(0)) &&
+				Character.isLetter(registrationNumber.charAt(1));
+	}
+
+	@Override
+	public String toString() {
+		return "Vehicle{" +
+				"mark='" + mark + '\'' +
+				", model='" + model + '\'' +
+				", productionDate=" + productionDate +
+				", registrationNumber='" + registrationNumber + '\'' +
+				", technicalCondition='" + technicalCondition + '\'' +
+				", color='" + color + '\'' +
+				", vin='" + vin + '\'' +
+				'}';
 	}
 
 	@Override

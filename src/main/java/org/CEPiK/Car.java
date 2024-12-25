@@ -10,14 +10,6 @@ public class Car extends Vehicle {
 
 	@Override
 	public String toString() {
-		return "Car{" +
-				"color='" + color + '\'' +
-				", registrationNumber='" + registrationNumber + '\'' +
-				", vin='" + vin + '\'' +
-				", model='" + model + '\'' +
-				", mark='" + mark + '\'' +
-				", technicalCondition='" + technicalCondition + '\'' +
-				", productionDate=" + productionDate +
-				'}';
+		return "Car{}" + super.toString();
 	}
 }
