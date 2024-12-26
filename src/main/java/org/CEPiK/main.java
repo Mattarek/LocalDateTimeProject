@@ -49,6 +49,22 @@ public class main {
 		final String color = scanner.nextLine();
 
 		final Car car = new Car(model, vin, mark, productionDate, registrationNumber, technicalCondition, color);
+
+		System.out.print("Dodajemy kierowcę, podaj imię kierowcy: ");
+		final String name = scanner.nextLine();
+
+		System.out.print("Podaj nazwisko kierowcy: ");
+		final String lastName = scanner.nextLine();
+
+		System.out.print("Podaj kategorie jakie ten kierowca posiada: ");
+		final String licence = scanner.nextLine();
+		final CarDriver firstDriver = new CarDriver(name, lastName, licence);
+
+		car.addDriver(firstDriver);
+		firstDriver.addCar(car);
+
 		System.out.println(car);
+		System.out.println(car.getCarDrivers());
+		System.out.println(firstDriver.getCarsList());
 	}
 }

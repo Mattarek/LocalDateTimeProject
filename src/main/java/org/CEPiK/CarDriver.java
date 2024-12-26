@@ -20,13 +20,16 @@ public class CarDriver {
 		carsList.add(car);
 	}
 
+	public List<Car> getCarsList() {
+		return carsList;
+	}
+
 	@Override
 	public String toString() {
 		return "CarDriver{" +
 				"name='" + name + '\'' +
 				", lastName='" + lastName + '\'' +
 				", licence='" + licence + '\'' +
-				", carsList=" + carsList +
 				'}';
 	}
 

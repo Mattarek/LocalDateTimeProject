@@ -12,6 +12,10 @@ public class Car extends Vehicle {
 		super(model, vin, mark, productionDate, registrationNumber, technicalCondition, color);
 	}
 
+	public List<CarDriver> getCarDrivers() {
+		return driversList;
+	}
+
 	public boolean addDriver(final CarDriver carDriver) {
 		if (driversList.size() >= 2) {
 			return false;
@@ -22,6 +26,7 @@ public class Car extends Vehicle {
 
 	@Override
 	public String toString() {
-		return "Car{}" + super.toString();
+		return "Car{" +
+				"} " + super.toString();
 	}
 }
