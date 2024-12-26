@@ -12,10 +12,6 @@ public class main {
 	private static final List<CarDriver> drivers = new ArrayList<>();
 
 	public static void main(final String[] args) {
-		final Scanner scanner = new Scanner(System.in);
-		final List<Car> cars = new ArrayList<>();
-		final List<CarDriver> drivers = new ArrayList<>();
-
 		while (true) {
 			System.out.println("\nMenu:");
 			System.out.println("1. Dodaj samochód");
