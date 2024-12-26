@@ -41,7 +41,7 @@ public class Vehicle {
 
 	public boolean isValidRegistrationNumber(final String registrationNumber) {
 		return registrationNumber.length() >= 5 &&
-				registrationNumber.length() <= 7 &&
+				registrationNumber.length() <= 8 &&
 				Character.isLetter(registrationNumber.charAt(0)) &&
 				Character.isLetter(registrationNumber.charAt(1));
 	}
