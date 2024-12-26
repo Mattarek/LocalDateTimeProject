@@ -3,6 +3,7 @@ package org.CEPiK;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Car extends Vehicle {
 	private final List<CarDriver> driversList = new ArrayList<>();
@@ -12,8 +13,26 @@ public class Car extends Vehicle {
 		super(model, vin, mark, productionDate, registrationNumber, technicalCondition, color);
 	}
 
-	public List<CarDriver> getCarDrivers() {
-		return driversList;
+	@Override
+	public String toString() {
+		return "Car{" +
+				"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (!(o instanceof final Car car)) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		return Objects.equals(driversList, car.driversList);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), driversList);
 	}
 
 	public boolean addDriver(final CarDriver carDriver) {
@@ -22,11 +41,5 @@ public class Car extends Vehicle {
 		}
 		driversList.add(carDriver);
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Car{" +
-				"} " + super.toString();
 	}
 }

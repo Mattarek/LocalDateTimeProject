@@ -16,21 +16,18 @@ public class CarDriver {
 		this.licence = licence;
 	}
 
-	public void addCar(final Car car) {
-		carsList.add(car);
-	}
-
-	public List<Car> getCarsList() {
-		return carsList;
-	}
-
 	@Override
 	public String toString() {
 		return "CarDriver{" +
 				"name='" + name + '\'' +
 				", lastName='" + lastName + '\'' +
 				", licence='" + licence + '\'' +
+				", carsList=" + carsList +
 				'}';
+	}
+
+	public void addCar(final Car car) {
+		carsList.add(car);
 	}
 
 	@Override
