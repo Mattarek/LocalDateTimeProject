@@ -21,7 +21,11 @@ public class RegistrationCertificate {
 
 	@Override
 	public String toString() {
-		return "RegistrationCertificate{}";
+		return "RegistrationCertificate{" +
+				"car=" + car +
+				", mainDriver=" + mainDriver +
+				", additionalDriver=" + additionalDriver +
+				'}';
 	}
 
 	@Override

@@ -8,8 +8,10 @@ import java.util.Scanner;
 public class main {
 
 	private static final Scanner scanner = new Scanner(System.in);
+
 	private static final List<Car> cars = new ArrayList<>();
 	private static final List<CarDriver> drivers = new ArrayList<>();
+	private static final List<RegistrationCertificate> registrationCertificates = new ArrayList<>();
 
 	public static void main(final String[] args) {
 		while (true) {
@@ -19,8 +21,9 @@ public class main {
 			System.out.println("3. Powiąż kierowcę z samochodem");
 			System.out.println("4. Wyświetl samochody");
 			System.out.println("5. Wyświetl kierowców");
-			System.out.println("6. Porównaj dwóch kierowców");
-			System.out.println("7. Wyjdź");
+			System.out.println("6. Wyświetl dowody rejestracyjne");
+			System.out.println("7. Porównaj dwóch kierowców");
+			System.out.println("8. Wyjdź");
 			System.out.print("Wybierz opcję: ");
 
 			final int choice = scanner.nextInt();
@@ -69,7 +72,10 @@ public class main {
 					final String color = scanner.nextLine();
 
 					final Car car = new Car(model, vin, mark, productionDate, registrationNumber, technicalCondition, color);
+					final RegistrationCertificate newRegistrationCertificate = new RegistrationCertificate(car);
+
 					cars.add(car);
+					registrationCertificates.add(newRegistrationCertificate);
 					System.out.println("Samochód dodany.");
 				}
 				case 2 -> {
@@ -87,7 +93,7 @@ public class main {
 					System.out.println("Kierowca dodany.");
 				}
 				case 3 -> {
-					if (cars.isEmpty() || drivers.isEmpty()) {
+					if (cars.isEmpty() || drivers.isEmpty() || registrationCertificates.isEmpty()) {
 						System.out.println("Brak samochodów lub kierowców do powiązania.");
 						break;
 					}
@@ -102,8 +108,8 @@ public class main {
 					scanner.nextLine();
 
 					System.out.println("Lista samochodów:");
-					for (int i = 0; i < cars.size(); i++) {
-						System.out.println((i + 1) + ". " + cars.get(i));
+					for (int i = 0; i < registrationCertificates.size(); i++) {
+						System.out.println((i + 1) + ". " + registrationCertificates.get(i));
 					}
 
 					System.out.print("Wybierz numer samochodu: ");
@@ -111,10 +117,11 @@ public class main {
 					scanner.nextLine();
 
 					final CarDriver selectedDriver = drivers.get(driverIndex);
-					final Car selectedCar = cars.get(carIndex);
+					final RegistrationCertificate selectedCar = registrationCertificates.get(carIndex);
 
-					if (selectedCar.addDriver(selectedDriver)) {
-						selectedDriver.addCar(selectedCar);
+					if (true) {
+						drivers.add(selectedDriver);
+						registrationCertificates.add(selectedCar);
 						System.out.println("Kierowca został powiązany z samochodem.");
 					} else {
 						System.out.println("Samochód ma już maksymalną liczbę kierowców.");
@@ -135,6 +142,13 @@ public class main {
 					}
 				}
 				case 6 -> {
+					if (registrationCertificates.isEmpty()) {
+						System.out.println("Brak dowodów rejestracyjnych do wyświetlenia");
+					} else {
+						registrationCertificates.forEach(System.out::println);
+					}
+				}
+				case 7 -> {
 					if (drivers.size() < 2) {
 						System.out.println("Brak wystarczającej liczby kierowców do porównania.");
 						break;
@@ -166,7 +180,7 @@ public class main {
 						System.out.println("Kierowcy są różni.");
 					}
 				}
-				case 7 -> {
+				case 8 -> {
 					System.out.println("Zakończono program.");
 					return;
 				}
