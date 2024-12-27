@@ -1,14 +1,11 @@
 package org.CEPiK;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class CarDriver {
 	private final String name;
 	private final String lastName;
 	private final String licence;
-	private final List<Car> carsList = new ArrayList<>();
 
 	public CarDriver(final String name, final String lastName, final String licence) {
 		this.name = name;
@@ -22,12 +19,7 @@ public class CarDriver {
 				"name='" + name + '\'' +
 				", lastName='" + lastName + '\'' +
 				", licence='" + licence + '\'' +
-				", carsList=" + carsList +
 				'}';
-	}
-
-	public void addCar(final Car car) {
-		carsList.add(car);
 	}
 
 	@Override
@@ -35,14 +27,11 @@ public class CarDriver {
 		if (!(o instanceof final CarDriver carDriver)) {
 			return false;
 		}
-		return Objects.equals(name, carDriver.name) &&
-				Objects.equals(lastName, carDriver.lastName) &&
-				Objects.equals(licence, carDriver.licence) &&
-				Objects.equals(carsList, carDriver.carsList);
+		return Objects.equals(name, carDriver.name) && Objects.equals(lastName, carDriver.lastName) && Objects.equals(licence, carDriver.licence);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, lastName, licence, carsList);
+		return Objects.hash(name, lastName, licence);
 	}
 }
