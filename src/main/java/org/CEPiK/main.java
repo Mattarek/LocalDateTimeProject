@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class main {
-
 	private static final Scanner scanner = new Scanner(System.in);
-
 	private static final List<Car> cars = new ArrayList<>();
 	private static final List<CarDriver> drivers = new ArrayList<>();
 	private static final List<RegistrationCertificate> registrationCertificates = new ArrayList<>();
@@ -31,8 +29,15 @@ public class main {
 
 			switch (choice) {
 				case 1 -> {
-					System.out.print("Podaj markę samochodu: ");
-					final String mark = scanner.nextLine();
+					System.out.println("Podaj markę samochodu: ");
+					final Mark[] mark = Mark.values();
+					for (int i = 0; i < mark.length; i++) {
+						System.out.println((i + 1) + ". " + mark[i]);
+					}
+
+					System.out.print("Wybrana marka: ");
+					final int choiceMark = scanner.nextInt();
+					final Mark selectedMark = mark[choiceMark - 1];
 
 					System.out.println("Podaj model samochodu: ");
 					final Model[] models = Model.values();
@@ -80,7 +85,7 @@ public class main {
 					System.out.print("Podaj kolor: ");
 					final String color = scanner.nextLine();
 
-					final Car car = new Car(selectedModel, vin, mark, productionDate, registrationNumber,
+					final Car car = new Car(selectedModel, vin, selectedMark, productionDate, registrationNumber,
 							technicalCondition, color);
 					final RegistrationCertificate newRegistrationCertificate = new RegistrationCertificate(car);
 

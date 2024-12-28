@@ -1,10 +1,10 @@
 package org.CEPiK;
 
 public enum Model {
-	Insignia,
-	Astra,
-	Zafira,
-	Vivaro,
-	Movano,
-	Corsa
+	INSIGNIA,
+	ASTRA,
+	ZAFIRA,
+	VIVARO,
+	MOVANO,
+	CORSA
 }
