@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class Vehicle {
 	private final String mark;
-	private final String model;
+	private final Model model;
 	private final LocalDateTime productionDate;
 	private final String registrationNumber;
 	private final String technicalCondition;
 	private final String color;
 	private final String vin;
 
-	public Vehicle(final String model, final String vin, final String mark, final LocalDateTime productionDate,
+	public Vehicle(final Model model, final String vin, final String mark, final LocalDateTime productionDate,
 				   final String registrationNumber, final String technicalCondition, final String color) {
 		this.model = model;
 		this.mark = mark;

@@ -33,7 +33,9 @@ public class RegistrationCertificate {
 		if (!(o instanceof final RegistrationCertificate that)) {
 			return false;
 		}
-		return Objects.equals(car, that.car) && Objects.equals(mainDriver, that.mainDriver) && Objects.equals(additionalDriver, that.additionalDriver);
+		return Objects.equals(car, that.car) &&
+				Objects.equals(mainDriver, that.mainDriver) &&
+				Objects.equals(additionalDriver, that.additionalDriver);
 	}
 
 	@Override

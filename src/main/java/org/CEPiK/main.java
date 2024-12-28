@@ -31,14 +31,23 @@ public class main {
 
 			switch (choice) {
 				case 1 -> {
-					System.out.print("Podaj model samochodu: ");
-					final String model = scanner.nextLine();
+					System.out.print("Podaj markę samochodu: ");
+					final String mark = scanner.nextLine();
+
+					System.out.println("Podaj model samochodu: ");
+					final Model[] models = Model.values();
+
+					for (int i = 0; i < models.length; i++) {
+						System.out.println((i + 1) + ". " + models[i]);
+					}
+
+					System.out.print("Wybrany model: ");
+					final int choiceModel = scanner.nextInt();
+					scanner.nextLine();
+					final Model selectedModel = models[choiceModel - 1];
 
 					System.out.print("Podaj vin: ");
 					final String vin = scanner.nextLine();
-
-					System.out.print("Podaj markę samochodu: ");
-					final String mark = scanner.nextLine();
 
 					System.out.print("Podaj rok produkcji: ");
 					final int year = scanner.nextInt();
@@ -71,7 +80,8 @@ public class main {
 					System.out.print("Podaj kolor: ");
 					final String color = scanner.nextLine();
 
-					final Car car = new Car(model, vin, mark, productionDate, registrationNumber, technicalCondition, color);
+					final Car car = new Car(selectedModel, vin, mark, productionDate, registrationNumber,
+							technicalCondition, color);
 					final RegistrationCertificate newRegistrationCertificate = new RegistrationCertificate(car);
 
 					cars.add(car);
