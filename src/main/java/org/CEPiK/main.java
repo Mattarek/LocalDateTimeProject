@@ -30,17 +30,21 @@ public class main {
 			switch (choice) {
 				case 1 -> {
 					System.out.println("Podaj markę samochodu: ");
-					final Mark[] mark = Mark.values();
-					for (int i = 0; i < mark.length; i++) {
-						System.out.println((i + 1) + ". " + mark[i]);
+					final Mark[] marks = Mark.values();
+					for (int i = 0; i < marks.length; i++) {
+						System.out.println((i + 1) + ". " + marks[i]);
 					}
 
 					System.out.print("Wybrana marka: ");
 					final int choiceMark = scanner.nextInt();
-					final Mark selectedMark = mark[choiceMark - 1];
+					final Mark selectedMark = marks[choiceMark - 1];
 
-					System.out.println("Podaj model samochodu: ");
-					final Model[] models = Model.values();
+					final Model[] models = selectedMark.getModels();
+
+					if (models.length == 0) {
+						System.out.println("Brak dostępnych modeli dla tej marki!");
+						break;
+					}
 
 					for (int i = 0; i < models.length; i++) {
 						System.out.println((i + 1) + ". " + models[i]);
