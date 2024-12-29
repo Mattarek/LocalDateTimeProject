@@ -30,33 +30,15 @@ public class main {
 			switch (choice) {
 				case 1 -> {
 					System.out.println("Podaj markę samochodu: ");
-					final Mark[] marks = Mark.values();
-					for (int i = 0; i < marks.length; i++) {
-						System.out.println((i + 1) + ". " + marks[i]);
-					}
+					final String providedMark = scanner.next();
+					final Mark mark = Mark.valueOf(providedMark.toUpperCase());
 
-					System.out.print("Wybrana marka: ");
-					final int choiceMark = scanner.nextInt();
-					final Mark selectedMark = marks[choiceMark - 1];
-
-					final Model[] models = selectedMark.getModels();
-
-					if (models.length == 0) {
-						System.out.println("Brak dostępnych modeli dla tej marki!");
-						break;
-					}
-
-					for (int i = 0; i < models.length; i++) {
-						System.out.println((i + 1) + ". " + models[i]);
-					}
-
-					System.out.print("Wybrany model: ");
-					final int choiceModel = scanner.nextInt();
-					scanner.nextLine();
-					final Model selectedModel = models[choiceModel - 1];
+					System.out.println("Podaj model: ");
+					final String providedModel = scanner.next();
+					final Model model = Model.valueOf(providedModel.toUpperCase());
 
 					System.out.print("Podaj vin: ");
-					final String vin = scanner.nextLine();
+					final String vin = scanner.next();
 
 					System.out.print("Podaj rok produkcji: ");
 					final int year = scanner.nextInt();
@@ -89,7 +71,7 @@ public class main {
 					System.out.print("Podaj kolor: ");
 					final String color = scanner.nextLine();
 
-					final Car car = new Car(selectedModel, vin, selectedMark, productionDate, registrationNumber,
+					final Car car = new Car(model, vin, mark, productionDate, registrationNumber,
 							technicalCondition, color);
 					final RegistrationCertificate newRegistrationCertificate = new RegistrationCertificate(car);
 
