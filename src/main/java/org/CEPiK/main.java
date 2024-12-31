@@ -2,6 +2,7 @@ package org.CEPiK;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +11,39 @@ public class main {
 	private static final List<Car> cars = new ArrayList<>();
 	private static final List<CarDriver> drivers = new ArrayList<>();
 	private static final List<RegistrationCertificate> registrationCertificates = new ArrayList<>();
+
+	public static Mark getMark() {
+		while (true) {
+			System.out.println("Podaj markę samochodu: ");
+			final String providedMark = scanner.next();
+
+			for (final Mark mark : Mark.values()) {
+				if (mark.name().equals(providedMark.toUpperCase())) {
+					return mark;
+				}
+			}
+		}
+	}
+
+	public static Model getModel(final Mark mark) {
+		while (true) {
+			System.out.println("Dostępne modele dla marki " + mark + ":");
+			for (final Model model : mark.getModels()) {
+				System.out.println(model);
+			}
+
+			System.out.println(mark.getModels());
+
+			System.out.println("Podaj wybrany model: ");
+			final String providedModel = scanner.next();
+
+			for (final Model model : mark.getModels()) {
+				if (model.name().equals(providedModel.toUpperCase())) {
+					return model;
+				}
+			}
+		}
+	}
 
 	public static void main(final String[] args) {
 		while (true) {
@@ -29,13 +63,10 @@ public class main {
 
 			switch (choice) {
 				case 1 -> {
-					System.out.println("Podaj markę samochodu: ");
-					final String providedMark = scanner.next();
-					final Mark mark = Mark.valueOf(providedMark.toUpperCase());
-
-					System.out.println("Podaj model: ");
-					final String providedModel = scanner.next();
-					final Model model = Model.valueOf(providedModel.toUpperCase());
+					System.out.println(Arrays.toString(Mark.values()));
+					
+					final Mark mark = getMark();
+					final Model model = getModel(mark);
 
 					System.out.print("Podaj vin: ");
 					final String vin = scanner.next();

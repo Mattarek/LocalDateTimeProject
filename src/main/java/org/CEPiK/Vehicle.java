@@ -23,7 +23,7 @@ public class Vehicle {
 		}
 
 		this.productionDate = productionDate;
-		if (isValidRegistrationNumber(registrationNumber)) {
+		if (validateRegistrationNumber(registrationNumber)) {
 			this.registrationNumber = registrationNumber;
 		} else {
 			this.registrationNumber = "";
@@ -32,18 +32,39 @@ public class Vehicle {
 		this.color = color;
 	}
 
+	public static boolean validateRegistrationNumber(final String registrationNumber) {
+		if (registrationNumber == null || registrationNumber.length() <= 4 || registrationNumber.length() >= 8) {
+			return false;
+		}
+
+		final String[] parts = registrationNumber.split(" ");
+
+		if (parts.length != 2) {
+			return false;
+		}
+
+		final String city = parts[0];
+		for (final char firstLetter : city.toCharArray()) {
+			if (!Character.isLetter(firstLetter)) {
+				return false;
+			}
+		}
+
+		final String rest = parts[1];
+		for (final char c : rest.toCharArray()) {
+			if (!Character.isLetterOrDigit(c)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public boolean isVinCorrect(final String vin) {
 		return vin.length() == 17 &&
 				!vin.contains("O") &&
 				!vin.contains("Q") &&
 				!vin.contains("I");
-	}
-
-	public boolean isValidRegistrationNumber(final String registrationNumber) {
-		return registrationNumber.length() >= 5 &&
-				registrationNumber.length() <= 8 &&
-				Character.isLetter(registrationNumber.charAt(0)) &&
-				Character.isLetter(registrationNumber.charAt(1));
 	}
 
 	@Override
