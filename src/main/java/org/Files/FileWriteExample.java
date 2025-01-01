@@ -8,6 +8,8 @@ public class FileWriteExample {
 		try (final FileWriter writer = new FileWriter("example.txt")) {
 			writer.write("Hello world \n");
 			writer.write("Druga linia");
+			// jako, żę wykonujemy try... with resources, ten automatycznie dodaje writer.close()
+			// i dlatego tekst jest zapisywany
 			System.out.println("Tekst został zapisany do pliku!");
 		} catch (final IOException e) {
 			System.out.println("Wystąpił błąd podczas zapisu do pliku");
