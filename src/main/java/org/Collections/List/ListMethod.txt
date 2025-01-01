@@ -1,0 +1,39 @@
+1. List (ArrayList, LinkedList, Vector, Stack)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| add(E e)                         | Dodaje element na koniec listy. |
+	| add(int index, E element)        | Wstawia element na określonej pozycji. |
+	| get(int index)                   | Zwraca element pod wskazanym indeksem. |
+	| set(int index, E element)        | Zastępuje element na wskazanym indeksie. |
+	| remove(int index)                | Usuwa element pod wskazanym indeksem. |
+	| remove(Object o)                 | Usuwa pierwsze wystąpienie danego elementu. |
+	| clear()                          | Usuwa wszystkie elementy z listy. |
+	| size()                           | Zwraca liczbę elementów w liście. |
+	| isEmpty()                        | Sprawdza, czy lista jest pusta. |
+	| contains(Object o)               | Sprawdza, czy lista zawiera dany element. |
+	| indexOf(Object o)                | Zwraca indeks pierwszego wystąpienia elementu. |
+	| lastIndexOf(Object o)            | Zwraca indeks ostatniego wystąpienia elementu. |
+	| subList(int fromIndex, int toIndex) | Zwraca podlistę między indeksami. |
+	| toArray()                        | Zwraca tablicę z elementami listy. |
+
+1.1. Metody specyficzne dla LinkedList (implementuje Deque)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| addFirst(E e)                    | Dodaje element na początek listy. |
+	| addLast(E e)                     | Dodaje element na koniec listy. |
+	| removeFirst()                    | Usuwa pierwszy element z listy. |
+	| removeLast()                     | Usuwa ostatni element z listy. |
+	| peekFirst()                      | Zwraca pierwszy element, nie usuwając go. |
+	| peekLast()                       | Zwraca ostatni element, nie usuwając go. |
+	| offerFirst(E e)                  | Próbuje dodać element na początek listy. |
+	| offerLast(E e)                   | Próbuje dodać element na koniec listy. |
+	| pollFirst()                      | Usuwa i zwraca pierwszy element. |
+	| pollLast()                       | Usuwa i zwraca ostatni element. |
+
+	1.2. Metody specyficzne dla Stack (rozszerza Vector)
+
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| push(E item)                     | Dodaje element na stos. |
+	| pop()                            | Usuwa i zwraca element z góry stosu. |
+	| peek()                           | Zwraca element z góry stosu bez jego usuwania. |
