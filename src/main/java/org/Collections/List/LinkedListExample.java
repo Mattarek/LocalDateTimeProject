@@ -15,9 +15,23 @@ public class LinkedListExample {
 
 		linkedList.add("Pierwszy");
 		linkedList.add("Drugi");
+		linkedList.add("Trzeci");
+		linkedList.add("Czwarty");
+
+		linkedList.addLast("Ostatni");
+		linkedList.add("Piąty");
 		linkedList.addFirst("Zerowy"); // Dodawanie na początku
 
-		System.out.println("Pierwszy element: " + linkedList.get(0));
+		/*
+			# Kolejność
+				Zerowy
+				Pierwszy
+				Drugi
+				Trzeci
+				Czwarty
+				Ostatni
+				Piąty
+		 */
 
 		for (final String item : linkedList) {
 			System.out.println(item);
