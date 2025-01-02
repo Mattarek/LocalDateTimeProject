@@ -1,0 +1,135 @@
+Interfejs Map
+	Interfejs Map w Javie reprezentuje zbiór par klucz-wartość, gdzie każdy klucz jest unikalny,
+	a wartość jest związana z tym kluczem. Map zapewnia podstawowe operacje takie jak dodawanie,
+	usuwanie, wyszukiwanie oraz iterowanie po elementach w mapie. Oto niektóre z głównych metod
+	interfejsu
+
+3. Map (HashMap, LinkedHashMap, TreeMap)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| put(K key, V value)              | Dodaje parę klucz-wartość do mapy, jeśli klucz nie istnieje, lub aktualizuje wartość, jeśli klucz już istnieje. |
+	| get(Object key)                  | Zwraca wartość przypisaną do podanego klucza. |
+	| remove(Object key)               | Usuwa parę klucz-wartość na podstawie podanego klucza. |
+	| containsKey(Object key)          | Sprawdza, czy mapa zawiera dany klucz. |
+	| containsValue(Object value)      | Sprawdza, czy mapa zawiera daną wartość. |
+	| size()                           | Zwraca liczbę par klucz-wartość w mapie. |
+	| isEmpty()                        | Sprawdza, czy mapa jest pusta. |
+	| keySet()                         | Zwraca zbiór wszystkich kluczy w mapie. |
+	| values()                         | Zwraca kolekcję wszystkich wartości w mapie. |
+	| entrySet()                       | Zwraca zbiór wszystkich par klucz-wartość w mapie. |
+	| putAll(Map<? extends K, ? extends V> m) | Dodaje wszystkie pary klucz-wartość z innej mapy do bieżącej mapy. |
+	| clear()                          | Usuwa wszystkie elementy z mapy. |
+	| replace(K key, V value)          | Zastępuje wartość przypisaną do podanego klucza, jeśli klucz istnieje. |
+	| replace(K key, V oldValue, V newValue) | Zastępuje wartość przypisaną do klucza tylko, jeśli wartość jest zgodna z daną. |
+
+3.1. Metody specyficzne dla TreeMap (dziedziczy po NavigableMap)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| firstKey()                       | Zwraca pierwszy (najmniejszy) klucz w mapie. |
+	| lastKey()                        | Zwraca ostatni (największy) klucz w mapie. |
+	| lowerKey(K key)                  | Zwraca klucz, który jest mniejszy niż podany klucz. |
+	| higherKey(K key)                 | Zwraca klucz, który jest większy niż podany klucz. |
+	| pollFirstEntry()                 | Usuwa i zwraca pierwszą parę klucz-wartość. |
+	| pollLastEntry()                  | Usuwa i zwraca ostatnią parę klucz-wartość. |
+
+
+# HashMap
+	HashMap to najczęściej używana implementacja Map, która używa tablicy haszującej do
+	 przechowywania danych. Jest to szybka struktura danych, która zapewnia średnią złożoność
+	 O(1) dla operacji takich jak get, put, remove, itp. HashMap nie gwarantuje żadnej konkretnej
+	  kolejności przechowywania elementów, ponieważ zależy to od wartości hasza klucza.
+
+	Zawiera:
+		Tablicę haszującą do przechowywania elementów.
+		Operacje na mapie w średnim czasie O(1).
+		Brak synchronizacji (niebezpieczna w środowisku wielowątkowym bez dodatkowych
+		 mechanizmów synchronizacji).
+
+	Różnice:
+		Brak gwarancji kolejności przechowywania.
+		Działa na zasadzie porównania hashów kluczy.
+		Nie obsługuje null w kontekście wartości i kluczy, chociaż w HashMap klucz lub
+		wartość mogą być null.
+
+# LinkedHashMap
+	LinkedHashMap jest rozszerzeniem HashMap, które zachowuje kolejność dodawania elementów.
+	Mapa ta używa dodatkowej struktury danych (dwukierunkowa lista), co pozwala na iterowanie po
+	 elementach w kolejności ich wstawiania. Można także przełączyć ją w tryb LRU (Least Recently
+	  Used), aby utrzymywać kolejność dostępu do elementów.
+
+	Zawiera:
+		Tablicę haszującą oraz połączoną listę elementów, która zapewnia zachowanie kolejności dodawania elementów.
+		Operacje na mapie w czasie O(1) dla podstawowych operacji, ale z dodatkowym narzutem związanym z utrzymaniem listy.
+		Gwarantowana kolejność przechowywania elementów – elementy są zwracane w kolejności ich dodania.
+
+	Różnice:
+		Zapewnia kolejność wstawiania (lub dostępu, jeśli skonfigurowana w trybie LRU).
+		Większy narzut pamięciowy i wydajnościowy niż HashMap z powodu przechowywania dodatkowej listy.
+
+# TreeMap
+	TreeMap implementuje interfejs SortedMap i przechowuje elementy w uporządkowanej kolejności. Wykorzystuje strukturę
+	drzewa czerwono-czarnego, co zapewnia złożoność O(log n) dla operacji takich jak get, put, remove. TreeMap zapewnia
+	naturalne porównanie kluczy (na podstawie Comparable lub dostarczonego Comparator).
+
+	Zawiera:
+		Drzewo czerwono-czarne do przechowywania elementów w uporządkowanej kolejności.
+		Złożoność O(log n) dla operacji takich jak get, put, remove.
+		Gwarantowana posortowana kolejność elementów na podstawie kluczy.
+
+	Różnice:
+		Przechowuje elementy w posortowanej kolejności.
+		Wydajność gorsza od HashMap (O(log n) vs O(1) dla podstawowych operacji).
+		Idealna do przypadków, w których konieczna jest posortowana mapa.
+
+# Hashtable
+	Hashtable to starsza implementacja Map, która zapewnia synchronizację. Każda operacja na Hashtable jest wykonywana
+	 w sposób zsynchronizowany, co sprawia, że jest bezpieczna w środowisku wielowątkowym. W porównaniu do HashMap jest
+	 wolniejsza i nie obsługuje null jako klucz ani wartość.
+
+	Zawiera:
+		Synchronizację dla operacji, co zapewnia bezpieczeństwo w środowisku wielowątkowym.
+		Brak null jako wartości lub klucza.
+		Gorsza wydajność w porównaniu do HashMap w związku z synchronizacją.
+
+	Różnice:
+		Przestarzała, zaleca się używanie HashMap w nowych aplikacjach.
+		Operacje na Hashtable są wolniejsze, ponieważ są synchronizowane.
+		Brak wsparcia dla null w kluczach i wartościach.
+
+# WeakHashMap
+	WeakHashMap przechowuje klucze jako słabe referencje, co oznacza, że jeśli klucz nie jest już używany w żadnym
+	 innym miejscu w programie, może zostać usunięty przez garbage collector (GC). Jest to przydatne w przypadkach, gdy
+	  chcemy unikać wycieków pamięci, ponieważ elementy mapy są automatycznie usuwane, gdy nie ma już do nich silnych referencji.
+
+	Zawiera:
+		Klucze przechowywane w słabych referencjach, co pozwala na automatyczne usuwanie ich przez garbage collector.
+		Operacje na mapie podobne do HashMap, ale z dodatkową funkcjonalnością dotyczącą zarządzania pamięcią.
+		Mapy, które usuwają klucze, których nie ma już innych referencji.
+
+	Różnice:
+		Używa słabych referencji do kluczy, co pozwala na automatyczne usuwanie kluczy przez GC.
+		Idealne do zarządzania pamięcią w aplikacjach, które przechowują duże ilości danych w mapach.
+
+# IdentityHashMap
+	IdentityHashMap działa podobnie do HashMap, ale porównuje klucze na podstawie ich referencji (a nie za pomocą metody equals).
+	 Jest to przydatne, gdy chcemy rozróżniać obiekty, które są równe, ale różnymi instancjami.
+
+	Zawiera:
+		Klucze porównywane na podstawie ich referencji (czyli używa ==, a nie equals).
+		Idealne do porównań obiektów na poziomie referencji.
+		Działa w sposób podobny do HashMap, ale z różnicą w porównywaniu kluczy.
+
+	Różnice:
+		Porównuje klucze na podstawie referencji, a nie wartości.
+		Używane w przypadkach, gdy referencje do obiektów są kluczowe, a nie same dane.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+3. Queue (LinkedList, PriorityQueue, ArrayDeque)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| add(E e)                         | Dodaje element do kolejki (wyrzuca wyjątek, jeśli kolejka jest pełna). |
+	| offer(E e)                       | Dodaje element do kolejki (zwraca false, jeśli kolejka jest pełna). |
+	| remove()                         | Usuwa i zwraca pierwszy element z kolejki. Zgłasza wyjątek, gdy kolejka jest pusta. |
+	| poll()                           | Usuwa i zwraca pierwszy element z kolejki. Zwraca null, jeśli kolejka jest pusta. |
+	| element()                        | Zwraca pierwszy element w kolejce bez usuwania. Zgłasza wyjątek, gdy kolejka jest pusta. |
+	| peek()                           | Zwraca pierwszy element w kolejce bez usuwania. Zwraca null, jeśli kolejka jest pusta. |
+	| size()                           | Zwraca liczbę elementów w kolejce. |
+	| isEmpty()                        | Sprawdza, czy kolejka jest pusta. |
+
+3.1. Metody specyficzne dla PriorityQueue
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| peek()                           | Zwraca element o najwyższym priorytecie (najmniejszy element w naturalnym porządku). |
+	| poll()                           | Usuwa i zwraca element o najwyższym priorytecie. |
+	| offer(E e)                       | Dodaje element z określonym priorytetem. |
+
+3.2. Metody specyficzne dla ArrayDeque (dziedziczy po Deque)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| addFirst(E e)                    | Dodaje element na początek kolejki. |
+	| addLast(E e)                     | Dodaje element na koniec kolejki. |
+	| removeFirst()                    | Usuwa pierwszy element z kolejki. |
+	| removeLast()                     | Usuwa ostatni element z kolejki. |
+	| peekFirst()                      | Zwraca pierwszy element, nie usuwając go. |
+	| peekLast()                       | Zwraca ostatni element, nie usuwając go. |

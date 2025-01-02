@@ -1,0 +1,24 @@
+2. Set (HashSet, LinkedHashSet, TreeSet)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| add(E e)                         | Dodaje element do zbioru, jeśli jeszcze nie istnieje. |
+	| remove(Object o)                 | Usuwa element ze zbioru. |
+	| clear()                          | Usuwa wszystkie elementy ze zbioru. |
+	| contains(Object o)               | Sprawdza, czy zbiór zawiera dany element. |
+	| isEmpty()                        | Sprawdza, czy zbiór jest pusty. |
+	| size()                           | Zwraca liczbę elementów w zbiorze. |
+	| iterator()                       | Zwraca iterator dla zbioru. |
+	| toArray()                        | Zwraca tablicę z elementami zbioru. |
+	| retainAll(Collection<?> c)       | Zachowuje tylko te elementy, które są również obecne w podanej kolekcji. |
+	| removeAll(Collection<?> c)       | Usuwa wszystkie elementy, które są obecne w podanej kolekcji. |
+	| equals(Object o)                 | Sprawdza, czy zbiór jest równy innemu obiektowi. |
+
+2.1. Metody specyficzne dla TreeSet (dziedziczy po NavigableSet)
+	| Metoda                           | Opis |
+	|----------------------------------|------|
+	| first()                          | Zwraca pierwszy (najmniejszy) element zbioru. |
+	| last()                           | Zwraca ostatni (największy) element zbioru. |
+	| lower(E e)                       | Zwraca element mniejszy niż podany element. |
+	| higher(E e)                      | Zwraca element większy niż podany element. |
+	| pollFirst()                      | Usuwa i zwraca pierwszy (najmniejszy) element zbioru. |
+	| pollLast()                       | Usuwa i zwraca ostatni (największy) element zbioru. |
