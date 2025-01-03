@@ -9,7 +9,7 @@ public class main {
 		int numberA = getNumber();
 
 		while (true) {
-			System.out.println("Podaj sposób działania: +,-,/,*");
+			System.out.println("Podaj sposób działania: +,-,*,/, ^, absolute");
 			final String operator = scanner.next();
 
 			final int numberB = getNumber();
@@ -35,8 +35,14 @@ public class main {
 						System.out.println("Nie można dzielić przez zero.");
 					}
 					break;
+				case "^":
+					numberA = (int) Math.pow(numberA, numberB);
+					break;
+				case "absolute":
+					System.out.println(Math.abs(numberB));
+					break;
 				default:
-					System.out.println("Nie podałeś poprawnego znaku, skorzystaj z: +,-,*,/");
+					System.out.println("Nie podałeś poprawnego znaku, skorzystaj z: +,-,*,/, ^, absolute");
 			}
 		}
 		System.out.println("Aktualny wynik: " + numberA);
