@@ -64,7 +64,7 @@ public class main {
 			switch (choice) {
 				case 1 -> {
 					System.out.println(Arrays.toString(Mark.values()));
-					
+
 					final Mark mark = getMark();
 					final Model model = getModel(mark);
 
@@ -218,6 +218,8 @@ public class main {
 				}
 				default -> System.out.println("Nieprawidłowa opcja.");
 			}
+
+			scanner.close();
 		}
 	}
 }
