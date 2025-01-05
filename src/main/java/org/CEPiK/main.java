@@ -218,8 +218,6 @@ public class main {
 				}
 				default -> System.out.println("Nieprawidłowa opcja.");
 			}
-
-			scanner.close();
 		}
 	}
 }

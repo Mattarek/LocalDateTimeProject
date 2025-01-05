@@ -33,7 +33,7 @@ public class Vehicle {
 	}
 
 	public static boolean validateRegistrationNumber(final String registrationNumber) {
-		if (registrationNumber == null || registrationNumber.length() <= 4 || registrationNumber.length() >= 8) {
+		if (registrationNumber == null || registrationNumber.length() <= 4 || registrationNumber.length() > 9) {
 			return false;
 		}
 
@@ -44,10 +44,16 @@ public class Vehicle {
 		}
 
 		final String city = parts[0];
-		for (final char firstLetter : city.toCharArray()) {
-			if (!Character.isLetter(firstLetter)) {
-				return false;
-			}
+		if (!Character.isLetter(city.charAt(0))) {
+			return false;
+		}
+
+		if (city.length() == 2 && !Character.isLetterOrDigit(city.charAt(1))) {
+			return false;
+		}
+
+		if (city.length() == 3 && !Character.isLetterOrDigit(city.charAt(2))) {
+			return false;
 		}
 
 		final String rest = parts[1];
@@ -56,7 +62,6 @@ public class Vehicle {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
