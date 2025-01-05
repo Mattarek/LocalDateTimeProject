@@ -43,3 +43,4 @@ public class RegistrationCertificate {
 		return Objects.hash(car, mainDriver, additionalDriver);
 	}
 }
+

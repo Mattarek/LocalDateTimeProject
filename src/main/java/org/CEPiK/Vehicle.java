@@ -7,7 +7,7 @@ public class Vehicle {
 	private final Mark mark;
 	private final Model model;
 	private final LocalDateTime productionDate;
-	private final String registrationNumber;
+	private final RegistrationNumber registrationNumber;
 	private final String technicalCondition;
 	private final String color;
 	private final String vin;
@@ -23,46 +23,9 @@ public class Vehicle {
 		}
 
 		this.productionDate = productionDate;
-		if (validateRegistrationNumber(registrationNumber)) {
-			this.registrationNumber = registrationNumber;
-		} else {
-			this.registrationNumber = "";
-		}
+		this.registrationNumber = new RegistrationNumber(registrationNumber);
 		this.technicalCondition = technicalCondition;
 		this.color = color;
-	}
-
-	public static boolean validateRegistrationNumber(final String registrationNumber) {
-		if (registrationNumber == null || registrationNumber.length() <= 4 || registrationNumber.length() > 9) {
-			return false;
-		}
-
-		final String[] parts = registrationNumber.split(" ");
-
-		if (parts.length != 2) {
-			return false;
-		}
-
-		final String city = parts[0];
-		if (!Character.isLetter(city.charAt(0))) {
-			return false;
-		}
-
-		if (city.length() == 2 && !Character.isLetterOrDigit(city.charAt(1))) {
-			return false;
-		}
-
-		if (city.length() == 3 && !Character.isLetterOrDigit(city.charAt(2))) {
-			return false;
-		}
-
-		final String rest = parts[1];
-		for (final char c : rest.toCharArray()) {
-			if (!Character.isLetterOrDigit(c)) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public boolean isVinCorrect(final String vin) {

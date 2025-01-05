@@ -94,7 +94,18 @@ public class main {
 					final LocalDateTime productionDate = LocalDateTime.of(year, month, day, hour, minute);
 
 					System.out.print("Podaj rejestrację: ");
-					final String registrationNumber = scanner.nextLine();
+					String providedRegistrationNumber;
+					while (true) {
+						providedRegistrationNumber = scanner.nextLine();
+
+						try {
+							new RegistrationNumber(providedRegistrationNumber);
+							System.out.println("Poprawna rejestracja: " + providedRegistrationNumber);
+							break;
+						} catch (final IllegalArgumentException e) {
+							System.out.println("Niepoprawna rejestracja: " + providedRegistrationNumber + ". Spróbuj ponownie.");
+						}
+					}
 
 					System.out.print("Podaj stan techniczny: ");
 					final String technicalCondition = scanner.nextLine();
@@ -102,7 +113,7 @@ public class main {
 					System.out.print("Podaj kolor: ");
 					final String color = scanner.nextLine();
 
-					final Car car = new Car(model, vin, mark, productionDate, registrationNumber,
+					final Car car = new Car(model, vin, mark, productionDate, providedRegistrationNumber,
 							technicalCondition, color);
 					final RegistrationCertificate newRegistrationCertificate = new RegistrationCertificate(car);
 
