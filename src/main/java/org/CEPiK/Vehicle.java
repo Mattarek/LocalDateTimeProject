@@ -13,7 +13,7 @@ public class Vehicle {
 	private final String vin;
 
 	public Vehicle(final Model model, final String vin, final Mark mark, final LocalDateTime productionDate,
-				   final String registrationNumber, final String technicalCondition, final String color) {
+				   final RegistrationNumber registrationNumber, final String technicalCondition, final String color) {
 		this.model = model;
 		this.mark = mark;
 		if (isVinCorrect(vin)) {
@@ -23,7 +23,7 @@ public class Vehicle {
 		}
 
 		this.productionDate = productionDate;
-		this.registrationNumber = new RegistrationNumber(registrationNumber);
+		this.registrationNumber = registrationNumber;
 		this.technicalCondition = technicalCondition;
 		this.color = color;
 	}

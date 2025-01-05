@@ -95,11 +95,13 @@ public class main {
 
 					System.out.print("Podaj rejestrację: ");
 					String providedRegistrationNumber;
+					RegistrationNumber registrationNumberNew;
 					while (true) {
 						providedRegistrationNumber = scanner.nextLine();
 
 						try {
-							new RegistrationNumber(providedRegistrationNumber);
+							registrationNumberNew =
+									new RegistrationNumber(providedRegistrationNumber);
 							System.out.println("Poprawna rejestracja: " + providedRegistrationNumber);
 							break;
 						} catch (final IllegalArgumentException e) {
@@ -113,7 +115,7 @@ public class main {
 					System.out.print("Podaj kolor: ");
 					final String color = scanner.nextLine();
 
-					final Car car = new Car(model, vin, mark, productionDate, providedRegistrationNumber,
+					final Car car = new Car(model, vin, mark, productionDate, registrationNumberNew,
 							technicalCondition, color);
 					final RegistrationCertificate newRegistrationCertificate = new RegistrationCertificate(car);
 
