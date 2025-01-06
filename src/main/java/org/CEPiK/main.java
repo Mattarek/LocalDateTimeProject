@@ -47,11 +47,11 @@ public class main {
 
 	public static VIN readVinNumber() {
 		while (true) {
-			final String vinProvided = scanner.next();
+			final String vin = scanner.next();
 			try {
-				return new VIN(vinProvided);
+				return new VIN(vin);
 			} catch (final IllegalArgumentException e) {
-				System.out.printf("VIN incorrect: %s. Try again!", vinProvided);
+				System.out.printf("VIN incorrect: %s. Try again!", vin);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ public class main {
 			try {
 				return new RegistrationNumber(providedRegistrationNumber);
 			} catch (final IllegalArgumentException e) {
-				System.out.println("Niepoprawna rejestracja: " + providedRegistrationNumber + ". Spróbuj ponownie.");
+				System.out.printf("Niepoprawna rejestracja: %s. Spróbuj ponownie.", providedRegistrationNumber);
 			}
 		}
 	}
