@@ -56,6 +56,17 @@ public class main {
 		}
 	}
 
+	public static RegistrationNumber readRegistrationNumber() {
+		while (true) {
+			final String providedRegistrationNumber = scanner.nextLine();
+			try {
+				return new RegistrationNumber(providedRegistrationNumber);
+			} catch (final IllegalArgumentException e) {
+				System.out.println("Niepoprawna rejestracja: " + providedRegistrationNumber + ". Spróbuj ponownie.");
+			}
+		}
+	}
+
 	public static void main(final String[] args) {
 		while (true) {
 			System.out.println("\nMenu:");
@@ -105,19 +116,7 @@ public class main {
 					final LocalDateTime productionDate = LocalDateTime.of(year, month, day, hour, minute);
 
 					System.out.print("Podaj rejestrację: ");
-					String providedRegistrationNumber;
-					RegistrationNumber registrationNumberNew;
-					while (true) {
-						providedRegistrationNumber = scanner.nextLine();
-
-						try {
-							registrationNumberNew = new RegistrationNumber(providedRegistrationNumber);
-							System.out.println("Poprawna rejestracja: " + providedRegistrationNumber);
-							break;
-						} catch (final IllegalArgumentException e) {
-							System.out.println("Niepoprawna rejestracja: " + providedRegistrationNumber + ". Spróbuj ponownie.");
-						}
-					}
+					final RegistrationNumber registrationNumberNew = readRegistrationNumber();
 
 					System.out.print("Podaj stan techniczny: ");
 					final String technicalCondition = scanner.nextLine();
