@@ -45,17 +45,13 @@ public class main {
 		}
 	}
 
-	public static VIN vinNumber() {
-		String vinProvided;
-		VIN vin;
+	public static VIN readVinNumber() {
 		while (true) {
-			vinProvided = scanner.next();
+			final String vinProvided = scanner.next();
 			try {
-				vin = new VIN(vinProvided);
-				System.out.println("Vin jest poprawny: " + vin);
-				return vin;
+				return new VIN(vinProvided);
 			} catch (final IllegalArgumentException e) {
-				System.out.println("Niepoprawny vin: " + vinProvided + ". Spróbuj ponownie.");
+				System.out.printf("VIN incorrect: %s. Try again!", vinProvided);
 			}
 		}
 	}
@@ -84,7 +80,7 @@ public class main {
 					final Model model = getModel(mark);
 
 					System.out.print("Podaj vin: ");
-					final VIN vin = vinNumber();
+					final VIN vin = readVinNumber();
 
 					System.out.print("Podaj rok produkcji: ");
 					final int year = scanner.nextInt();
