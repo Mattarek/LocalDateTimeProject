@@ -10,29 +10,18 @@ public class Vehicle {
 	private final RegistrationNumber registrationNumber;
 	private final String technicalCondition;
 	private final String color;
-	private final String vin;
+	private final VIN vin;
 
-	public Vehicle(final Model model, final String vin, final Mark mark, final LocalDateTime productionDate,
+	public Vehicle(final Model model, final VIN vin, final Mark mark, final LocalDateTime productionDate,
 				   final RegistrationNumber registrationNumber, final String technicalCondition, final String color) {
 		this.model = model;
 		this.mark = mark;
-		if (isVinCorrect(vin)) {
-			this.vin = vin;
-		} else {
-			this.vin = "";
-		}
+		this.vin = vin;
 
 		this.productionDate = productionDate;
 		this.registrationNumber = registrationNumber;
 		this.technicalCondition = technicalCondition;
 		this.color = color;
-	}
-
-	public boolean isVinCorrect(final String vin) {
-		return vin.length() == 17 &&
-				!vin.contains("O") &&
-				!vin.contains("Q") &&
-				!vin.contains("I");
 	}
 
 	@Override

@@ -69,7 +69,18 @@ public class main {
 					final Model model = getModel(mark);
 
 					System.out.print("Podaj vin: ");
-					final String vin = scanner.next();
+					String vinProvided;
+					VIN vin;
+					while (true) {
+						vinProvided = scanner.next();
+						try {
+							vin = new VIN(vinProvided);
+							System.out.println("Vin jest poprawny: " + vin);
+							break;
+						} catch (final IllegalArgumentException e) {
+							System.out.println("Niepoprawny vin: " + vinProvided + ". Spróbuj ponownie.");
+						}
+					}
 
 					System.out.print("Podaj rok produkcji: ");
 					final int year = scanner.nextInt();
