@@ -51,7 +51,6 @@ public class Main {
 
 					final Event event = new Event(nameOfEvent, description, LocalDateTime.of(yearOfEvent, monthOfEvent, dayOfEvent, hourOfEvent, minuteOfEvent));
 					eventsList.add(event);
-					System.out.println(event);
 				}
 				case 2 -> {
 
@@ -68,6 +67,7 @@ public class Main {
 					}
 					final int eventIndex = scanner.nextInt() - 1;
 					eventsList.remove(eventIndex);
+					System.out.println("Usunięto event o infexie: " + (eventIndex + 1));
 				}
 				case 0 -> {
 					System.out.println("Zakończono program.");
