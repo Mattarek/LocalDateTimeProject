@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class main {
+public class Main {
 	private static final Scanner scanner = new Scanner(System.in);
 	private static final List<Car> cars = new ArrayList<>();
 	private static final List<CarDriver> drivers = new ArrayList<>();
@@ -58,11 +58,11 @@ public class main {
 
 	public static RegistrationNumber readRegistrationNumber() {
 		while (true) {
-			final String providedRegistrationNumber = scanner.nextLine();
+			final String registrationNumber = scanner.nextLine();
 			try {
-				return new RegistrationNumber(providedRegistrationNumber);
+				return new RegistrationNumber(registrationNumber);
 			} catch (final IllegalArgumentException e) {
-				System.out.printf("Niepoprawna rejestracja: %s. Spróbuj ponownie.", providedRegistrationNumber);
+				System.out.printf("Niepoprawna rejestracja: %s. Spróbuj ponownie.", registrationNumber);
 			}
 		}
 	}
