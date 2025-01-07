@@ -57,10 +57,17 @@ public class Main {
 
 				}
 				case 3 -> {
-
+					for (int i = 0; i < eventsList.size(); i++) {
+						System.out.println((i + 1) + ". " + eventsList.get(i));
+					}
 				}
 				case 4 -> {
-
+					System.out.println("Podaj numer wydarzenia do usunięcia:");
+					for (int i = 0; i < eventsList.size(); i++) {
+						System.out.println((i + 1) + ". " + eventsList.get(i));
+					}
+					final int eventIndex = scanner.nextInt() - 1;
+					eventsList.remove(eventIndex);
 				}
 				case 0 -> {
 					System.out.println("Zakończono program.");
