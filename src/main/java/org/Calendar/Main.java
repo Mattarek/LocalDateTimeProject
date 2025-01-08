@@ -23,37 +23,7 @@ public class Main {
 
 			switch (choice) {
 				case 1 -> addNewEvent();
-				case 2 -> {
-					if (eventsList.isEmpty()) {
-						System.out.println("Brak wydarzeń do edycji.");
-						break;
-					}
-					System.out.println("Podaj numer wydarzenia do edycji:");
-
-					showAllEvents();
-
-					final int eventIndex = scanner.nextInt() - 1;
-					scanner.nextLine();
-
-					if (eventIndex < 0 || eventIndex >= eventsList.size()) {
-						System.out.println("Nieprawidłowy numer wydarzenia.");
-						break;
-					}
-
-					final Event eventToEdit = (Event) eventsList.get(eventIndex);
-
-					System.out.println("\nCo chcesz edytować?");
-					System.out.println("1. Nazwa wydarzenia (obecna: " + eventToEdit.getName() + ")");
-					System.out.println("2. Opis wydarzenia (obecny: " + eventToEdit.getDescription() + ")");
-					System.out.println("3. Data i godzina wydarzenia (obecna: " + eventToEdit.getDateOfEvent() + ")");
-					System.out.println("0. Zakończ edycję");
-					System.out.print("Podaj numer opcji: ");
-
-					final int editChoice = scanner.nextInt();
-					scanner.nextLine();
-
-					editEvent(editChoice, eventToEdit);
-				}
+				case 2 -> editEvent();
 				case 3 -> showAllEvents();
 				case 4 -> removeEvent();
 				case 0 -> {
@@ -113,7 +83,39 @@ public class Main {
 		eventsList.add(event);
 	}
 
-	public static void editEvent(final int editChoice, final Event eventToEdit) {
+	public static void editEvent() {
+		if (eventsList.isEmpty()) {
+			System.out.println("Brak wydarzeń do edycji.");
+			return;
+		}
+		System.out.println("Podaj numer wydarzenia do edycji:");
+
+		showAllEvents();
+
+		final int eventIndex = scanner.nextInt() - 1;
+		scanner.nextLine();
+
+		if (eventIndex < 0 || eventIndex >= eventsList.size()) {
+			System.out.println("Nieprawidłowy numer wydarzenia.");
+			return;
+		}
+
+		final Event eventToEdit = (Event) eventsList.get(eventIndex);
+
+		System.out.println("\nCo chcesz edytować?");
+		System.out.println("1. Nazwa wydarzenia (obecna: " + eventToEdit.getName() + ")");
+		System.out.println("2. Opis wydarzenia (obecny: " + eventToEdit.getDescription() + ")");
+		System.out.println("3. Data i godzina wydarzenia (obecna: " + eventToEdit.getDateOfEvent() + ")");
+		System.out.println("0. Zakończ edycję");
+		System.out.print("Podaj numer opcji: ");
+
+		final int editChoice = scanner.nextInt();
+		scanner.nextLine();
+
+		choiceEventToEdit(editChoice, eventToEdit);
+	}
+
+	public static void choiceEventToEdit(final int editChoice, final Event eventToEdit) {
 		switch (editChoice) {
 			case 1 -> {
 				System.out.println("Podaj nową nazwę wydarzenia: ");
