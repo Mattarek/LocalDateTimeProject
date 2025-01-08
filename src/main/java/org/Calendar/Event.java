@@ -4,14 +4,38 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Event {
-	final String name;
-	final String description;
-	final LocalDateTime dateOfEvent;
+	private String name;
+	private String description;
+	private LocalDateTime dateOfEvent;
 
 	public Event(final String name, final String description, final LocalDateTime dateOfEvent) {
 		this.name = name;
 		this.description = description;
 		this.dateOfEvent = dateOfEvent;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public LocalDateTime getDateOfEvent() {
+		return dateOfEvent;
+	}
+
+	public void setDateOfEvent(final LocalDateTime dateOfEvent) {
+		this.dateOfEvent = dateOfEvent;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
 	}
 
 	@Override

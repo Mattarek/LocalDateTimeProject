@@ -53,7 +53,78 @@ public class Main {
 					eventsList.add(event);
 				}
 				case 2 -> {
+					if (eventsList.isEmpty()) {
+						System.out.println("Brak wydarzeń do edycji.");
+						break;
+					}
 
+					System.out.println("Podaj numer wydarzenia do edycji:");
+					for (int i = 0; i < eventsList.size(); i++) {
+						System.out.println((i + 1) + ". " + eventsList.get(i));
+					}
+
+					final int eventIndex = scanner.nextInt() - 1;
+					scanner.nextLine();
+
+					if (eventIndex < 0 || eventIndex >= eventsList.size()) {
+						System.out.println("Nieprawidłowy numer wydarzenia.");
+						break;
+					}
+
+					final Event eventToEdit = (Event) eventsList.get(eventIndex);
+
+					while (true) {
+						System.out.println("\nCo chcesz edytować?");
+						System.out.println("1. Nazwa wydarzenia (obecna: " + eventToEdit.getName() + ")");
+						System.out.println("2. Opis wydarzenia (obecny: " + eventToEdit.getDescription() + ")");
+						System.out.println("3. Data i godzina wydarzenia (obecna: " + eventToEdit.getDateOfEvent() + ")");
+						System.out.println("0. Zakończ edycję");
+						System.out.print("Podaj numer opcji: ");
+						
+						final int editChoice = scanner.nextInt();
+						scanner.nextLine();
+
+						switch (editChoice) {
+							case 1 -> {
+								System.out.println("Podaj nową nazwę wydarzenia: ");
+
+								final String newName = scanner.nextLine();
+								eventToEdit.setName(newName);
+							}
+							case 2 -> {
+								System.out.println("Podaj nowy opis wydarzenia: ");
+
+								final String newDescription = scanner.nextLine();
+								eventToEdit.setDescription(newDescription);
+							}
+							case 3 -> {
+								System.out.println("Podaj nową datę i godzinę wydarzenia: ");
+								System.out.println("Podaj rok: ");
+								final int newYear = scanner.nextInt();
+
+								System.out.println("Podaj miesiąc: ");
+								final int newMonth = scanner.nextInt();
+
+								System.out.println("Podaj dzień: ");
+								final int newDay = scanner.nextInt();
+
+								System.out.println("Podaj godzine: ");
+								final int newHour = scanner.nextInt();
+
+								System.out.println("Podaj minutę: ");
+								final int newMinute = scanner.nextInt();
+								scanner.nextLine();
+
+								eventToEdit.setDateOfEvent(LocalDateTime.of(newYear, newMonth, newDay, newHour, newMinute));
+								System.out.println("Wydarzenie zakatualizowane.");
+							}
+							case 0 -> {
+								System.out.println("Zakończono edycję.");
+								return;
+							}
+							default -> System.out.println("Nieprawidłowa opcja. Wybierz ponownie");
+						}
+					}
 				}
 				case 3 -> {
 					for (int i = 0; i < eventsList.size(); i++) {
