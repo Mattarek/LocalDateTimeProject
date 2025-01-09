@@ -15,7 +15,6 @@ public class Event {
 	}
 
 	public static Event fromString(final String line) {
-		// Zakładamy, że linia jest w formacie: "name;description;yyyy-MM-dd'T'HH:mm"
 		final String[] parts = line.split(";");
 
 		if (parts.length != 3) {
