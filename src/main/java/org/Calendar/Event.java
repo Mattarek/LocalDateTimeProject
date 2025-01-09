@@ -14,6 +14,21 @@ public class Event {
 		this.dateOfEvent = dateOfEvent;
 	}
 
+	public static Event fromString(final String line) {
+		// Zakładamy, że linia jest w formacie: "name;description;yyyy-MM-dd'T'HH:mm"
+		final String[] parts = line.split(";");
+
+		if (parts.length != 3) {
+			throw new IllegalArgumentException("Invalid format. Expected format: name;description;yyyy-MM-dd'T'HH:mm");
+		}
+
+		final String name = parts[0];
+		final String description = parts[1];
+		final LocalDateTime dateOfEvent = LocalDateTime.parse(parts[2]);
+
+		return new Event(name, description, dateOfEvent);
+	}
+
 	public String getName() {
 		return name;
 	}

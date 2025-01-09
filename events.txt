@@ -1,0 +1,3 @@
+Event{name='nowyr', description='nowyr', dateOfEvent=1990-12-12T12:12}
+Event{name='nowyr', description='nowyr', dateOfEvent=1990-12-12T12:12}
+Event{name='nowyr', description='nowyr', dateOfEvent=1990-12-12T12:12}

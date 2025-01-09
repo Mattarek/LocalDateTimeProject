@@ -1,5 +1,10 @@
 package org.Calendar;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +13,7 @@ import java.util.Scanner;
 public class Main {
 	private static final Scanner scanner = new Scanner(System.in);
 	private static final List eventsList = new ArrayList<>();
+	private static final String fileName = "events.txt";
 
 	public static void main(final String[] args) {
 		while (true) {
@@ -16,6 +22,8 @@ public class Main {
 			System.out.println("2. Edytuj wydarzenie");
 			System.out.println("3. Wyświetl wydarzenia");
 			System.out.println("4. Usuń wydarzenie");
+			System.out.println("5. Zapisz wydarzenia do pliku");
+			System.out.println("6. Odczyt wydarzeń z pliku");
 			System.out.println("0. Wyjdź");
 
 			final int choice = scanner.nextInt();
@@ -26,6 +34,8 @@ public class Main {
 				case 2 -> editEvent();
 				case 3 -> showAllEvents();
 				case 4 -> removeEvent();
+				case 5 -> saveToFile();
+				case 6 -> loadFile();
 				case 0 -> {
 					System.out.println("Zakończono program.");
 					return;
@@ -79,7 +89,7 @@ public class Main {
 		scanner.nextLine();
 
 		final Event event = new Event(nameOfEvent, description, LocalDateTime.of(yearOfEvent, monthOfEvent, dayOfEvent, hourOfEvent, minuteOfEvent));
-		eventsList.add(event);
+		eventsList.addLast(event);
 	}
 
 	public static void editEvent() {
@@ -153,6 +163,33 @@ public class Main {
 				System.out.println("Zakończono edycję.");
 			}
 			default -> System.out.println("Nieprawidłowa opcja. Wybierz ponownie");
+		}
+	}
+
+	public static void saveToFile() {
+		try (final PrintWriter printWriter = new PrintWriter(new FileWriter(fileName))) {
+			for (final Object element : eventsList) {
+				printWriter.println(element);
+			}
+			System.out.println("Pliki zostały zapisane");
+		} catch (final IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	public static void loadFile() {
+		try {
+			final List<String> lines = Files.readAllLines(Path.of("events.txt"));
+
+			for (final String line : lines) {
+				final Event event = Event.fromString(line);
+				eventsList.add(event);
+			}
+			for (final Object event : eventsList) {
+				System.out.println(event);
+			}
+		} catch (final IOException e) {
+			System.err.println("Błąd odczytu pliku: " + e.getMessage());
 		}
 	}
 }
