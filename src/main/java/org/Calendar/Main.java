@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-	static final Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 	private static final List eventsList = new ArrayList<>();
 
 	public static void main(final String[] args) {
@@ -42,7 +42,6 @@ public class Main {
 	}
 
 	public static void removeEvent() {
-
 		System.out.println("Podaj numer wydarzenia do usunięcia:");
 		for (int i = 0; i < eventsList.size(); i++) {
 			System.out.println((i + 1) + ". " + eventsList.get(i));
@@ -54,10 +53,10 @@ public class Main {
 
 	public static void addNewEvent() {
 		System.out.println("Podaj nazwę wydarzenia: ");
-		final String nameOfEvent = scanner.next();
+		final String nameOfEvent = scanner.nextLine();
 
-		System.out.println("Podaj opis wydarzenia");
-		final String description = scanner.next();
+		System.out.println("Podaj opis wydarzenia:");
+		final String description = scanner.nextLine();
 
 		System.out.println("Podaj rok:");
 		final int yearOfEvent = scanner.nextInt();
