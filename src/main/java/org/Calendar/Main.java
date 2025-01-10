@@ -1,20 +1,14 @@
 package org.Calendar;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
 	private static final Scanner scanner = new Scanner(System.in);
+	private static final FileManager fileManager = new FileManager();
 	private static final List eventsList = new ArrayList<>();
 
 	public static void main(final String[] args) {
@@ -112,14 +106,12 @@ public class Main {
 		}
 
 		final Event eventToEdit = (Event) eventsList.get(eventIndex);
-
 		System.out.println("\nCo chcesz edytować?");
 		System.out.println("1. Nazwa wydarzenia (obecna: " + eventToEdit.getName() + ")");
 		System.out.println("2. Opis wydarzenia (obecny: " + eventToEdit.getDescription() + ")");
 		System.out.println("3. Data i godzina wydarzenia (obecna: " + eventToEdit.getDateOfEvent() + ")");
 		System.out.println("0. Zakończ edycję");
 		System.out.print("Podaj numer opcji: ");
-
 		final int editChoice = scanner.nextInt();
 		scanner.nextLine();
 
@@ -172,7 +164,7 @@ public class Main {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
 		try {
-			FileManager.saveToFile(eventsList, fileName);
+			fileManager.saveToFile(fileName);
 			System.out.println("Pliki zostały zapisane");
 		} catch (final IOException e) {
 			System.out.println(e);
@@ -183,8 +175,9 @@ public class Main {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
 		try {
-			final boolean foundMatch = FileManager.loadFile(eventsList, fileName);
-			if (foundMatch) {
+			final List<Event> newList = fileManager.loadFile(fileName);
+			if (!newList.isEmpty()) {
+				eventsList.addAll(newList);
 				System.out.println("Plik został wczytany poprawnie.");
 			} else {
 				System.out.println("Nie znaleziono żadnych pasujących danych w pliku.");
