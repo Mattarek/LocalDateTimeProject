@@ -1,5 +1,6 @@
 package org.Calendar;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,11 +10,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 	private static final Scanner scanner = new Scanner(System.in);
 	private static final List eventsList = new ArrayList<>();
-	private static final String fileName = "events.txt";
 
 	public static void main(final String[] args) {
 		while (true) {
@@ -167,10 +169,10 @@ public class Main {
 	}
 
 	public static void saveToFile() {
-		try (final PrintWriter printWriter = new PrintWriter(new FileWriter(fileName))) {
-			for (final Object element : eventsList) {
-				printWriter.println(element);
-			}
+		System.out.println("Podaj nazwę pliku który chcesz wczytać");
+		final String fileName = scanner.nextLine();
+		try {
+			FileManager.saveToFile(eventsList, fileName);
 			System.out.println("Pliki zostały zapisane");
 		} catch (final IOException e) {
 			System.out.println(e);
@@ -178,17 +180,16 @@ public class Main {
 	}
 
 	public static void loadFile() {
+		System.out.println("Podaj nazwę pliku który chcesz wczytać");
+		final String fileName = scanner.nextLine();
 		try {
-			final List<String> lines = Files.readAllLines(Path.of("events.txt"));
-
-			for (final String line : lines) {
-				final Event event = Event.fromString(line);
-				eventsList.add(event);
+			final boolean foundMatch = FileManager.loadFile(eventsList, fileName);
+			if (foundMatch) {
+				System.out.println("Plik został wczytany poprawnie.");
+			} else {
+				System.out.println("Nie znaleziono żadnych pasujących danych w pliku.");
 			}
-			for (final Object event : eventsList) {
-				System.out.println(event);
-			}
-		} catch (final IOException e) {
+		} catch (final Exception e) {
 			System.err.println("Błąd odczytu pliku: " + e.getMessage());
 		}
 	}
