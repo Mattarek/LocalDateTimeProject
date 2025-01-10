@@ -17,7 +17,7 @@ public class FileManager {
 
 	public void saveToFile(final String fileName, final List<Event> eventsList) throws IOException {
 		final PrintWriter printWriter = new PrintWriter(new FileWriter(fileName));
-		for (final Object element : eventsList) {
+		for (final Event element : eventsList) {
 			printWriter.println(element);
 		}
 		printWriter.close();
