@@ -12,10 +12,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileManager {
-	private static final List eventsList = new ArrayList<>();
-	final Pattern patternForEvent = Pattern.compile("name='(.*?)',\\s+description='(.*?)',\\s+dateOfEvent=(.*?)\\}");
+	private final Pattern patternForEvent = Pattern.compile("name='(.*?)',\\s+description='(.*?)',\\s+dateOfEvent=(" +
+			".*?)\\}");
 
-	public void saveToFile(final String fileName) throws IOException {
+	public void saveToFile(final String fileName, final List<Event> eventsList) throws IOException {
 		final PrintWriter printWriter = new PrintWriter(new FileWriter(fileName));
 		for (final Object element : eventsList) {
 			printWriter.println(element);
@@ -24,6 +24,7 @@ public class FileManager {
 	}
 
 	public List<Event> loadFile(final String fileName) throws IOException {
+		final List eventsList = new ArrayList<>();
 		final List<String> lines = Files.readAllLines(Path.of(fileName));
 		eventsList.clear();
 		for (final String line : lines) {

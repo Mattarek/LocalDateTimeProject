@@ -164,8 +164,8 @@ public class Main {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
 		try {
-			fileManager.saveToFile(fileName);
-			System.out.println("Pliki zostały zapisane");
+			fileManager.saveToFile(fileName, eventsList);
+			System.out.println("Plik został zapisany");
 		} catch (final IOException e) {
 			System.out.println(e);
 		}
@@ -174,6 +174,7 @@ public class Main {
 	public static void loadFile() {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
+		eventsList.clear();
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
 			if (!newList.isEmpty()) {
