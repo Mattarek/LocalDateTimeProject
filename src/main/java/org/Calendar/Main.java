@@ -174,7 +174,6 @@ public class Main {
 	public static void loadFile() {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
-		eventsList.clear();
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
 			if (!newList.isEmpty()) {

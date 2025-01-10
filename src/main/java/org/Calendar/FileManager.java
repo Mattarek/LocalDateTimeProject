@@ -12,7 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileManager {
-	private final Pattern patternForEvent = Pattern.compile("name='(.*?)',\\s+description='(.*?)',\\s+dateOfEvent=(" +
+	private static final Pattern PATTERN_EVENT = Pattern.compile("name='(.*?)',\\s+description='(.*?)'," +
+			"\\s+dateOfEvent=(" +
 			".*?)\\}");
 
 	public void saveToFile(final String fileName, final List<Event> eventsList) throws IOException {
@@ -26,9 +27,8 @@ public class FileManager {
 	public List<Event> loadFile(final String fileName) throws IOException {
 		final List eventsList = new ArrayList<>();
 		final List<String> lines = Files.readAllLines(Path.of(fileName));
-		eventsList.clear();
 		for (final String line : lines) {
-			final Matcher matcher = patternForEvent.matcher(line);
+			final Matcher matcher = PATTERN_EVENT.matcher(line);
 			if (matcher.find()) {
 				final String nameValue = matcher.group(1);
 				final String descriptionValue = matcher.group(2);
