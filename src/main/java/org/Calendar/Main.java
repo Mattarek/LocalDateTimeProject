@@ -180,42 +180,38 @@ public class Main {
 
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
-			if (!eventsList.isEmpty()) {
-				System.out.println("1. Dodaj eventy z pliku do istniejącej listy");
-				System.out.println("2. Odczytaj i nadpisz istniejące eventy.");
-				System.out.println("0. Wyjdź.");
+			if (eventsList.isEmpty()) {
+				eventsList.addAll(newList);
+				System.out.printf("Wczytano %s wydarzeń.", newList.size());
+				return;
+			}
+			System.out.println("1. Dodaj eventy z pliku do istniejącej listy");
+			System.out.println("2. Odczytaj i nadpisz istniejące eventy.");
+			System.out.println("0. Wyjdź.");
 
-				final int choice = scanner.nextInt();
-				scanner.nextLine();
-				System.out.println(choice);
-				switch (choice) {
-					case 1 -> {
-						eventsList.addAll(newList);
-						System.out.printf("Wczytano %s wydarzeń.", newList.size());
-						return;
-					}
+			final int choice = scanner.nextInt();
+			scanner.nextLine();
+			System.out.println(choice);
+			switch (choice) {
+				case 1 -> {
+					eventsList.addAll(newList);
+					System.out.printf("Wczytano %s wydarzeń.", newList.size());
+				}
 
-					case 2 -> {
-						eventsList.clear();
-						eventsList.addAll(newList);
-						System.out.println("Zawartość pliku została dodana do listy.");
-						return;
-					}
+				case 2 -> {
+					eventsList.clear();
+					eventsList.addAll(newList);
+					System.out.println("Zawartość pliku została dodana do listy.");
+				}
 
-					case 0 -> {
-						System.out.println("Wyjście.");
-						return;
-					}
+				case 0 -> {
+					System.out.println("Wyjście.");
+				}
 
-					default -> {
-						System.out.println("Nieprawidłowy wybór.");
-						return;
-					}
+				default -> {
+					System.out.println("Nieprawidłowy wybór.");
 				}
 			}
-
-			eventsList.addAll(newList);
-			System.out.printf("Wczytano %s wydarzeń.", newList.size());
 		} catch (final Exception e) {
 			System.err.println("Błąd odczytu pliku: " + e.getMessage());
 		}
