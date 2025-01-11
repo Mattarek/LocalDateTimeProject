@@ -1,6 +1,9 @@
 package org.Calendar;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -164,9 +167,8 @@ public class Main {
 	public static void saveToFile() {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
+
 		try {
-			final List<Event> newList = fileManager.loadFile(fileName);
-			eventsList.addAll(newList);
 			fileManager.saveToFile(fileName, eventsList);
 			System.out.println("Plik został zapisany");
 		} catch (final IOException e) {
@@ -181,7 +183,6 @@ public class Main {
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
 			if (eventsList.isEmpty()) {
-				eventsList.addAll(newList);
 				System.out.printf("Wczytano %s wydarzeń.", newList.size());
 				return;
 			}
@@ -193,26 +194,25 @@ public class Main {
 			scanner.nextLine();
 			System.out.println(choice);
 			switch (choice) {
-				case 1 -> {
+				case 1:
 					eventsList.addAll(newList);
 					System.out.printf("Wczytano %s wydarzeń.", newList.size());
-				}
+					break;
 
-				case 2 -> {
+				case 2:
 					eventsList.clear();
 					eventsList.addAll(newList);
 					System.out.println("Zawartość pliku została dodana do listy.");
-				}
+					break;
 
-				case 0 -> {
+				case 0:
 					System.out.println("Wyjście.");
-				}
+					break;
 
-				default -> {
+				default:
 					System.out.println("Nieprawidłowy wybór.");
-				}
 			}
-		} catch (final Exception e) {
+		} catch (final IOException e) {
 			System.err.println("Błąd odczytu pliku: " + e.getMessage());
 		}
 	}

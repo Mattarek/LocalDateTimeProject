@@ -1,1 +1,5 @@
-Event{name='j', description='j', dateOfEvent=0001-01-01T01:01}
+[{
+    "dateOfEvent": "0001-01-01T01:01",
+    "name": "1",
+    "description": "1"
+}]
