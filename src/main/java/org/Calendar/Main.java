@@ -3,6 +3,7 @@ package org.Calendar;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -57,6 +58,15 @@ public class Main {
 		System.out.println("Usunięto event o indexie: " + (eventIndex + 1));
 	}
 
+	private static int getIntInput(final String prompt) {
+		System.out.println(prompt);
+		while (!scanner.hasNextInt()) {
+			System.out.println("Nieprawidłowy numer. Spróbuj ponownie:");
+			scanner.next();
+		}
+		return scanner.nextInt();
+	}
+
 	public static void addNewEvent() {
 		System.out.println("Podaj nazwę wydarzenia: ");
 		final String nameOfEvent = scanner.nextLine();
@@ -64,28 +74,19 @@ public class Main {
 		System.out.println("Podaj opis wydarzenia:");
 		final String description = scanner.nextLine();
 
-		System.out.println("Podaj rok:");
-		final int yearOfEvent = scanner.nextInt();
-		scanner.nextLine();
+		final int yearOfEvent = getIntInput("Podaj rok:");
+		final int monthOfEvent = getIntInput("Podaj miesiąc (1-12):");
+		final int dayOfEvent = getIntInput("Podaj dzień (1-31):");
+		final int hourOfEvent = getIntInput("Podaj godzinę (0-23):");
+		final int minuteOfEvent = getIntInput("Podaj minutę (0-59):");
 
-		System.out.println("Podaj miesiąć:");
-		final int monthOfEvent = scanner.nextInt();
-		scanner.nextLine();
-
-		System.out.println("Podaj dzień:");
-		final int dayOfEvent = scanner.nextInt();
-		scanner.nextLine();
-
-		System.out.println("Podaj godzine:");
-		final int hourOfEvent = scanner.nextInt();
-		scanner.nextLine();
-
-		System.out.println("Podaj minutę:");
-		final int minuteOfEvent = scanner.nextInt();
-		scanner.nextLine();
-
-		final Event event = new Event(nameOfEvent, description, LocalDateTime.of(yearOfEvent, monthOfEvent, dayOfEvent, hourOfEvent, minuteOfEvent));
-		eventsList.addLast(event);
+		try {
+			final Event event = new Event(nameOfEvent, description, LocalDateTime.of(yearOfEvent, monthOfEvent, dayOfEvent, hourOfEvent, minuteOfEvent));
+			eventsList.add(event);
+			System.out.println("Dodano wydarzenie: " + event);
+		} catch (final Exception e) {
+			System.out.println("Błąd podczas tworzenia wydarzenia: " + e.getMessage());
+		}
 	}
 
 	public static void editEvent() {
@@ -166,6 +167,7 @@ public class Main {
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
 			eventsList.addAll(newList);
+			eventsList.sort(Comparator.comparing(Event::getDateOfEvent));
 			fileManager.saveToFile(fileName, eventsList);
 			eventsList.clear();
 			System.out.println("Plik został zapisany");
