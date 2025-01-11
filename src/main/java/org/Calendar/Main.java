@@ -167,17 +167,6 @@ public class Main {
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
 			eventsList.addAll(newList);
-			eventsList.sort(Comparator.comparing(Event::getDateOfEvent));
-			fileManager.saveToFile(fileName, eventsList);
-			eventsList.clear();
-			System.out.println("Plik został zapisany");
-		} catch (final IOException e) {
-			System.out.println(e);
-		}
-	}
-
-	public static void overwriteFile(final String fileName) {
-		try {
 			fileManager.saveToFile(fileName, eventsList);
 			System.out.println("Plik został zapisany");
 		} catch (final IOException e) {
@@ -189,35 +178,30 @@ public class Main {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
 
-		if (!eventsList.isEmpty()) {
-			System.out.println("1. Dodaj przechowywane eventy do odczytywanego pliku ");
-			System.out.println("2. Nadpisz eventy w odczytywanym pliku ");
-			System.out.println("0. Wyjdz ");
-			final int choice = scanner.nextInt();
-			scanner.nextLine();
-
-			switch (choice) {
-				case 1 -> {
-					saveToFile();
-				}
-				case 2 -> {
-					overwriteFile(fileName);
-					eventsList.clear();
-				}
-				case 0 -> {
-					System.out.println("Wyjście");
-					return;
-				}
-			}
-		}
-
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
-			if (!newList.isEmpty()) {
-				eventsList.addAll(newList);
-				System.out.println("Plik został wczytany poprawnie.");
-			} else {
-				System.out.println("Nie znaleziono żadnych pasujących danych w pliku.");
+			if (!eventsList.isEmpty()) {
+				System.out.println("1. Dodaj eventy z pliku do istniejącej listy");
+				System.out.println("2. Odczytaj i nadpisz istniejące eventy. ");
+				final int choice = scanner.nextInt();
+
+				switch (choice) {
+					case 1:
+						if (!newList.isEmpty()) {
+							System.out.println(newList);
+							eventsList.addAll(newList);
+							System.out.println("Plik został wczytany poprawnie.");
+						} else {
+							System.out.println("Nie znaleziono żadnych pasujących danych w pliku.");
+						}
+						break;
+					case 2:
+						eventsList.clear();
+						eventsList.addAll(newList);
+						break;
+					default:
+						System.out.println("Nieprawidłowa opcja. Wybierz ponownie");
+				}
 			}
 		} catch (final Exception e) {
 			System.err.println("Błąd odczytu pliku: " + e.getMessage());
