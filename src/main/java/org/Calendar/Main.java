@@ -54,7 +54,7 @@ public class Main {
 		}
 		final int eventIndex = scanner.nextInt() - 1;
 		eventsList.remove(eventIndex);
-		System.out.println("Usunięto event o infexie: " + (eventIndex + 1));
+		System.out.println("Usunięto event o indexie: " + (eventIndex + 1));
 	}
 
 	public static void addNewEvent() {
@@ -164,6 +164,18 @@ public class Main {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
 		try {
+			final List<Event> newList = fileManager.loadFile(fileName);
+			eventsList.addAll(newList);
+			fileManager.saveToFile(fileName, eventsList);
+			eventsList.clear();
+			System.out.println("Plik został zapisany");
+		} catch (final IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	public static void overwriteFile(final String fileName) {
+		try {
 			fileManager.saveToFile(fileName, eventsList);
 			System.out.println("Plik został zapisany");
 		} catch (final IOException e) {
@@ -174,6 +186,29 @@ public class Main {
 	public static void loadFile() {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
+
+		if (!eventsList.isEmpty()) {
+			System.out.println("1. Dodaj przechowywane eventy do odczytywanego pliku ");
+			System.out.println("2. Nadpisz eventy w odczytywanym pliku ");
+			System.out.println("0. Wyjdz ");
+			final int choice = scanner.nextInt();
+			scanner.nextLine();
+
+			switch (choice) {
+				case 1 -> {
+					saveToFile();
+				}
+				case 2 -> {
+					overwriteFile(fileName);
+					eventsList.clear();
+				}
+				case 0 -> {
+					System.out.println("Wyjście");
+					return;
+				}
+			}
+		}
+
 		try {
 			final List<Event> newList = fileManager.loadFile(fileName);
 			if (!newList.isEmpty()) {
