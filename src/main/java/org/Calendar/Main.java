@@ -197,9 +197,10 @@ public class Main {
 					case 2:
 						eventsList.clear();
 						eventsList.addAll(newList);
+						System.out.println("Zawartość pliku została dodana do listy.");
 						return;
 					default:
-						System.out.println("Nieprawidłowa opcja. Wybierz ponownie");
+						System.out.println("Nieprawidłowa opcja. Wybierz ponownie.");
 				}
 			}
 
