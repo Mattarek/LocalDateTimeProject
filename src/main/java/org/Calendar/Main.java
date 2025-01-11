@@ -188,21 +188,23 @@ public class Main {
 				switch (choice) {
 					case 1:
 						if (!newList.isEmpty()) {
-							System.out.println(newList);
 							eventsList.addAll(newList);
 							System.out.println("Plik został wczytany poprawnie.");
-						} else {
-							System.out.println("Nie znaleziono żadnych pasujących danych w pliku.");
+							return;
 						}
+						System.out.println("Nie znaleziono żadnych pasujących danych w pliku.");
 						break;
 					case 2:
 						eventsList.clear();
 						eventsList.addAll(newList);
-						break;
+						return;
 					default:
 						System.out.println("Nieprawidłowa opcja. Wybierz ponownie");
 				}
 			}
+
+			eventsList.addAll(newList);
+			System.out.println("Plik został wczytany poprawnie.");
 		} catch (final Exception e) {
 			System.err.println("Błąd odczytu pliku: " + e.getMessage());
 		}
