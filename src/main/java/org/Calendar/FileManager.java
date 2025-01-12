@@ -14,21 +14,12 @@ import java.util.List;
 public class FileManager {
 
 	public void saveToFile(final String fileName, final List<Event> eventsList) throws IOException {
-		final Path path = Path.of(fileName);
-
-		if (!Files.exists(path)) {
-			Files.createFile(path);
-		}
-
 		final JSONArray jsonArray = new JSONArray();
-
 		for (final Event event : eventsList) {
 			final JSONObject jsonObject = new JSONObject();
-			jsonObject.put("name", event.getName())
+			jsonArray.put(jsonObject.put("name", event.getName())
 					.put("description", event.getDescription())
-					.put("dateOfEvent", event.getDateOfEvent());
-
-			jsonArray.put(jsonObject);
+					.put("dateOfEvent", event.getDateOfEvent()));
 		}
 
 		try (final PrintWriter printWriter = new PrintWriter(fileName)) {

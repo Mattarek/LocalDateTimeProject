@@ -1,12 +1,1 @@
-[
-    {
-        "dateOfEvent": "0001-01-01T11:01",
-        "name": "w",
-        "description": "w"
-    },
-    {
-        "dateOfEvent": "0002-02-02T02:02",
-        "name": "y",
-        "description": "y"
-    }
-]
+[]
