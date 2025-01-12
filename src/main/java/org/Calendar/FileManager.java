@@ -20,18 +20,14 @@ public class FileManager {
 			Files.createFile(path);
 		}
 
-		final String content = Files.readString(path).trim();
-		if (content.isEmpty()) {
-			Files.writeString(path, "[]");
-		}
-
 		final JSONArray jsonArray = new JSONArray();
 
 		for (final Event event : eventsList) {
 			final JSONObject jsonObject = new JSONObject();
-			jsonObject.put("name", event.getName());
-			jsonObject.put("description", event.getDescription());
-			jsonObject.put("dateOfEvent", event.getDateOfEvent());
+			jsonObject.put("name", event.getName())
+					.put("description", event.getDescription())
+					.put("dateOfEvent", event.getDateOfEvent());
+
 			jsonArray.put(jsonObject);
 		}
 
@@ -45,11 +41,10 @@ public class FileManager {
 		final String content = Files.readString(Path.of(fileName));
 
 		if (content.isEmpty()) {
-			Files.writeString(Path.of(fileName), "[]");
+			return new ArrayList<>();
 		}
 
 		final JSONArray jsonArray = new JSONArray(content);
-		System.out.println(jsonArray);
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			final JSONObject jsonObject = jsonArray.getJSONObject(i);
