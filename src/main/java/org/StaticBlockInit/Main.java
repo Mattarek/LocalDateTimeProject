@@ -7,6 +7,8 @@ public class Main {
 		System.out.println(parrot);
 
 		Dog.someMethod();
+		Dog.someMethod();
+
 		Animal.someMethod();
 
 		Doable.doo();
