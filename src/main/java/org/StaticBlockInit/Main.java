@@ -8,11 +8,9 @@ public class Main {
 
 		Dog.someMethod();
 		Animal.someMethod();
-		Animal.someMethod();
 
 		Doable.doo();
 
-		Parrot.getName();
 		Parrot.getName();
 
 		System.out.println("Ending of Main");
