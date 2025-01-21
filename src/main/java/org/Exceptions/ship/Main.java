@@ -9,8 +9,6 @@ public class Main {
 			if (true) {
 				throw new RuntimeException("My new exception!");
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		} finally {
 			System.out.println("Finally.");
 		}
