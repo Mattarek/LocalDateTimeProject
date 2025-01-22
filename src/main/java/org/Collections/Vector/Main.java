@@ -61,5 +61,9 @@ public class Main {
 		arrayList.add(6, "Krakow");
 
 		System.out.println(arrayList);
+		System.out.println(arrayList.contains("Lodz")); // czy lista zawiera Lodz? Jeśli tak to zwróc index
+		System.out.println(arrayList.indexOf("Krakow")); // znajdujemy index pierwszego elementu o takiej nazwie
+		arrayList.clear(); // czyscimy tablice
+		System.out.println(arrayList);
 	}
 }
