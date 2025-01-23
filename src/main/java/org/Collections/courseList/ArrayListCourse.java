@@ -1,0 +1,38 @@
+package org.Collections.courseList;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ArrayListCourse {
+	public static void main(final String[] args) {
+		// Dynamiczna lista która może może być rozszerzana i skracana
+		// dynamicznie, a także zezwala na duplikaty.
+		final List<Integer> intsList = new ArrayList<>();
+		final List<String> stringsList = new ArrayList<>();
+
+		intsList.add(1);
+		intsList.add(2);
+		intsList.add(3);
+		intsList.add(4);
+		intsList.add(5);
+
+		stringsList.add("Warsaw");
+		stringsList.add("Gdansk");
+		stringsList.add("Krakow");
+		stringsList.add("Rzeszow");
+		stringsList.add("Poznan");
+
+		System.out.println("=== intsList ===");
+		System.out.println("intexOf: " + intsList.indexOf(3));
+		System.out.println("contains: " + intsList.contains(2));
+		System.out.println("remove: " + intsList.remove(4));
+		System.out.println("isEmpty: " + intsList.isEmpty());
+		System.out.println("===================");
+
+		System.out.println("=== stringsList ===");
+		System.out.println("size: " + stringsList.size());
+		System.out.println("getFirst: " + stringsList.getFirst());
+		System.out.println("getLast: " + stringsList.getLast());
+		System.out.println("===================");
+	}
+}

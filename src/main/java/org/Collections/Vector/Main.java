@@ -1,6 +1,5 @@
 package org.Collections.Vector;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -57,13 +56,55 @@ public class Main {
 		arrayList.add("Rzeszow");
 		arrayList.add("Rzeszow");
 		arrayList.add("Rzeszow");
+
 		arrayList.add(5, "Krakow");
 		arrayList.add(6, "Krakow");
 
 		System.out.println(arrayList);
 		System.out.println(arrayList.contains("Lodz")); // czy lista zawiera Lodz? Jeśli tak to zwróc index
 		System.out.println(arrayList.indexOf("Krakow")); // znajdujemy index pierwszego elementu o takiej nazwie
-		arrayList.clear(); // czyscimy tablice
+		//arrayList.clear(); // czyscimy tablice
 		System.out.println(arrayList);
+
+		//===========================================================
+		// Inicjalizacja nowej listy z zawartością
+		// Tablica domyślna
+		final List<Integer> intsList = new ArrayList<>();
+		intsList.add(1);
+		intsList.add(2);
+		intsList.add(3);
+		System.out.println("default array: intsList: " + intsList);
+
+		final List<Integer> intsListTwo = new ArrayList<>();
+		intsListTwo.add(4);
+		intsListTwo.add(5);
+
+		intsListTwo.add(6);
+		System.out.println("default array: intsListTwo: " + intsListTwo);
+
+		intsList.addAll(intsListTwo);
+		System.out.println(intsList);
+
+		final List<Integer> modifableList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+		System.out.println("modifableList: " + modifableList);
+
+		for (int i = 0; i < arrayList.size(); i++) {
+			System.out.println(arrayList.get(i));
+		}
+		final List<String> myList = new ArrayList<>();
+		myList.add("Warsaw");
+		myList.add("Lodz");
+		myList.add("Rzeszow");
+		myList.add("Krakow");
+		System.out.println(myList);
+
+		myList.remove("Rzeszow");
+		myList.remove("Krakoww");
+		System.out.println(myList);
+		//		System.out.println(arrayList.containsAll(myList));
+		//		System.out.println(myList.containsAll(arrayList));
+
+		final Object[] ourPrettyArray = myList.toArray(new String[0]);
+		System.out.println(Arrays.toString(ourPrettyArray));
 	}
 }
