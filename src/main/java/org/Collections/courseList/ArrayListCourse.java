@@ -6,7 +6,12 @@ import java.util.List;
 public class ArrayListCourse {
 	public static void main(final String[] args) {
 		// Dynamiczna lista która może może być rozszerzana i skracana
-		// dynamicznie, a także zezwala na duplikaty.
+		// dynamicznie, a także zezwala na duplikaty, dodatkowo
+		// gwaratnuje zachowanie kolejności elementow.
+
+		// Domyślnie ArrayLista tworzy tablice 10 elementowa i gdy dodajemy 11 element
+		// zwiększa ją o 50%, więc do 15, gdy dodajemy 16ty, zwiększa o kolejne 50%, do 22
+		// i tak dalej.
 		final List<Integer> intsList = new ArrayList<>();
 		final List<String> stringsList = new ArrayList<>();
 
