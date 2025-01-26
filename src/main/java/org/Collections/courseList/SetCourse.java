@@ -39,7 +39,7 @@ public class SetCourse {
 		carSet.add(carOne);
 		System.out.println(carSet);
 
-		carOne.setCompany("Audi");
+		carOne.setName("Audi");
 		carSet.add(carOne);
 		System.out.println(carSet); // [Car{name='Audi', age='12-12-1990', model='X6'}, Car{name='Audi', age='12-12-1990', model='X6'}]
 	}
