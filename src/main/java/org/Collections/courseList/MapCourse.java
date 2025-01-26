@@ -1,5 +1,6 @@
 package org.Collections.courseList;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -75,8 +76,33 @@ public class MapCourse {
 
 		// Zbieramy klucze i zamieniamy w tablice Integerow
 		System.out.println(mapAndListValue.keySet()); // [1, 2, 3]
+		for (final Integer integerKey : mapAndListValue.keySet()) {
+			System.out.println(integerKey);
+		}
 
 		// Zbieramy wartości i zamieniamy w tablice List
 		System.out.println(mapAndListValue.values()); // [[Rafał, Marcin, Patryk], [], [Mar Bar]]
+		for (final List<String> integerValue : mapAndListValue.values()) {
+			System.out.println(integerValue);
+		}
+
+		final Car carOne = new Car("BMW", "2020", "X3");
+		final Car carTwo = new Car("Audi", "2023", "xs");
+
+		final Map<Car, List<String>> options = new HashMap<Car, List<String>>();
+		options.put(carOne, List.of("good", "bad"));
+		options.put(carTwo, List.of("xd", "dx"));
+		options.put(carTwo, Arrays.asList("Galeria", "Tramwaj"));
+		System.out.println(options);
+
+		// Odczytujemy wartość która jest przypisana do klucza carTwo
+		System.out.println(options.get(carTwo));
+		carTwo.setName("Differen model");
+
+		// null - jeśli zmieniliśmy jakiekolwiek pole, to zmienia się rezultat z equals w porównaniu
+		// do carTwo jaki już się znajduje w hashMapie. Dodatkowo zanim HashMap przejdzie do porównania
+		// equals, to zmieni mu się wartość hashCode, tak więc nie znajdziemy bucketa w którym samochód
+		// będzie się znajdował.
+		System.out.println(options.get(carTwo));
 	}
 }
