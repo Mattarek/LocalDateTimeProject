@@ -1,6 +1,7 @@
 package org.Collections.courseList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -81,19 +82,72 @@ public class IteratorCourse {
 		//		}
 		//==============================================================================================
 		// Again
-		final List<String> listWithCities = new ArrayList<>();
-		listWithCities.add("Wraszawa");
-		listWithCities.add("Gdańsk");
-		listWithCities.add("Łódź");
-		listWithCities.add("Wrocław");
+		//		final List<String> listWithCities = new ArrayList<>();
+		//		listWithCities.add("Wraszawa");
+		//		listWithCities.add("Gdańsk");
+		//		listWithCities.add("Łódź");
+		//		listWithCities.add("Wrocław");
 
-		final ListIterator<String> iterator = listWithCities.listIterator();
-		while (iterator.hasPrevious()) { // hasNext() sprawdza i zwraca boolean, czy mamy jeszcze jakiś element
-			// 			W przypadku ListIterator, mamy też dostęp do sprawdzania, czy jest poprzedni: hasPrevious
-			//			Metoda hasNext() w iteratorze jest kluczowa, ponieważ sprawdza, czy istnieje kolejny
-			//			element w kolekcji przed jego pobraniem metodą next(). Jeśli nie użyjesz hasNext(),
-			//					a iterator znajdzie się na końcu kolekcji, wywołanie next() spowoduje wyjątek
-			//			NoSuchElementException.
+		//final ListIterator<String> iterator = listWithCities.listIterator();
+		//while (iterator.hasNext()) { // hasNext() sprawdza i zwraca boolean, czy mamy jeszcze jakiś element
+		//		 			W przypadku ListIterator, mamy też dostęp do sprawdzania, czy jest poprzedni: hasPrevious
+		//					Metoda hasNext() w iteratorze jest kluczowa, ponieważ sprawdza, czy istnieje kolejny
+		//					element w kolekcji przed jego pobraniem metodą next(). Jeśli nie użyjesz hasNext(),
+		//							a iterator znajdzie się na końcu kolekcji, wywołanie next() spowoduje wyjątek
+		//							NoSuchElementException czyli tak zwany fail fast.
+		//	System.out.println(iterator.next());
+		//}
+
+		//		final ListIterator<String> previousIterator = listWithCities.listIterator(listWithCities.size());
+		//		while (previousIterator.hasPrevious()) {
+		//			System.out.println(previousIterator.previous());
+		//		}
+		//		final Set<String> setWithCities = new HashSet<>();
+		//		setWithCities.add("Wraszawa");
+		//		setWithCities.add("Gdańsk");
+		//		setWithCities.add("Łódź");
+		//		setWithCities.add("Wrocław");
+		//
+		//		final Iterator<String> iteratorSet = setWithCities.iterator();
+		//		while (iteratorSet.hasNext()) {
+		//			System.out.println(iteratorSet.next());
+		//		}
+		//
+		//		for (final String setWithCity : setWithCities.k) {
+		//			System.out.println(setWithCity);
+		//		}
+
+		// Lista z iteratorem
+		final List<String> lista = new ArrayList<>(Arrays.asList("A", "B", "C"));
+		final Iterator<String> iterator = lista.iterator();
+		while (iterator.hasNext()) {
+			final String element = iterator.next();
+			System.out.println(element);
+			if (element.equals("B")) {
+				iterator.remove();
+			}
+		}
+		System.out.println(lista);
+
+		// set z iteratorem
+		final Set<Integer> setInt = new HashSet<>(Set.of(1, 2, 3));
+		final Iterator<Integer> setIterator = setInt.iterator();
+
+		setInt.add(4); // ConcurrentModificationException - bo dodałem po utworzeniu iteratora
+		while (setIterator.hasNext()) {
+			System.out.println(setIterator.next());
+		}
+
+		// Map
+		final Map<String, String> cars = new HashMap<>();
+		cars.put("Volvo", "XC60");
+		cars.put("Fiat", "Panda");
+		cars.put("Volkswagen", "Golf");
+
+		final Iterator<Map.Entry<String, String>> iteratorMap = cars.entrySet().iterator();
+
+		cars.values();
+		while (iteratorMap.hasNext()) {
 			System.out.println(iterator.next());
 		}
 	}
