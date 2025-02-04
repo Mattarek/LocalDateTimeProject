@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
 
 public class LocalExamples {
 	public static void main(final String[] args) {
@@ -14,5 +16,9 @@ public class LocalExamples {
 		final LocalTime localTime = LocalTime.parse("00:15:15");
 		final LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
 		System.out.println(localDateTime); // 2000-03-20T00:15:15
+		System.out.println(localDateTime.plusHours(90));
+		System.out.println(localDateTime.plusDays(90));
+
+		System.out.println(localDateTime.plus(90, ChronoUnit.HALF_DAYS));
 	}
 }
