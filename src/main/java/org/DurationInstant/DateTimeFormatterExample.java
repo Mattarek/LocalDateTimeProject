@@ -2,6 +2,8 @@ package org.DurationInstant;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public class DateTimeFormatterExample {
 	public static void main(final String[] args) {
@@ -13,8 +15,18 @@ public class DateTimeFormatterExample {
 		final DateTimeFormatter dateTimeFormatterTwo = DateTimeFormatter.ofPattern("yy MM dd HH mm ss");
 		final DateTimeFormatter dateTimeFormatterThree = DateTimeFormatter.ofPattern("yy-MM-dd HH-mm-ss");
 
+		// set nie zmienia permametnie, zmienia jedynie na czas działania programu, nie zmienia systemowo
+		Locale.setDefault(new Locale("pl", "PL"));
+
 		System.out.println(dateTimeFormatterOne.format(parsed));
 		System.out.println(dateTimeFormatterTwo.format(parsed));
 		System.out.println(dateTimeFormatterThree.format(parsed));
+		System.out.println(Locale.CANADA);
+		System.out.println(Locale.CHINA);
+		System.out.println(Locale.UK);
+		System.out.println(Locale.KOREA);
+
+		final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL);
+		System.out.println(parsed.format(dateTimeFormatter));
 	}
 }
