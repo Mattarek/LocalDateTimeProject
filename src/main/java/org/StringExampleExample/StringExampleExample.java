@@ -1,10 +1,11 @@
 package org.StringExampleExample;
 
-import java.time.LocalTime;
-import java.util.Random;
-import java.util.UUID;
-import java.util.function.Supplier;
+import java.util.List;
 
 public class StringExampleExample {
 
+	public static void main(final String[] args) {
+
+		final StringBuilder sb = new StringBuilder(120);
+	}
 }
