@@ -2,7 +2,7 @@ package org.BigIntAndBigDecimal;
 
 import java.math.BigInteger;
 
-public class BigIntAndBigDecimal {
+public class BigIntegerExample {
 	public static void main(final String[] args) {
 		final BigInteger a = new BigInteger("5000000000000000000000");
 		final BigInteger b = new BigInteger("2000000000000000000000");
@@ -33,6 +33,17 @@ public class BigIntAndBigDecimal {
 
 		System.out.println(one.equals(two));  // false
 		System.out.println(one.equals(oneToCompare)); // true
+
+		// Konwersja
+		final BigInteger num = new BigInteger("1234567890");
+		final int intValue = num.intValue();
+		final long longValue = num.longValue();
+		final double doubleValue = num.doubleValue();
+		final String stringValue = num.toString();
+		System.out.println(intValue);
+		System.out.println(longValue);
+		System.out.println(doubleValue);
+		System.out.println(stringValue);
 
 		//		System.out.println("Dodawanie: " + a.add(b));
 		//		System.out.println("Odejmowanie: " + a.subtract(b));
