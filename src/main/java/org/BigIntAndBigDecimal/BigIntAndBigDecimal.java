@@ -8,9 +8,13 @@ public class BigIntAndBigDecimal {
 		final BigInteger bigIntegerOne = BigInteger.ONE;
 		final BigInteger bigIntegerTwo = BigInteger.TWO;
 		final BigInteger bigIntegerTen = BigInteger.TEN;
+
 		System.out.println(bigIntegerZero);
 		System.out.println(bigIntegerTwo);
 		System.out.println(bigIntegerOne);
 		System.out.println(bigIntegerTen);
+
+		final BigInteger bigInteger = BigInteger.valueOf(Long.MAX_VALUE);
+		System.out.println(bigInteger);
 	}
 }
