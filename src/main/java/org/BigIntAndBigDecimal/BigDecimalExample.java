@@ -58,6 +58,8 @@ public class BigDecimalExample {
 
 		// =================================================================
 		// Tego problemu nie ma w BigDecimal
+		// Jeśli ważne jest zużycie godzin, razem z dokładnością do 0.1 godziny, to nie można korzystac z dobule
+		// bo ten wynik też będzie przeklamany
 		final BigDecimal bigDecimalOne = new BigDecimal("0.1");
 		final BigDecimal bigDecimalTwo = new BigDecimal("0.2");
 		System.out.println(bigDecimalOne.add(bigDecimalTwo)); // 0.3
