@@ -51,17 +51,27 @@ public class BigDecimalExample {
 		//		Gdy komputer dokonuje operacji 0.2 + 0.1, wartości te są najpierw aproksymowane w postaci liczby
 		//	zmiennoprzecinkowej (IEEE 754), co prowadzi do błędów zaokrąglenia. Efektem jest wynik 0.30000000000000004
 		//			, zamiast oczekiwanego 0.3.
-		final double a = 0.1;
-		final double b = 0.2;
-		final double c = a + b;
-		System.out.println(c); // 0.30000000000000004
+		//		final double a = 0.1;
+		//		final double b = 0.2;
+		//		final double c = a + b;
+		//		System.out.println(c); // 0.30000000000000004
 
 		// =================================================================
 		// Tego problemu nie ma w BigDecimal
 		// Jeśli ważne jest zużycie godzin, razem z dokładnością do 0.1 godziny, to nie można korzystac z dobule
 		// bo ten wynik też będzie przeklamany
-		final BigDecimal bigDecimalOne = new BigDecimal("0.1");
-		final BigDecimal bigDecimalTwo = new BigDecimal("0.2");
-		System.out.println(bigDecimalOne.add(bigDecimalTwo)); // 0.3
+		//		final BigDecimal bigDecimalOne = new BigDecimal("0.1");
+		//		final BigDecimal bigDecimalTwo = new BigDecimal("0.2");
+		//		System.out.println(bigDecimalOne.add(bigDecimalTwo)); // 0.3
+		//		System.out.println();
+
+		//======================================================================
+		final BigDecimal bigDec = BigDecimal.valueOf(123.0000);
+		final BigDecimal bigDecTwo = new BigDecimal("123.0000");
+
+		System.out.println(bigDec);
+		System.out.println(bigDecTwo);
+
+		System.out.println(bigDec.divide(bigDecTwo, RoundingMode.HALF_UP));
 	}
 }
