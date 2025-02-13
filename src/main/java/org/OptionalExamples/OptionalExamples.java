@@ -49,13 +49,13 @@ public class OptionalExamples {
 		//		System.out.println(diameterFiltered);
 
 		final List<String> list = List.of("Brasil", "Denmark", "China", "Poland");
-		final Optional<String> found = find(list, "Denmark");
+		final Optional<String> found = find(list, Optional.of("Denmark"));
 		System.out.println(found);
 	}
 
-	private static Optional<String> find(final List<String> countries, final String element) {
+	private static Optional<String> find(final List<String> countries, final Optional<String> element) {
 		for (final String country : countries) {
-			if (element.equals(country)) {
+			if (element.get().equals(country)) {
 				return Optional.of(country);
 			}
 		}
