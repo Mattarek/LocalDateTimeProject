@@ -1,5 +1,6 @@
 package org.OptionalExamples;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,11 +26,41 @@ public class OptionalExamples {
 		//			System.out.println("Is null");
 		//		}
 
-		final Optional<Car> car = Optional.of(new Car());
-		// dla Optionala w Optionalu, twórcy stworzyli flatMap
-		final Optional<SteeringWheel> steeringWheel = car.flatMap(c -> c.getSteeringWheelOptional());
-		System.out.println(steeringWheel);
+		//----------------------------------------------------------------------------
+		//		final Optional<Car> car = Optional.of(new Car()); // 0.3
+		//		final Optional<Car> car = Optional.empty(); // 0.0
+		//
+		//		final double diameter =
+		//				car
+		//						.flatMap(c -> c.getSteeringWheelOptional())
+		//						.flatMap(sw -> sw.getDiameterOptional())
+		//						.orElse(0.0);
+		//		System.out.println(diameter);
+		//----------------------------------------------------------------------------
+		//		final Optional<Car> car = Optional.empty();
+		//		final Optional<Double> diameterFiltered = car
+		//				.map(c -> c.getSteeringWheel())
+		//				.map(sw -> sw.getDiameter())
+		//				.filter(d -> {
+		//					System.out.println(d);
+		//					return d >= 0.5;
+		//				})
+		//				.filter(d -> d < 0.7);
+		//		System.out.println(diameterFiltered);
+
+		final List<String> list = List.of("Brasil", "Denmark", "China", "Poland");
+		final Optional<String> found = find(list, "Denmark");
+		System.out.println(found);
+	}
+
+	private static Optional<String> find(final List<String> countries, final String element) {
+		for (final String country : countries) {
+			if (element.equals(country)) {
+				return Optional.of(country);
+			}
+		}
+		return Optional.empty();
 	}
 }
-`
+
 
