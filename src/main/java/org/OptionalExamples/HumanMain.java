@@ -18,10 +18,15 @@ public class HumanMain {
 		//		return Optional.of(name);
 		//	}
 
-		final Optional<String> filteredNameOpt =
-				human.flatMap(h -> h.getName()).filter(f -> f.length() > 4);
-		System.out.println(filteredNameOpt);
-		filteredNameOpt.ifPresent(n -> System.out.println(n));
+		//=============================================================================
+		final Human humanOptional =
+				human.or(() -> Optional.empty()).or(() -> Optional.ofNullable(new Human("Edyta"))).get();
+		System.out.println(humanOptional);
+		//=============================================================================
+		//		final Optional<String> filteredNameOpt =
+		//				human.flatMap(h -> h.getName()).filter(f -> f.length() > 4);
+		//		System.out.println(filteredNameOpt);
+		//		filteredNameOpt.ifPresent(n -> System.out.println(n));
 		//=============================================================================
 		//human.map(h -> h.getName()).filter(f -> f.length() > 4).ifPresent(n -> System.out.println(n));
 
