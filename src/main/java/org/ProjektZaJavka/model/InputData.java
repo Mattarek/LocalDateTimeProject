@@ -1,15 +1,16 @@
 package org.ProjektZaJavka.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class InputData {
+	private static final BigDecimal PERCENT = BigDecimal.valueOf(100);
+	private BigDecimal bankMarginPercent = new BigDecimal("1.9");
 	private BigDecimal amount = new BigDecimal("300000");
 	private RateType rateType = RateType.CONSTANT;
-	private BigDecimal bankMargin = new BigDecimal("1.9");
 	private LocalDate repaymentStartDate = LocalDate.of(2020, 1, 6);
-	private BigDecimal wiborPercent = new BigDecimal("1,73");
+	private BigDecimal wiborPercent = new BigDecimal("1.73");
 	private BigDecimal monthsDuration = BigDecimal.valueOf(180);
 
 	public InputData withRepaymentStartDate(final LocalDate repaymentStartDate) {
@@ -32,8 +33,8 @@ public class InputData {
 		return this;
 	}
 
-	public InputData withBankMargin(final BigDecimal bankMargin) {
-		this.bankMargin = bankMargin;
+	public InputData withBankMarginPercent(final BigDecimal bankMarginPercent) {
+		this.bankMarginPercent = bankMarginPercent;
 		return this;
 	}
 
@@ -46,10 +47,6 @@ public class InputData {
 		return repaymentStartDate;
 	}
 
-	public BigDecimal getWiborPercent() {
-		return wiborPercent;
-	}
-
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -58,36 +55,15 @@ public class InputData {
 		return monthsDuration;
 	}
 
+	public BigDecimal getInterestPercent() {
+		return wiborPercent.add(bankMarginPercent).divide(PERCENT, 10, RoundingMode.HALF_UP);
+	}
+
+	public BigDecimal getInterestDisplay() {
+		return wiborPercent.add(bankMarginPercent).setScale(2, RoundingMode.HALF_UP);
+	}
+
 	public RateType getRateType() {
 		return rateType;
-	}
-
-	public BigDecimal getBankMargin() {
-		return bankMargin;
-	}
-
-	@Override
-	public String toString() {
-		return "InputData{" +
-				"repaymentStartDate=" + repaymentStartDate +
-				", wiborPercent=" + wiborPercent +
-				", amount=" + amount +
-				", monthsDuration=" + monthsDuration +
-				", rateType=" + rateType +
-				", bankMargin=" + bankMargin +
-				'}';
-	}
-
-	@Override
-	public boolean equals(final Object o) {
-		if (!(o instanceof final InputData inputData)) {
-			return false;
-		}
-		return Objects.equals(repaymentStartDate, inputData.repaymentStartDate) && Objects.equals(wiborPercent, inputData.wiborPercent) && Objects.equals(amount, inputData.amount) && Objects.equals(monthsDuration, inputData.monthsDuration) && rateType == inputData.rateType && Objects.equals(bankMargin, inputData.bankMargin);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(repaymentStartDate, wiborPercent, amount, monthsDuration, rateType, bankMargin);
 	}
 }
