@@ -40,14 +40,16 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 
 		final BigDecimal q = calculateQ(interestPercent);
 
-		final BigDecimal rateAmount = calculateConstantRateAmount();
+		final BigDecimal rateAmount = calculateConstantRateAmount(q, inputData.getAmount(), inputData.getMonthsDuration());
 		final BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-		final BigDecimal capitalAmount = calculateConstantCapitalAmount();
+		final BigDecimal capitalAmount = calculateConstantCapitalAmount(rateAmount, interestAmount);
 
 		return new RateAmounts(rateAmount, interestAmount, capitalAmount);
 	}
 
-	private BigDecimal calculateConstantRateAmount() {
+	private BigDecimal calculateConstantRateAmount(final BigDecimal q, final BigDecimal rateAmount,
+												   final BigDecimal monthsDuration) {
+		return rateAmount.multiply(q.pow(monthsDuration.intValue())).multiply(q.subtract(BigDecimal.ONE));
 	}
 
 	private BigDecimal calculateConstantCapitalAmount(final BigDecimal rateAmount, final BigDecimal interestAmount) {
@@ -58,25 +60,28 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 		return residualAmount.multiply(interestPercent).divide(YEAR, 2, RoundingMode.HALF_UP);
 	}
 
+	private RateAmounts calculateConstantRate(final InputData inputData) {
+		final BigDecimal interestPercent = inputData.getInterestPercent();
+		final BigDecimal residualAmount = inputData.getAmount();
+
+		final BigDecimal q = calculateQ(inputData.getInterestPercent());
+
+		final BigDecimal rateAmount = calculateConstantRateAmount(q, inputData.getAmount(), inputData.getMonthsDuration());
+		final BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
+		final BigDecimal capitalAmount = calculateConstantCapitalAmount(rateAmount, interestAmount);
+
+		return new RateAmounts(rateAmount, interestAmount, capitalAmount);
+	}
+
 	private RateAmounts calculateConstantRate(final InputData inputData, final Rate previousRate) {
 		final BigDecimal interestPercent = inputData.getInterestPercent();
 		final BigDecimal residualAmount = previousRate.getMortgageResidual().getAmount();
 
 		final BigDecimal q = calculateQ(interestPercent);
 
-		final BigDecimal rateAmount = calculateConstantRateAmount();
+		final BigDecimal rateAmount = calculateConstantRateAmount(q, inputData.getAmount(), inputData.getMonthsDuration());
 		final BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-		final BigDecimal capitalAmount = calculateConstantCapitalAmount();
-
-		return new RateAmounts(rateAmount, interestAmount, capitalAmount);
-	}
-
-	private RateAmounts calculateConstantRate(final InputData inputData) {
-		final BigDecimal q = calculateQ(inputData.getInterestPercent());
-
-		final BigDecimal rateAmount = calculateConstantRateAmount();
-		final BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-		final BigDecimal capitalAmount = calculateConstantCapitalAmount();
+		final BigDecimal capitalAmount = calculateConstantCapitalAmount(rateAmount, interestAmount);
 
 		return new RateAmounts(rateAmount, interestAmount, capitalAmount);
 	}

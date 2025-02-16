@@ -16,9 +16,11 @@ public class Rate {
 		this.timePoint = timePoint;
 	}
 
-	public Object getMortgageResidual() {
+	public MortgageResidual getMortgageResidual() {
+		return mortgageResidual;
 	}
 
-	public Object getAmount() {
+	public RateAmounts getAmount() {
+		return rateAmounts;
 	}
 }

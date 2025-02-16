@@ -27,6 +27,7 @@ public class Main {
 				new AmountsCalculationImplementation(),
 				new ResidualCalculationImplementation()
 		);
+
 		printingService.printInputDataInfo(inputData);
 
 		final MortgageCalculationService mortgageCalculationService =
