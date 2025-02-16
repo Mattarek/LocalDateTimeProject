@@ -8,6 +8,7 @@ import org.ProjektZaJavka.service.PrintingService;
 import org.ProjektZaJavka.service.PrintingServiceImplementation;
 import org.ProjektZaJavka.service.RateCalculationService;
 import org.ProjektZaJavka.service.RateCalculationServiceImplementation;
+import org.ProjektZaJavka.service.ResidualCalculationImplementation;
 import org.ProjektZaJavka.service.TimePointServiceImplementation;
 
 import java.math.BigDecimal;

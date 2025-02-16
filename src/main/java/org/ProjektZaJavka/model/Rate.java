@@ -15,4 +15,10 @@ public class Rate {
 		this.rateAmounts = rateAmounts;
 		this.timePoint = timePoint;
 	}
+
+	public Object getMortgageResidual() {
+	}
+
+	public Object getAmount() {
+	}
 }
