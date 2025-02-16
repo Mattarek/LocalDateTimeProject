@@ -1,12 +1,14 @@
 package org.ProjektZaJavka;
 
 import org.ProjektZaJavka.model.InputData;
+import org.ProjektZaJavka.service.AmountsCalculationImplementation;
 import org.ProjektZaJavka.service.MortgageCalculationImplementation;
 import org.ProjektZaJavka.service.MortgageCalculationService;
 import org.ProjektZaJavka.service.PrintingService;
 import org.ProjektZaJavka.service.PrintingServiceImplementation;
 import org.ProjektZaJavka.service.RateCalculationService;
 import org.ProjektZaJavka.service.RateCalculationServiceImplementation;
+import org.ProjektZaJavka.service.TimePointServiceImplementation;
 
 import java.math.BigDecimal;
 
@@ -19,7 +21,11 @@ public class Main {
 						.withMonthsDuration(BigDecimal.valueOf(160));
 
 		final PrintingService printingService = new PrintingServiceImplementation();
-		final RateCalculationService rateCalculationService = new RateCalculationServiceImplementation();
+		final RateCalculationService rateCalculationService = new RateCalculationServiceImplementation(
+				new TimePointServiceImplementation(),
+				new AmountsCalculationImplementation(),
+				new ResidualCalculationImplementation()
+		);
 		printingService.printInputDataInfo(inputData);
 
 		final MortgageCalculationService mortgageCalculationService =

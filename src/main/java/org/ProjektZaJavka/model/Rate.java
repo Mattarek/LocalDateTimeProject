@@ -8,7 +8,8 @@ public class Rate {
 	private final RateAmounts rateAmounts;
 	private final MortgageResidual mortgageResidual;
 
-	public Rate(final BigDecimal rateNumber, final MortgageResidual mortgageResidual, final RateAmounts rateAmounts, final TimePoint timePoint) {
+	public Rate(final BigDecimal rateNumber, final TimePoint timePoint,
+				final RateAmounts rateAmounts, final MortgageResidual mortgageResidual) {
 		this.rateNumber = rateNumber;
 		this.mortgageResidual = mortgageResidual;
 		this.rateAmounts = rateAmounts;
