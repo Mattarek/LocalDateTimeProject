@@ -18,8 +18,8 @@ public class Main {
 	public static void main(final String[] args) {
 		final InputData inputData =
 				new InputData()
-						.withAmount(new BigDecimal("298000"))
-						.withMonthsDuration(BigDecimal.valueOf(160));
+						.withAmount(new BigDecimal("300000"))
+						.withMonthsDuration(BigDecimal.valueOf(120));
 
 		final PrintingService printingService = new PrintingServiceImplementation();
 		final RateCalculationService rateCalculationService = new RateCalculationServiceImplementation(

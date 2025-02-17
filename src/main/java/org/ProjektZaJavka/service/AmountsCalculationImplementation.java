@@ -3,13 +3,13 @@ package org.ProjektZaJavka.service;
 import org.ProjektZaJavka.model.InputData;
 import org.ProjektZaJavka.model.Rate;
 import org.ProjektZaJavka.model.RateAmounts;
+import org.ProjektZaJavka.model.exception.RateCalculateException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class AmountsCalculationImplementation implements AmountsCalculationService {
 	public static final BigDecimal YEAR = BigDecimal.valueOf(12);
-	private BigDecimal interestAmount;
 
 	@Override
 	public RateAmounts calculate(final InputData inputData) {
@@ -19,7 +19,7 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 			case DECREASING:
 				return calculateDecreasingRate(inputData);
 			default:
-				throw new RuntimeException("Case not handled");
+				throw new RateCalculateException("First rate calculation exception.");// alt + j
 		}
 	}
 
@@ -30,7 +30,7 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 			case DECREASING:
 				return calculateDecreasingRate(inputData, previousRate);
 			default:
-				throw new RuntimeException("Case not handled");
+				throw new RateCalculateException();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 		final BigDecimal residualAmount = previousRate.getMortgageResidual().getAmount();
 
 		final BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-		final BigDecimal capitalAmount = calculateDecreasingCapitalAmount(residualAmount, inputData.getMonthsDuration());
+		final BigDecimal capitalAmount = calculateDecreasingCapitalAmount(inputData.getAmount(), inputData.getMonthsDuration());
 		final BigDecimal rateAmount = capitalAmount.add(interestAmount);
 
 		return new RateAmounts(rateAmount, interestAmount, capitalAmount);
