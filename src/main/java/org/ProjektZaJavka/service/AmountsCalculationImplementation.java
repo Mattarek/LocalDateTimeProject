@@ -1,6 +1,7 @@
 package org.ProjektZaJavka.service;
 
 import org.ProjektZaJavka.model.InputData;
+import org.ProjektZaJavka.model.Overpayment;
 import org.ProjektZaJavka.model.Rate;
 import org.ProjektZaJavka.model.RateAmounts;
 import org.ProjektZaJavka.model.exception.RateCalculateException;
@@ -23,7 +24,12 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 		}
 	}
 
-	public RateAmounts calculate(final InputData inputData, final Rate previousRate) {
+	@Override
+	public RateAmounts calculate(final InputData inputData, final Overpayment overpayment) {
+		return null;
+	}
+
+	public RateAmounts calculate(final InputData inputData, final Rate previousRate, final Overpayment overpayment) {
 		switch (inputData.getRateType()) {
 			case CONSTANT:
 				return calculateConstantRate(inputData, previousRate);
@@ -97,7 +103,7 @@ public class AmountsCalculationImplementation implements AmountsCalculationServi
 	}
 
 	private BigDecimal calculateInterestAmount(final BigDecimal residualAmount, final BigDecimal interestPercent) {
-		return residualAmount.multiply(interestPercent).divide(YEAR, 2, RoundingMode.HALF_UP);
+		return residualAmount.multiply(interestPercent).divide(YEAR, 50, RoundingMode.HALF_UP);
 	}
 
 	private BigDecimal calculateQ(final BigDecimal interestPercent) {

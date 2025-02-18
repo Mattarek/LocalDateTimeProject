@@ -3,9 +3,21 @@ package org.ProjektZaJavka.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class InputData {
 	private static final BigDecimal PERCENT = BigDecimal.valueOf(100);
+	private final Map<Integer, BigDecimal> overpaymenySchema = Map.of(
+			5, BigDecimal.valueOf(10000),
+			6, BigDecimal.valueOf(10000),
+			7, BigDecimal.valueOf(10000),
+			8, BigDecimal.valueOf(10000)
+
+	);
+	private final String overpaymentReduceWay = Override.REDUCE_PERIOD;
+	private final BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
+	private final BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
+
 	private BigDecimal bankMarginPercent = new BigDecimal("1.9");
 	private BigDecimal amount = new BigDecimal("300000");
 	private RateType rateType = RateType.CONSTANT;
@@ -56,7 +68,7 @@ public class InputData {
 	}
 
 	public BigDecimal getInterestPercent() {
-		return wiborPercent.add(bankMarginPercent).divide(PERCENT, 10, RoundingMode.HALF_UP);
+		return wiborPercent.add(bankMarginPercent).divide(PERCENT, 4, RoundingMode.HALF_UP);
 	}
 
 	public BigDecimal getInterestDisplay() {

@@ -1,7 +1,9 @@
 package org.ProjektZaJavka.service;
 
 import org.ProjektZaJavka.model.InputData;
+import org.ProjektZaJavka.model.MortgageReference;
 import org.ProjektZaJavka.model.MortgageResidual;
+import org.ProjektZaJavka.model.Overpayment;
 import org.ProjektZaJavka.model.Rate;
 import org.ProjektZaJavka.model.RateAmounts;
 import org.ProjektZaJavka.model.TimePoint;
@@ -13,12 +15,20 @@ import java.util.List;
 public class RateCalculationServiceImplementation implements RateCalculationService {
 	private final TimePointService timePointService;
 	private final AmountsCalculationService amountsCalculationService;
+	private final OverpaymentCalculationService overpaymentCalculationService;
 	private final ResidualCalculationService residualCalculationService;
+	private final ReferenceCalculationService referenceCalculationService;
 
-	public RateCalculationServiceImplementation(final TimePointService timePointService, final AmountsCalculationService amountsCalculationService, final ResidualCalculationService residualCalculationService) {
+	public RateCalculationServiceImplementation(final TimePointService timePointService,
+												final AmountsCalculationService amountsCalculationService,
+												final OverpaymentCalculationService overpaymentCalculationService,
+												final ResidualCalculationService residualCalculationService,
+												final ReferenceCalculationService referenceCalculationService) {
 		this.timePointService = timePointService;
 		this.amountsCalculationService = amountsCalculationService;
+		this.overpaymentCalculationService = overpaymentCalculationService;
 		this.residualCalculationService = residualCalculationService;
+		this.referenceCalculationService = referenceCalculationService;
 	}
 
 	@Override
@@ -41,16 +51,19 @@ public class RateCalculationServiceImplementation implements RateCalculationServ
 
 	private Rate calculateRate(final BigDecimal rateNumber, final InputData inputData) {
 		final TimePoint timePoint = timePointService.calculate(rateNumber, inputData);
-		final RateAmounts rateAmounts = amountsCalculationService.calculate(inputData);
+		final Overpayment overpayment = overpaymentCalculationService.calculate(inputData);
+		final RateAmounts rateAmounts = amountsCalculationService.calculate(inputData, overpayment);
 		final MortgageResidual mortgageResidual = residualCalculationService.calculate(rateAmounts, inputData);
-		return new Rate(rateNumber, timePoint, rateAmounts, mortgageResidual);
+		final MortgageReference mortgageReference = referenceCalculationService.calculate();
+		return new Rate(rateNumber, timePoint, rateAmounts, mortgageResidual, mortgageReference);
 	}
 
 	private Rate calculateRate(final BigDecimal rateNumber, final InputData inputData, final Rate previousRate) {
 		final TimePoint timePoint = timePointService.calculate(rateNumber, inputData);
-		final RateAmounts rateAmounts = amountsCalculationService.calculate(inputData, previousRate);
+		final Overpayment overpayment = overpaymentCalculationService.calculate(inputData);
+		final RateAmounts rateAmounts = amountsCalculationService.calculate(inputData, previousRate, overpayment);
 		final MortgageResidual mortgageResidual = residualCalculationService.calculate(rateAmounts, previousRate);
-
-		return new Rate(rateNumber, timePoint, rateAmounts, mortgageResidual);
+		final MortgageReference mortgageReference = referenceCalculationService.calculate();
+		return new Rate(rateNumber, timePoint, rateAmounts, mortgageResidual, mortgageReference);
 	}
 }

@@ -4,10 +4,13 @@ import org.ProjektZaJavka.model.InputData;
 import org.ProjektZaJavka.service.AmountsCalculationImplementation;
 import org.ProjektZaJavka.service.MortgageCalculationImplementation;
 import org.ProjektZaJavka.service.MortgageCalculationService;
+import org.ProjektZaJavka.service.OverpaymentCalculationService;
+import org.ProjektZaJavka.service.OverpaymentCalculationServiceImplementation;
 import org.ProjektZaJavka.service.PrintingService;
 import org.ProjektZaJavka.service.PrintingServiceImplementation;
 import org.ProjektZaJavka.service.RateCalculationService;
 import org.ProjektZaJavka.service.RateCalculationServiceImplementation;
+import org.ProjektZaJavka.service.ReferenceCalculationServiceImplementation;
 import org.ProjektZaJavka.service.ResidualCalculationImplementation;
 import org.ProjektZaJavka.service.SummaryServiceFactory;
 import org.ProjektZaJavka.service.TimePointServiceImplementation;
@@ -26,7 +29,9 @@ public class Main {
 		final RateCalculationService rateCalculationService = new RateCalculationServiceImplementation(
 				new TimePointServiceImplementation(),
 				new AmountsCalculationImplementation(),
-				new ResidualCalculationImplementation()
+				new OverpaymentCalculationServiceImplementation(),
+				new ResidualCalculationImplementation(),
+				new ReferenceCalculationServiceImplementation()
 		);
 
 		printingService.printInputDataInfo(inputData);
