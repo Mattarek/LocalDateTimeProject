@@ -17,25 +17,20 @@ public class Rate {
 		this.timePoint = timePoint;
 	}
 
-	public MortgageResidual getMortgageResidual() {
-		return mortgageResidual;
+	public BigDecimal getRateNumber() {
+		return rateNumber;
 	}
 
-	public RateAmounts getAmount() {
+	public TimePoint getTimePoint() {
+		return timePoint;
+	}
+
+	public RateAmounts getRateAmounts() {
 		return rateAmounts;
 	}
 
-	@Override
-	public boolean equals(final Object o) {
-		if (!(o instanceof final Rate rate)) {
-			return false;
-		}
-		return Objects.equals(rateNumber, rate.rateNumber) && Objects.equals(timePoint, rate.timePoint) && Objects.equals(rateAmounts, rate.rateAmounts) && Objects.equals(mortgageResidual, rate.mortgageResidual);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(rateNumber, timePoint, rateAmounts, mortgageResidual);
+	public MortgageResidual getMortgageResidual() {
+		return mortgageResidual;
 	}
 
 	@Override

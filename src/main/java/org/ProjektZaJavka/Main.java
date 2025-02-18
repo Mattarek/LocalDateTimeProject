@@ -9,6 +9,7 @@ import org.ProjektZaJavka.service.PrintingServiceImplementation;
 import org.ProjektZaJavka.service.RateCalculationService;
 import org.ProjektZaJavka.service.RateCalculationServiceImplementation;
 import org.ProjektZaJavka.service.ResidualCalculationImplementation;
+import org.ProjektZaJavka.service.SummaryServiceFactory;
 import org.ProjektZaJavka.service.TimePointServiceImplementation;
 
 import java.math.BigDecimal;
@@ -18,8 +19,8 @@ public class Main {
 	public static void main(final String[] args) {
 		final InputData inputData =
 				new InputData()
-						.withAmount(new BigDecimal("300000"))
-						.withMonthsDuration(BigDecimal.valueOf(120));
+						.withAmount(new BigDecimal("298000"))
+						.withMonthsDuration(BigDecimal.valueOf(360));
 
 		final PrintingService printingService = new PrintingServiceImplementation();
 		final RateCalculationService rateCalculationService = new RateCalculationServiceImplementation(
@@ -31,7 +32,8 @@ public class Main {
 		printingService.printInputDataInfo(inputData);
 
 		final MortgageCalculationService mortgageCalculationService =
-				new MortgageCalculationImplementation(printingService, rateCalculationService);
+				new MortgageCalculationImplementation(printingService, rateCalculationService,
+						SummaryServiceFactory.create());
 		mortgageCalculationService.calculate(inputData);
 	}
 }

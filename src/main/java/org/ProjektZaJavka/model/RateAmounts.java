@@ -17,12 +17,12 @@ public class RateAmounts {
 		return rateAmount;
 	}
 
-	public BigDecimal getCapitalAmount() {
-		return capitalAmount;
-	}
-
 	public BigDecimal getInterestAmount() {
 		return interestAmount;
+	}
+
+	public BigDecimal getCapitalAmount() {
+		return capitalAmount;
 	}
 
 	@Override
