@@ -1,50 +1,50 @@
-package org.ProjektZaJavka.model;
+package mortgage.model;
 
 import java.math.BigDecimal;
 
 public class Rate {
-	private final BigDecimal rateNumber;
-	private final TimePoint timePoint;
-	private final RateAmounts rateAmounts;
-	private final MortgageResidual mortgageResidual;
-	private final MortgageReference mortgageReference;
 
-	public Rate(
-			final BigDecimal rateNumber,
-			final TimePoint timePoint,
-			final RateAmounts rateAmounts,
-			final MortgageResidual mortgageResidual,
-			final MortgageReference mortgageReference) {
-		this.rateNumber = rateNumber;
-		this.timePoint = timePoint;
-		this.rateAmounts = rateAmounts;
-		this.mortgageResidual = mortgageResidual;
-		this.mortgageReference = mortgageReference;
-	}
+    private final BigDecimal rateNumber;
 
-	public BigDecimal getRateNumber() {
-		return rateNumber;
-	}
+    private final TimePoint timePoint;
 
-	public TimePoint getTimePoint() {
-		return timePoint;
-	}
+    private final RateAmounts rateAmounts;
 
-	public RateAmounts getRateAmounts() {
-		return rateAmounts;
-	}
+    private final MortgageResidual mortgageResidual;
 
-	public MortgageResidual getMortgageResidual() {
-		return mortgageResidual;
-	}
+    private final MortgageReference mortgageReference;
 
-	@Override
-	public String toString() {
-		return "Rate{" +
-				"rateNumber=" + rateNumber +
-				", timePoint=" + timePoint +
-				", rateAmounts=" + rateAmounts +
-				", mortgageResidual=" + mortgageResidual +
-				'}';
-	}
+    public Rate(
+        final BigDecimal rateNumber,
+        final TimePoint timePoint,
+        final RateAmounts rateAmounts,
+        final MortgageResidual mortgageResidual,
+        final MortgageReference mortgageReference
+    ) {
+        this.rateNumber = rateNumber;
+        this.timePoint = timePoint;
+        this.rateAmounts = rateAmounts;
+        this.mortgageResidual = mortgageResidual;
+        this.mortgageReference = mortgageReference;
+    }
+
+    public BigDecimal getRateNumber() {
+        return rateNumber;
+    }
+
+    public TimePoint getTimePoint() {
+        return timePoint;
+    }
+
+    public RateAmounts getRateAmounts() {
+        return rateAmounts;
+    }
+
+    public MortgageResidual getMortgageResidual() {
+        return mortgageResidual;
+    }
+
+    public MortgageReference getMortgageReference() {
+        return mortgageReference;
+    }
 }

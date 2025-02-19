@@ -1,29 +1,23 @@
-package org.ProjektZaJavka.model;
+package mortgage.model;
 
 import java.math.BigDecimal;
 
 public class MortgageResidual {
-	private final BigDecimal amount;
-	private final BigDecimal duration;
 
-	public MortgageResidual(final BigDecimal amount, final BigDecimal duration) {
-		this.amount = amount;
-		this.duration = duration;
-	}
+    private final BigDecimal residualAmount;
 
-	public BigDecimal getDuration() {
-		return duration;
-	}
+    private final BigDecimal residualDuration;
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    public MortgageResidual(final BigDecimal residualAmount, final BigDecimal residualDuration) {
+        this.residualAmount = residualAmount;
+        this.residualDuration = residualDuration;
+    }
 
-	@Override
-	public String toString() {
-		return "MortgageResidual{" +
-				"amount=" + amount +
-				", duration=" + duration +
-				'}';
-	}
+    public BigDecimal getResidualAmount() {
+        return residualAmount;
+    }
+
+    public BigDecimal getResidualDuration() {
+        return residualDuration;
+    }
 }

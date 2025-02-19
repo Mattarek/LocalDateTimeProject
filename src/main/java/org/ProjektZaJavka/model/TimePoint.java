@@ -1,37 +1,31 @@
-package org.ProjektZaJavka.model;
+package mortgage.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class TimePoint {
-	private final LocalDate date;
-	private final BigDecimal year;
-	private final BigDecimal month;
 
-	public TimePoint(final LocalDate date, final BigDecimal year, final BigDecimal month) {
-		this.date = date;
-		this.year = year;
-		this.month = month;
-	}
+    private final BigDecimal year;
 
-	public LocalDate getDate() {
-		return date;
-	}
+    private final BigDecimal month;
 
-	public BigDecimal getYear() {
-		return year;
-	}
+    private final LocalDate date;
 
-	public BigDecimal getMonth() {
-		return month;
-	}
+    public TimePoint(final BigDecimal year, final BigDecimal month, final LocalDate date) {
+        this.year = year;
+        this.month = month;
+        this.date = date;
+    }
 
-	@Override
-	public String toString() {
-		return "TimePoint{" +
-				"date=" + date +
-				", year=" + year +
-				", month=" + month +
-				'}';
-	}
+    public BigDecimal getYear() {
+        return year;
+    }
+
+    public BigDecimal getMonth() {
+        return month;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

@@ -1,4 +1,4 @@
-package org.ProjektZaJavka.model;
+package mortgage.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -6,111 +6,158 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class InputData {
-	private static final BigDecimal PERCENT = BigDecimal.valueOf(100);
-	private Map<Integer, BigDecimal> overpaymenySchema = Map.of(
-			5, BigDecimal.valueOf(10000),
-			6, BigDecimal.valueOf(10000),
-			7, BigDecimal.valueOf(10000),
-			8, BigDecimal.valueOf(10000)
 
-	);
-	private String overpaymentReduceWay = Overpayment.REDUCE_PERIOD;
-	private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
-	private BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
-	private BigDecimal bankMarginPercent = new BigDecimal("1.9");
-	private BigDecimal amount = new BigDecimal("300000");
-	private RateType rateType = RateType.CONSTANT;
-	private LocalDate repaymentStartDate = LocalDate.of(2020, 1, 6);
-	private BigDecimal wiborPercent = new BigDecimal("1.73");
-	private BigDecimal monthsDuration = BigDecimal.valueOf(180);
+    private static final BigDecimal PERCENT = new BigDecimal("100");
 
-	public InputData withOverpaymentSchema(final Map<Integer, BigDecimal> overpaymenySchema) {
-		this.overpaymenySchema = overpaymenySchema;
-		return this;
-	}
+    private LocalDate repaymentStartDate = LocalDate.of(2020, 12, 10);
 
-	public InputData withOverpaymentReduceWay(final String overpaymentReduceWay) {
-		this.overpaymentReduceWay = overpaymentReduceWay;
-		return this;
-	}
+    private BigDecimal wiborPercent = BigDecimal.valueOf(1.70);
 
-	public InputData withOverpaymentProvisionPercent(final BigDecimal overpaymentProvisionPercent) {
-		this.overpaymentProvisionPercent = overpaymentProvisionPercent;
-		return this;
-	}
+    private BigDecimal amount = BigDecimal.valueOf(301953.46);
+    private BigDecimal monthsDuration = BigDecimal.valueOf(180);
 
-	public InputData withOverpaymentProvisionMonths(final BigDecimal overpaymentProvisionMonths) {
-		this.overpaymentProvisionMonths = overpaymentProvisionMonths;
-		return this;
-	}
+    private MortgageType rateType = MortgageType.CONSTANT;
 
-	public InputData withRepaymentStartDate(final LocalDate repaymentStartDate) {
-		this.repaymentStartDate = repaymentStartDate;
-		return this;
-	}
+    private BigDecimal marginPercent = BigDecimal.valueOf(1.6);
 
-	public InputData withWiborPercent(final BigDecimal wiborPercent) {
-		this.wiborPercent = wiborPercent;
-		return this;
-	}
+    private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
+    private BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
 
-	public InputData withMonthsDuration(final BigDecimal monthsDuration) {
-		this.monthsDuration = monthsDuration;
-		return this;
-	}
+    private BigDecimal overpaymentStartMonth = BigDecimal.valueOf(1);
+    private Map<Integer, BigDecimal> overpaymentSchema = Map.of(
+        2, BigDecimal.valueOf(10000),
+        3, BigDecimal.valueOf(10000),
+        5, BigDecimal.valueOf(10000),
+        6, BigDecimal.valueOf(10000),
+        7, BigDecimal.valueOf(10000)
+    );
+    private String overpaymentReduceWay = Overpayment.REDUCE_PERIOD;
 
-	public InputData withRateType(final RateType rateType) {
-		this.rateType = rateType;
-		return this;
-	}
+    private boolean mortgagePrintPayoffsSchedule = true;
+    private Integer mortgageRateNumberToPrint = 1;
 
-	public InputData withBankMarginPercent(final BigDecimal bankMarginPercent) {
-		this.bankMarginPercent = bankMarginPercent;
-		return this;
-	}
+    public InputData withRepaymentStartDate(LocalDate repaymentStartDate) {
+        this.repaymentStartDate = repaymentStartDate;
+        return this;
+    }
 
-	public BigDecimal getOverpaymentProvisionMonths() {
-		return overpaymentProvisionMonths;
-	}
+    public InputData withWiborPercent(BigDecimal wiborPercent) {
+        this.wiborPercent = wiborPercent;
+        return this;
+    }
 
-	public BigDecimal getOverpaymentProvisionPercent() {
-		return overpaymentProvisionPercent.divide(PERCENT, 4, RoundingMode.HALF_UP);
-	}
+    public InputData withAmount(BigDecimal amount) {
+        this.amount = amount;
+        return this;
+    }
 
-	public String getOverpaymentReduceWay() {
-		return overpaymentReduceWay;
-	}
+    public InputData withMonthsDuration(BigDecimal monthsDuration) {
+        this.monthsDuration = monthsDuration;
+        return this;
+    }
 
-	public Map<Integer, BigDecimal> getOverpaymenySchema() {
-		return overpaymenySchema;
-	}
+    public InputData withType(MortgageType type) {
+        this.rateType = type;
+        return this;
+    }
 
-	public InputData withAmount(final BigDecimal amount) {
-		this.amount = amount;
-		return this;
-	}
+    public InputData withMarginPercent(BigDecimal marginPercent) {
+        this.marginPercent = marginPercent;
+        return this;
+    }
 
-	public LocalDate getRepaymentStartDate() {
-		return repaymentStartDate;
-	}
+    public InputData withOverpaymentProvisionPercent(BigDecimal overpaymentProvisionPercent) {
+        this.overpaymentProvisionPercent = overpaymentProvisionPercent;
+        return this;
+    }
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    public InputData withOverpaymentProvisionMonths(BigDecimal overpaymentProvisionMonths) {
+        this.overpaymentProvisionMonths = overpaymentProvisionMonths;
+        return this;
+    }
 
-	public BigDecimal getMonthsDuration() {
-		return monthsDuration;
-	}
+    public InputData withOverpaymentStartMonth(BigDecimal overpaymentStartMonth) {
+        this.overpaymentStartMonth = overpaymentStartMonth;
+        return this;
+    }
 
-	public BigDecimal getInterestPercent() {
-		return wiborPercent.add(bankMarginPercent).divide(PERCENT, 4, RoundingMode.HALF_UP);
-	}
+    public InputData withOverpaymentSchema(Map<Integer, BigDecimal> overpaymentSchema) {
+        this.overpaymentSchema = overpaymentSchema;
+        return this;
+    }
 
-	public BigDecimal getInterestDisplay() {
-		return wiborPercent.add(bankMarginPercent).setScale(2, RoundingMode.HALF_UP);
-	}
+    public InputData withOverpaymentReduceWay(String overpaymentReduceWay) {
+        this.overpaymentReduceWay = overpaymentReduceWay;
+        return this;
+    }
 
-	public RateType getRateType() {
-		return rateType;
-	}
+    public InputData withMortgagePrintPayoffsSchedule(boolean mortgagePrintPayoffsSchedule) {
+        this.mortgagePrintPayoffsSchedule = mortgagePrintPayoffsSchedule;
+        return this;
+    }
+
+    public InputData withMortgageRateNumberToPrint(Integer mortgageRateNumberToPrint) {
+        this.mortgageRateNumberToPrint = mortgageRateNumberToPrint;
+        return this;
+    }
+
+    public LocalDate getRepaymentStartDate() {
+        return repaymentStartDate;
+    }
+
+    public BigDecimal getWiborPercent() {
+        return wiborPercent.divide(PERCENT, 4, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public BigDecimal getMonthsDuration() {
+        return monthsDuration;
+    }
+
+    public MortgageType getRateType() {
+        return rateType;
+    }
+
+    public BigDecimal getOverpaymentStartMonth() {
+        return overpaymentStartMonth;
+    }
+
+    public Map<Integer, BigDecimal> getOverpaymentSchema() {
+        return overpaymentSchema;
+    }
+
+    public BigDecimal getMarginPercent() {
+        return marginPercent.divide(PERCENT, 4, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getOverpaymentProvisionPercent() {
+        return overpaymentProvisionPercent.divide(PERCENT, 4, RoundingMode.HALF_UP);
+    }
+
+    public BigDecimal getOverpaymentProvisionMonths() {
+        return overpaymentProvisionMonths;
+    }
+
+    public boolean isMortgagePrintPayoffsSchedule() {
+        return mortgagePrintPayoffsSchedule;
+    }
+
+    public Integer getMortgageRateNumberToPrint() {
+        return mortgageRateNumberToPrint;
+    }
+
+    public String getOverpaymentReduceWay() {
+        return overpaymentReduceWay;
+    }
+
+    public BigDecimal getInterestPercent() {
+        return getMarginPercent().add(getWiborPercent());
+    }
+
+    public BigDecimal getInterestToDisplay() {
+        return wiborPercent.add(marginPercent);
+    }
 }
