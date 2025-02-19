@@ -51,19 +51,21 @@ public class RateCalculationServiceImplementation implements RateCalculationServ
 
 	private Rate calculateRate(final BigDecimal rateNumber, final InputData inputData) {
 		final TimePoint timePoint = timePointService.calculate(rateNumber, inputData);
-		final Overpayment overpayment = overpaymentCalculationService.calculate(inputData);
+		final Overpayment overpayment = overpaymentCalculationService.calculate(rateNumber, inputData);
 		final RateAmounts rateAmounts = amountsCalculationService.calculate(inputData, overpayment);
 		final MortgageResidual mortgageResidual = residualCalculationService.calculate(rateAmounts, inputData);
 		final MortgageReference mortgageReference = referenceCalculationService.calculate();
+
 		return new Rate(rateNumber, timePoint, rateAmounts, mortgageResidual, mortgageReference);
 	}
 
 	private Rate calculateRate(final BigDecimal rateNumber, final InputData inputData, final Rate previousRate) {
 		final TimePoint timePoint = timePointService.calculate(rateNumber, inputData);
-		final Overpayment overpayment = overpaymentCalculationService.calculate(inputData);
+		final Overpayment overpayment = overpaymentCalculationService.calculate(rateNumber, inputData);
 		final RateAmounts rateAmounts = amountsCalculationService.calculate(inputData, previousRate, overpayment);
 		final MortgageResidual mortgageResidual = residualCalculationService.calculate(rateAmounts, previousRate);
 		final MortgageReference mortgageReference = referenceCalculationService.calculate();
+
 		return new Rate(rateNumber, timePoint, rateAmounts, mortgageResidual, mortgageReference);
 	}
 }
