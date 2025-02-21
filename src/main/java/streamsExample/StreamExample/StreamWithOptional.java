@@ -43,5 +43,11 @@ public class StreamWithOptional {
 
 		//		final String nameThree = emptyList.stream().findFirst().orElseThrow(() -> new RuntimeException("Lista jest pusta!"));
 		//		System.out.println(nameThree);
+
+		//==========================================================================================================
+		final List<String> namesSix = List.of("Anna", "Kamil", "Ola", "Kasia");
+		final Optional<String> firstNameSix = namesSix.stream().findFirst();
+		final Optional<String> longName = firstNameSix.filter(name -> name.length() > 4);
+		System.out.println(longName.orElse("Brak drugiego imienia"));
 	}
 }
