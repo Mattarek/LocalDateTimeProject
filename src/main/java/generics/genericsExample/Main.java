@@ -12,5 +12,9 @@ public class Main {
 		Element.showElement(123);
 		System.out.println(list);
 		Name.showNumber(123);
+
+		final IGeneric<String> repo = new GenericExample();
+		repo.save("Example");
+		System.out.println(repo.findById(1));
 	}
 }

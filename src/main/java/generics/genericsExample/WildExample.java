@@ -3,7 +3,7 @@ package generics.genericsExample;
 import java.util.List;
 
 public class WildExample {
-	public static void printList(final List<?> list) {
+	public static void printList(final List<?> list) { // nie chcemy podawać konkretnego typu
 		for (final Object elem : list) {
 			System.out.println(elem);
 		}
