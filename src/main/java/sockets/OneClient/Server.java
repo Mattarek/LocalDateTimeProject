@@ -1,4 +1,4 @@
-package sockets;
+package sockets.OneClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package sockets;
+package sockets.ManyClients;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client {
+public class ClientFirst {
 	public static void main(final String[] args) {
 		final String host = "localhost";
 		final int port = 12345;
+
 		try (final Socket socket = new Socket(host, port);
 			 final PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			 final BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
