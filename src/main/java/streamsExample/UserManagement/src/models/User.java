@@ -1,4 +1,4 @@
-package org.OptionalExamples;
+package streamsExample.UserManagement.src.models;
 
 public class User {
 	protected int id;
@@ -25,6 +25,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return id + ": " + firstName + " " + lastName;
+		return "User{" +
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				'}';
 	}
 }
