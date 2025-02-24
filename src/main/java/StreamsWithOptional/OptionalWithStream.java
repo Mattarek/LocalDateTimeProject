@@ -25,12 +25,18 @@ public class OptionalWithStream {
 
 		// Bez flatMap
 		//		final List<String> result = optionalList
-		//				.map(List::stream)
-		//				.orElseGet(Stream::empty) // rozpakowujemy nasz Optional<List<String>> do List<String>
+		//				.map(List::stream) // Zwraca Optional<Stream<String>>
+		//				.orElseGet(Stream::empty) // .orElseGet(Stream::empty) // Rozpakowanie Optional<List<String>> do List<String> lub pusty Stream
 		//				.collect(Collectors.toList());
 		//		System.out.println(result); // [A, B, C, D]
 
+		//		🔥 Czy orElseGet() zawsze jest konieczne?
+		//
+		//				Tak, jeśli używasz map(), bo map() zwraca Optional<Stream<T>>, a nie Stream<T>.
+		//		Nie, jeśli używasz flatMap(List::stream), bo flatMap() od razu zwraca Stream<T>
+
 		// Z flatMap: Używamy flatMap, aby uniknąć Optional<List<T>> -> Stream<List<T>>
+
 		final List<String> result = optionalList.stream()
 				.flatMap(List::stream)
 				.collect(Collectors.toList());
