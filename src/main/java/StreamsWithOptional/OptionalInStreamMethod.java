@@ -12,6 +12,9 @@ public class OptionalInStreamMethod {
 	}
 
 	static Optional<String> findValue(final int num) {
+		//		Even-2
+		//		Even-4
+		//		➡ Wyszukujemy tylko parzyste liczby i zamiast null, używamy Optional, który konwertujemy na Stream i odfiltrowujemy puste wartości.
 		return num % 2 == 0 ? Optional.of("Even-" + num) : Optional.empty();
 	}
 }
