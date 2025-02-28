@@ -9,7 +9,13 @@ package ObjectValue;
 // pola instancji nie są możliwe w recordzie
 
 // Recordy nie mogą rozszerzać innych klas
-public record EmployeeRecord(String name, int employeeNumber) {
+// Wszystkie rekordy pośrednio rozszrzaja klase record, tak jak ENUM
+// rozszerza enum. A Java nie pozwala na wielodziedziczenie
+
+// każdy record jest takż pośrednio final, czyli nie mogą być rozszerzane przez
+// żadna inna klase, dlatego tez final jest wysarzane
+
+public record EmployeeRecord(String name, int employeeNumber) implements Runnable {
 
 	public static String someMethodTwo() {
 		return "getEmployee";
@@ -17,5 +23,9 @@ public record EmployeeRecord(String name, int employeeNumber) {
 
 	public String someMethod() {
 		return "getEmployee";
+	}
+
+	@Override
+	public void run() {
 	}
 }
