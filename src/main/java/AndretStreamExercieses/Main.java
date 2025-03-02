@@ -126,7 +126,8 @@ public final class Main {
 				.map(Company::employees)
 				.flatMap(List::stream)
 				.mapToDouble(Employee::salary)
-				.average().orElse(0.0);
+				.average()
+				.orElse(0.0);
 
 		// 5.
 		companies.stream()
@@ -181,7 +182,6 @@ public final class Main {
 
 		//=============================================================================================================================================
 		// III
-		// 7. For each company count all the roles assigned to its employees.
 
 		// 1.
 		companies.stream()
