@@ -51,6 +51,8 @@ public final class Main {
 						new Employee("Carol", "Danvers", Gender.FEMALE, List.of(Role.WORKER, Role.HR), 4100))));
 		//		System.out.println(companies);
 
+		//=========================================================================================================
+		// I.
 		//		// 1
 		//		final List<String> namesOfCompanies = companies.stream().map(u -> u.name()).toList(); //
 		//		// SDA,
@@ -80,5 +82,20 @@ public final class Main {
 		//						company.employees().stream().sorted(Comparator.comparing(Employee::firstName)).toList())).toList();
 		//
 		//		System.out.println(eomployeesAlphabetically);
+		//=============================================================================================================================================
+		// II
+		// // 1.
+		//		final List<Employee> maleEmployee =
+		//				companies.stream().flatMap(company -> company.employees().stream().filter(employee -> employee.gender() == Gender.MALE)).toList();
+		//		System.out.println(maleEmployee);
+
+		// // 2.
+		//		final List<Employee> employessWithoutMale = companies
+		//				.stream()
+		//				.flatMap(company -> company.employees().stream().filter(employee -> employee.gender() != Gender.MALE)).toList();
+		//
+		//		System.out.println(employessWithoutMale);
+
+		// // 3.
 	}
 }
