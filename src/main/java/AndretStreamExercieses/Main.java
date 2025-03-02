@@ -2,6 +2,7 @@ package AndretStreamExercieses;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 // I.
@@ -96,6 +97,62 @@ public final class Main {
 		//
 		//		System.out.println(employessWithoutMale);
 
-		// // 3.
+		// // 3.+++++++
+		//		final List<Company> companiesWithMoreMales = companies.stream().filter(company -> {
+		//			final long maleCount = company.employees().stream().filter(employee -> employee.gender() == Gender.MALE).count();
+		//			final long femaleCount = company.employees().stream().filter(employee -> employee.gender() == Gender.FEMALE).count();
+		//
+		//			return maleCount > femaleCount;
+		//		}).toList();
+		//		System.out.println(companiesWithMoreMales);
+
+		// 4.+++++++
+		//		final List<Double> averangeSalaryForAllCompanies =
+		//				companies.stream().map(company -> company.employees().stream().mapToDouble(Employee::salary).average().orElse(0.0)).toList();
+		//		System.out.println(averangeSalaryForAllCompanies);
+
+		// 5.
+		//		final List<Employee> earningThanThreeThousandFourHoundred =
+		//				companies.stream().flatMap(company -> company.employees().stream().filter(employee -> employee.salary() > 3400)).toList();
+		//		System.out.println(earningThanThreeThousandFourHoundred);
+
+		// 6.++++++
+		//		final List<Employee> employeesSalaryDescending = companies
+		//				.stream()
+		//				.flatMap(company -> company.employees().stream()).sorted(Comparator.comparing(Employee::salary).reversed())
+		//				.toList();
+		//		System.out.println(employeesSalaryDescending);
+
+		// 7.+++++++++++++++++++++++++++++++++++++++++++++
+		//		final Map<Gender, Double> employeeAvgSalary = companies.stream().collect(Collectors.toMap(
+		//				company -> {
+		//					final double maleAvg = company.employees().stream()
+		//							.filter(e -> e.gender() == Gender.MALE)
+		//							.mapToDouble(Employee::salary)
+		//							.average().orElse(0.0);
+		//
+		//					final double femaleAvg = company.employees().stream()
+		//							.filter(e -> e.gender() == Gender.FEMALE)
+		//							.mapToDouble(Employee::salary)
+		//							.average().orElse(0.0);
+		//
+		//					return maleAvg > femaleAvg ? Gender.MALE : femaleAvg > maleAvg ? Gender.FEMALE : null;
+		//				},
+		//				company -> {
+		//					final double maleAvg = company.employees().stream()
+		//							.filter(e -> e.gender() == Gender.MALE)
+		//							.mapToDouble(Employee::salary)
+		//							.average().orElse(0.0);
+		//
+		//					final double femaleAvg = company.employees().stream()
+		//							.filter(e -> e.gender() == Gender.FEMALE)
+		//							.mapToDouble(Employee::salary)
+		//							.average().orElse(0.0);
+		//
+		//					return Math.max(maleAvg, femaleAvg);
+		//				}
+		//		));
+		//
+		//		System.out.println(employeeAvgSalary);
 	}
 }
