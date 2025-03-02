@@ -55,26 +55,36 @@ public final class Main {
 		//=========================================================================================================
 		// I.
 		//		// 1
-		//		final List<String> namesOfCompanies = companies.stream().map(u -> u.name()).toList(); //
-		//		// SDA,
+		//		final List<String> namesOfCompanies = companies.stream()
+		//		.map(u -> u.name())
+		//		.toList();
 		//		System.out.println(namesOfCompanies); // [SDA, Avengerex]
 		//
 		//		// 2.
 		//		final List<Employee> employeesOfCompanies =
-		//				companies.stream().flatMap(company -> company.employees().stream()).toList();
+		//				companies.stream()
+		//				.flatMap(company -> company.employees().stream())
+		//				.toList();
 		//		System.out.println(employeesOfCompanies);
+
 		//		// 3
 		//		final List<Company> companiesWithOddCountOfEmployees =
-		//				companies.stream().filter(company -> company.employees().size() % 2 != 0).toList();
+		//				companies.stream()
+		//				.filter(company -> company.employees().size() % 2 != 0)
+		//				.toList();
 		//		System.out.println(companiesWithOddCountOfEmployees);
 		//
 		//		// 4
 		//		final List<Employee> managers = companies.stream()
-		//				.flatMap(company -> company.employees().stream()).filter(employee -> employee.roles().contains(Role.MANAGER)).toList();
+		//				.flatMap(company -> company.employees().stream())
+		//				.filter(employee -> employee.roles().contains(Role.MANAGER))
+		//				.toList();
 		//		System.out.println(managers);
 		//
 		// 		// 5.
-		//		final List<Integer> countOfEmployee = companies.stream().map(company -> company.employees().size()).toList();
+		//		final List<Integer> countOfEmployee = companies.stream()
+		//				.map(company -> company.employees().size())
+		//				.toList();
 		//		System.out.println(countOfEmployee);
 
 		//		// 6
@@ -87,51 +97,70 @@ public final class Main {
 		// II
 		// // 1.
 		//		final List<Employee> maleEmployee =
-		//				companies.stream().flatMap(company -> company.employees().stream().filter(employee -> employee.gender() == Gender.MALE)).toList();
+		//				companies.stream().flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.gender() == Gender.MALE)
+		//						.toList();
 		//		System.out.println(maleEmployee);
 
 		// // 2.
 		//		final List<Employee> employessWithoutMale = companies
 		//				.stream()
-		//				.flatMap(company -> company.employees().stream().filter(employee -> employee.gender() != Gender.MALE)).toList();
+		//				.flatMap(company -> company.employees().stream())
+		//				.filter(employee -> employee.gender() != Gender.MALE)
+		//				.toList();
 		//
 		//		System.out.println(employessWithoutMale);
 
 		// // 3.+++++++
 		//		final List<Company> companiesWithMoreMales = companies.stream().filter(company -> {
-		//			final long maleCount = company.employees().stream().filter(employee -> employee.gender() == Gender.MALE).count();
-		//			final long femaleCount = company.employees().stream().filter(employee -> employee.gender() == Gender.FEMALE).count();
+		//			final long maleCount = company.employees()
+		//					.stream()
+		//					.filter(employee -> employee.gender() == Gender.MALE)
+		//					.count();
+		//			final long femaleCount = company.employees()
+		//					.stream()
+		//					.filter(employee -> employee.gender() == Gender.FEMALE)
+		//					.count();
 		//
 		//			return maleCount > femaleCount;
 		//		}).toList();
 		//		System.out.println(companiesWithMoreMales);
 
 		// 4.+++++++
-		//		final List<Double> averangeSalaryForAllCompanies =
-		//				companies.stream().map(company -> company.employees().stream().mapToDouble(Employee::salary).average().orElse(0.0)).toList();
-		//		System.out.println(averangeSalaryForAllCompanies);
+		//				final List<Double> averangeSalaryForAllCompanies =
+		//						companies.stream()
+		//								.map(company -> company.employees().stream().mapToDouble(Employee::salary)
+		//								.average().orElse(0.0))
+		//								.toList();
+		//				System.out.println(averangeSalaryForAllCompanies);
 
 		// 5.
 		//		final List<Employee> earningThanThreeThousandFourHoundred =
-		//				companies.stream().flatMap(company -> company.employees().stream().filter(employee -> employee.salary() > 3400)).toList();
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.salary() > 3400)
+		//						.toList();
 		//		System.out.println(earningThanThreeThousandFourHoundred);
 
 		// 6.++++++
 		//		final List<Employee> employeesSalaryDescending = companies
 		//				.stream()
-		//				.flatMap(company -> company.employees().stream()).sorted(Comparator.comparing(Employee::salary).reversed())
+		//				.flatMap(company -> company.employees().stream())
+		//				.sorted(Comparator.comparing(Employee::salary).reversed())
 		//				.toList();
 		//		System.out.println(employeesSalaryDescending);
 
 		// 7.+++++++++++++++++++++++++++++++++++++++++++++
 		//		final Map<Gender, Double> employeeAvgSalary = companies.stream().collect(Collectors.toMap(
 		//				company -> {
-		//					final double maleAvg = company.employees().stream()
+		//					final double maleAvg = company.employees()
+		//							.stream()
 		//							.filter(e -> e.gender() == Gender.MALE)
 		//							.mapToDouble(Employee::salary)
 		//							.average().orElse(0.0);
 		//
-		//					final double femaleAvg = company.employees().stream()
+		//					final double femaleAvg = company.employees()
+		//							.stream()
 		//							.filter(e -> e.gender() == Gender.FEMALE)
 		//							.mapToDouble(Employee::salary)
 		//							.average().orElse(0.0);
@@ -139,12 +168,14 @@ public final class Main {
 		//					return maleAvg > femaleAvg ? Gender.MALE : femaleAvg > maleAvg ? Gender.FEMALE : null;
 		//				},
 		//				company -> {
-		//					final double maleAvg = company.employees().stream()
+		//					final double maleAvg = company.employees()
+		//							.stream()
 		//							.filter(e -> e.gender() == Gender.MALE)
 		//							.mapToDouble(Employee::salary)
 		//							.average().orElse(0.0);
 		//
-		//					final double femaleAvg = company.employees().stream()
+		//					final double femaleAvg = company.employees()
+		//							.stream()
 		//							.filter(e -> e.gender() == Gender.FEMALE)
 		//							.mapToDouble(Employee::salary)
 		//							.average().orElse(0.0);
@@ -154,5 +185,67 @@ public final class Main {
 		//		));
 		//
 		//		System.out.println(employeeAvgSalary);
+
+		//=============================================================================================================================================
+		// III
+		// 7. For each company count all the roles assigned to its employees.
+
+		// 1.
+		//		final List<Employee> employeesWithRoleHrOrPr =
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.roles().contains(Role.PR) || employee.roles().contains(Role.HR))
+		//						.toList();
+		//
+		//		System.out.println(employeesWithRoleHrOrPr);
+
+		// 2.
+		//		final List<Company> companiesWithMoreThanTwoWorkderRole =
+		//				companies.stream()
+		//						.filter(company -> company.employees().stream().filter(employee -> employee.roles().contains(Role.WORKER)).count() > 2)
+		//						.toList();
+		//		System.out.println(companiesWithMoreThanTwoWorkderRole);
+
+		// 3.
+		//		final double managerSalarySum =
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.roles().contains(Role.MANAGER))
+		//						.mapToDouble(Employee::salary)
+		//						.sum();
+		//		System.out.println(managerSalarySum);
+
+		// 4.
+		//		final List<Employee> listOfEmployeeWithMoreThanOneRike =
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.roles().size() > 1)
+		//						.toList();
+		//
+		//		System.out.println(listOfEmployeeWithMoreThanOneRike);
+
+		// 5.
+		//		final List<Employee> employeeWithPrAndWithousManager =
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.roles().contains(Role.PR) && !employee.roles().contains(Role.MANAGER))
+		//						.toList();
+		//		System.out.println(employeeWithPrAndWithousManager);
+
+		// 6.
+		//		final Map<String, Double> qwe =
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.filter(employee -> employee.roles().contains(Role.ACCOUNTANT))
+		//						.collect(Collectors.toMap(Employee::lastName, Employee::salary));
+		//
+		//		System.out.println(qwe);
+
+		// 7.
+		//		final int countOfEmployeesRole =
+		//				companies.stream()
+		//						.flatMap(company -> company.employees().stream())
+		//						.mapToInt(employee -> employee.roles().size()).sum();
+		//		System.out.println(countOfEmployeesRole);
 	}
 }
