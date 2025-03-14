@@ -1,18 +1,22 @@
 package ThreadExample;
 
-public class DeadlockExample {
-	private final Object lockOne = new Object();
-	private final Object lockTwo = new Object();
+class DeadlockExample {
+	private final Object lock1 = new Object();
+	private final Object lock2 = new Object();
 
-	public void methodOne() {
-		synchronized (lockOne) {
-			System.out.println("MethodOne");
+	public void method1() {
+		synchronized (lock1) {
+			synchronized (lock2) {
+				System.out.println("Method1");
+			}
 		}
 	}
 
-	public void methodTwo() {
-		synchronized (lockTwo) {
-			System.out.println("MethodTwo");
+	public void method2() {
+		synchronized (lock2) {
+			synchronized (lock1) {
+				System.out.println("Method2");
+			}
 		}
 	}
 }

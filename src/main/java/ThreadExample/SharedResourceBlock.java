@@ -1,6 +1,6 @@
 package ThreadExample;
 
-public class SharedResourceBlock {
+class SharedResourceBlock {
 	private final Object lock = new Object();
 	private int count;
 

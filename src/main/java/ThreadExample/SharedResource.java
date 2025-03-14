@@ -1,6 +1,6 @@
 package ThreadExample;
 
-public class SharedResource {
+class SharedResource {
 	private int count;
 
 	public synchronized void increment() {
