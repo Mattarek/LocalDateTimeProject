@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
 
 public class Main {
 	private static final Scanner scanner = new Scanner(System.in);
@@ -168,52 +169,69 @@ public class Main {
 		System.out.println("Podaj nazwę pliku który chcesz wczytać");
 		final String fileName = scanner.nextLine();
 
-		try {
-			fileManager.saveToFile(fileName, eventsList);
-			System.out.println("Plik został zapisany");
-		} catch (final IOException e) {
-			System.out.println(e);
-		}
+		CompletableFuture.runAsync(() -> {
+			try {
+				fileManager.saveToFile(fileName, eventsList);
+				System.out.println("Plik został zapisany");
+			} catch (final IOException e) {
+				System.out.println(e);
+			}
+		});
 	}
 
 	public static void loadFile() {
-		System.out.println("Podaj nazwę pliku który chcesz wczytać");
+		System.out.println("Podaj nazwę pliku, który chcesz wczytać:");
 		final String fileName = scanner.nextLine();
 
-		try {
-			final List<Event> newList = fileManager.loadFile(fileName);
-			if (eventsList.isEmpty()) {
-				System.out.printf("Wczytano %s wydarzeń.", newList.size());
-				return;
-			}
+		int choice = 2;
+
+		if (!eventsList.isEmpty()) {
+			System.out.println("Lista nie jest pusta. Wybierz opcję:");
 			System.out.println("1. Dodaj eventy z pliku do istniejącej listy");
 			System.out.println("2. Odczytaj i nadpisz istniejące eventy.");
 			System.out.println("0. Wyjdź.");
 
-			final int choice = scanner.nextInt();
-			scanner.nextLine();
-			System.out.println(choice);
-			switch (choice) {
-				case 1:
-					eventsList.addAll(newList);
-					System.out.printf("Wczytano %s wydarzeń.", newList.size());
-					break;
-
-				case 2:
-					eventsList.clear();
-					eventsList.addAll(newList);
-					System.out.println("Zawartość pliku została dodana do listy.");
-					break;
-
-				case 0:
-					System.out.println("Wyjście.");
-					break;
-
-				default:
-					System.out.println("Nieprawidłowy wybór.");
+			while (true) {
+				if (scanner.hasNextInt()) {
+					choice = scanner.nextInt();
+					scanner.nextLine();
+					if (choice == 0 || choice == 1 || choice == 2) {
+						break;
+					}
+				} else {
+					scanner.next();
+				}
+				System.out.println("Nieprawidłowy wybór, podaj liczbę.");
 			}
-		} catch (final IOException e) {
-			System.err.println("Błąd odczytu pliku: " + e.getMessage());
 		}
+
+		final int finalChoice = choice;
+
+		CompletableFuture.supplyAsync(() -> {
+			try {
+				return fileManager.loadFile(fileName);
+			} catch (final IOException e) {
+				System.err.println("Błąd odczytu pliku: " + e.getMessage());
+				return new ArrayList<Event>();
+			}
+		}).thenAccept(newList -> {
+			if (newList.isEmpty()) {
+				System.out.println("Plik nie zawiera żadnych wydarzeń.");
+				return;
+			}
+
+			System.out.println("Wczytano " + newList.size() + " wydarzeń.");
+
+			if (finalChoice == 1) {
+				eventsList.addAll(newList);
+				System.out.printf("Dodano %s wydarzeń do istniejącej listy.%n", newList.size());
+			} else if (finalChoice == 2) {
+				eventsList.clear();
+				eventsList.addAll(newList);
+				System.out.println("Lista została nadpisana zawartością pliku.");
+			} else {
+				System.out.println("Wyjście bez zmian.");
+			}
+		});
 	}
 }
