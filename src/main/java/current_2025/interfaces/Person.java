@@ -11,9 +11,15 @@ public class Person {
 		p.sayHello();
 	}
 
+	public static void greet(final Person p, final String text) {
+		p.sayHello();
+		System.out.println(text);
+	}
+
 	public static void main(final String[] args) {
 		final Person person = new Person("Marcin");
 		greet(person);
+		greet(person, "test");
 	}
 
 	public void sayHello() {

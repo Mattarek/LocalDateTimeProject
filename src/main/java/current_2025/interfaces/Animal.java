@@ -17,6 +17,8 @@ public interface Animal {
 
 	void makeNoise(); // Metoda abstrakcyjna – musi być zaimplementowana w klasie
 
+	// MEtoda defaultowa, czyli ma już swoją implementacje, jeśli nie nadpiszemy jej
+	// w klasie, to dostarczymy tą domyślną strukture.
 	default void eat() {
 		System.out.println("Animal is eating...");
 	}
