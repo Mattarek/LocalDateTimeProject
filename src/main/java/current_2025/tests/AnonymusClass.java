@@ -14,5 +14,17 @@ public class AnonymusClass {
 		};
 		car.run();
 		car.stop();
+
+		//=================
+		final int wynik = Utils.add(5, 3);
+		System.out.println(wynik);
+
+		//====================
+		final StaticExample staticExample1 = new StaticExample();
+		final StaticExample staticExample2 = new StaticExample();
+		final StaticExample staticExample3 = new StaticExample();
+		final StaticExample staticExample4 = new StaticExample();
+		final StaticExample staticExample5 = new StaticExample();
+		System.out.println(StaticExample.getCound()); // 5
 	}
 }
