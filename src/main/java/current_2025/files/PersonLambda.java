@@ -1,4 +1,4 @@
-package files;
+package current_2025.files;
 
 @FunctionalInterface
 public interface PersonLambda {

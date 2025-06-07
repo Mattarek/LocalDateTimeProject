@@ -1,4 +1,4 @@
-package files;
+package current_2025.files;
 
 import java.io.BufferedReader; // do buforowanego odczytu całych linii.
 import java.io.FileReader; //  do odczytu znakowego z pliku.
