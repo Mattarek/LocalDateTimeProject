@@ -1,23 +1,19 @@
 package current_2025.wzorceProjektowe;
 
 public class App {
-	public static void main() {
-		final Logger logger1 = Logger.getInstance();
-		final Logger logger2 = Logger.getInstance();
-		final Logger logger3 = Logger.getInstance();
-		final Logger logger4 = Logger.getInstance();
-		final Logger logger5 = Logger.getInstance();
-		final Logger logger6 = Logger.getInstance();
-		final Logger logger7 = Logger.getInstance();
+	public static void main(final String[] args) {
+		final Runnable task = () -> {
+			final Logger logger = Logger.getInstance();
+			logger.log("Wątek: " + Thread.currentThread().getName());
+		};
 
-		logger1.log("Aplikacja uruuchomiona.");
-		logger1.log("Trwa przetwarzanie danych...");
+		// Tworzymy kilka wątków, które równocześnie próbują uzyskać instancję Loggera
+		final Thread t1 = new Thread(task, "T1");
+		final Thread t2 = new Thread(task, "T2");
+		final Thread t3 = new Thread(task, "T3");
 
-		System.out.println("Czy logger1 == logger2? " + (logger1 == logger2));
-		System.out.println("Czy logger1 == logger2? " + (logger2 == logger3));
-		System.out.println("Czy logger1 == logger2? " + (logger3 == logger4));
-		System.out.println("Czy logger1 == logger2? " + (logger4 == logger5));
-		System.out.println("Czy logger1 == logger2? " + (logger5 == logger6));
-		System.out.println("Czy logger1 == logger2? " + (logger6 == logger7));
+		t1.start();
+		t2.start();
+		t3.start();
 	}
 }
