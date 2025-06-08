@@ -1,4 +1,4 @@
-package current_2025.wzorceProjektowe;
+package current_2025.wzorceProjektowe.Singleton;
 
 public class App {
 	public static void main(final String[] args) {

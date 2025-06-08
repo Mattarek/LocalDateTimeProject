@@ -1,4 +1,4 @@
-package current_2025.wzorceProjektowe;
+package current_2025.wzorceProjektowe.Singleton;
 
 public class Logger {
 	// Volatile gwarantuje widoczność zmian między wątkami
