@@ -10,6 +10,9 @@ public class GenericMethodMain<T> {
 	public static void main(final String[] args) {
 		callOne(new Bike());
 		callTwo(new Bike());
+
+		// Do ZAPAMIĘTANIA
+		final String o = GenericMethodMain.<Bike>callThree().getName();
 	}
 
 	public static <T extends Vehicle> void callOne(final T element) {
@@ -30,7 +33,9 @@ public class GenericMethodMain<T> {
 	}
 
 	static class Bike implements Vehicle {
-
+		final String getName() {
+			return "bikeName";
+		}
 	}
 
 	static class Apple {
