@@ -17,11 +17,12 @@ public class UpperBoundWildcard {
 		print(animals);
 		print(dogs);
 		print(monkeys);
-		print(strings);
-		print(implementingVoiceables);
+		//		print(strings);
+		//		print(implementingVoiceables);
 	}
 
-	private static void print(final List<Animal> list) { // możemy tylko Animal, ale nie typy dziedziczące z niego
+	private static void print(final List<? extends Animal> list) { // możemy tylko Animal, ale nie typy dziedziczące
+		// z niego
 		for (final Object o : list) {
 			System.out.println(o);
 		}
