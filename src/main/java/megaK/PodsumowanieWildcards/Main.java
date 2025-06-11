@@ -9,6 +9,7 @@ import java.util.List;
 public class Main {
 	public static void main(final String[] args) {
 		final List<? extends Dog> dogList = Arrays.asList(new Dog(), new Dog());
+		final List<? extends Dog> dogListArrayList = new ArrayList<>(Arrays.asList(new Dog(), new Dog()));
 		final List<Animal> stringList = Arrays.asList(new Dog(), new Animal());
 
 		final List<Pigeon> pigeonList = Arrays.asList(new Pigeon(), new Pigeon());
@@ -24,9 +25,12 @@ public class Main {
 		printSize(dogList);
 		printSize(pigeonList);
 		printSize(stringList);
+		printSize(aList);
 
 		System.out.println("=== ArrayList ===");
 		printSize(arrayListAnimal);
+
+		dogListArrayList.add(new Pigeon());
 	}
 
 	//	static void print(final List<?> list) { // przekazemy jakas liste, na ktorej mozemy wykonac metody Listy
