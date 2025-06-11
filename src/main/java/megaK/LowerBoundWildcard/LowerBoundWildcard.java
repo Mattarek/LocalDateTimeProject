@@ -1,4 +1,4 @@
-package megaK;
+package megaK.LowerBoundWildcard;
 
 import java.util.ArrayList;
 import java.util.List;
