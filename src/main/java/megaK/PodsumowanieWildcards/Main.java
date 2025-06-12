@@ -9,6 +9,7 @@ import java.util.List;
 public class Main {
 	public static void main(final String[] args) {
 		final List<? extends Dog> dogList = Arrays.asList(new Dog(), new Dog());
+		final List<? super Dog> dogListTwo = Arrays.asList(new Dog(), new Dog());
 		final List<? extends Dog> dogListArrayList = new ArrayList<>(Arrays.asList(new Dog(), new Dog()));
 		final List<Animal> stringList = Arrays.asList(new Dog(), new Animal());
 
@@ -18,6 +19,7 @@ public class Main {
 		// aList.add(new Animal());
 
 		// Ale możemy to zrobić z ArrayLista
+		dogListTwo.add(new Dog());
 		final List<Animal> arrayListAnimal = new ArrayList<>();
 		arrayListAnimal.add(new Pigeon());
 		arrayListAnimal.add(new Dog());
@@ -29,8 +31,6 @@ public class Main {
 
 		System.out.println("=== ArrayList ===");
 		printSize(arrayListAnimal);
-
-		dogListArrayList.add(new Pigeon());
 	}
 
 	//	static void print(final List<?> list) { // przekazemy jakas liste, na ktorej mozemy wykonac metody Listy
