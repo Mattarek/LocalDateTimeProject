@@ -1,0 +1,4 @@
+package megaK.PodsumowanieWildcards.CompositionInheritence.exampleTwo;
+
+public class DecreasingAmountCalculationServiceImpl implements DecreasingAmountCalculationService {
+}
