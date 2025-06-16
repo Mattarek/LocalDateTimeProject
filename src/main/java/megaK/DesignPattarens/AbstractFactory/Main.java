@@ -1,9 +1,5 @@
 package megaK.DesignPattarens.AbstractFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 public class Main {
 
 	public static void main(final String[] args) {
