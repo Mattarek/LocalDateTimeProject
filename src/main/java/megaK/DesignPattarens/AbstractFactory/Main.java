@@ -1,6 +1,11 @@
 package megaK.DesignPattarens.AbstractFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
 public class Main {
+
 	public static void main(final String[] args) {
 		final AbstractFactory<?> pizzaFactory = FactoryProvider.getFactory("Pizza");
 		final Object hawaiian = pizzaFactory.create("Hawaiian");
