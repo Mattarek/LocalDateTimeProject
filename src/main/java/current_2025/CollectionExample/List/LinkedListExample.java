@@ -6,13 +6,14 @@ import java.util.List;
 //✅ LinkedList<E>
 //Opis: Lista dwukierunkowa – każdy element zawiera wskaźnik na poprzedni i następny.
 
-//➕ Zalety:
+//➕ Zalety (Dodawanie i usuwanie):
 //	- Bardzo szybkie dodawanie i usuwanie elementów z początku/końca listy (O(1))
 //	- Może działać jako Queue, Deque i Stack
 
 //➖ Wady:
 //	- Wolny dostęp po indeksie (get(i) – O(n))
 //	- Większe zużycie pamięci (wskaźniki)
+//	- Nie jest synchronizowana (brak bezpieczeństwa wątkowego)
 
 //🎯 Kiedy używać:
 //	- Często dodajesz lub usuwasz elementy z początku/środka listy

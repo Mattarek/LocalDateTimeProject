@@ -6,13 +6,14 @@ import java.util.List;
 //✅ ArrayList<E>
 //	Opis: Lista oparta na dynamicznej tablicy – najczęściej używana implementacja List.
 
-// ➕ Zalety:
+// ➕ Zalety (dodawanie i odczyt):
 //	- Szybki dostęp do elementu po indeksie (get(i) – O(1))
 //	- Bardzo dobra wydajność przy dodawaniu na końcu (add(e) – O(1) amortyzowane)
 //	- Kompaktowa pamięciowo
 
 // ➖ Wady:
-//	- Wstawianie lub usuwanie ze środka/wstępu listy jest kosztowne (O(n))
+//	- Wstawianie lub usuwanie ze środka/początku listy jest kosztowne (O(n)), do usuwania
+//		na początku lepiej użyć LinkedList.
 //	- Nie jest synchronizowana (brak bezpieczeństwa wątkowego)
 
 // 🎯 Kiedy używać:
