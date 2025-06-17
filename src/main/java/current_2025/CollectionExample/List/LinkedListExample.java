@@ -28,6 +28,10 @@ public class LinkedListExample {
 		patientQueue.add("Pacjent A");
 		patientQueue.add("Pacjent B");
 		patientQueue.add("Pacjent C");
+		patientQueue.add("Pacjent D");
+		patientQueue.add("Pacjent E");
+		patientQueue.add("Pacjent F");
+		System.out.println(patientQueue.get(4));
 		System.out.println(patientQueue);
 
 		// Obsługa pierwszego pacjenta

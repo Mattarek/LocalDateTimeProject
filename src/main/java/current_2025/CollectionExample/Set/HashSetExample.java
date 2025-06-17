@@ -25,6 +25,7 @@ public class HashSetExample {
 		stringsTwo.add("x");
 		strings.add("B");
 		strings.add("C");
+		stringsTwo.remove("x");
 		strings.addAll(stringsTwo);
 		System.out.println(strings);
 	}
