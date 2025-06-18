@@ -1,8 +1,8 @@
 package current_2025.Lotto.game;
 
-import current_2025.LottoGameGPT.generator.NumberGenerator;
-import current_2025.LottoGameGPT.input.PlayerNumberProvider;
-import current_2025.LottoGameGPT.output.ResultPrinter;
+import current_2025.Lotto.generator.NumberGenerator;
+import current_2025.Lotto.input.PlayerNumberProvider;
+import current_2025.Lotto.output.ResultPrinter;
 
 import java.util.Set;
 import java.util.TreeSet;
