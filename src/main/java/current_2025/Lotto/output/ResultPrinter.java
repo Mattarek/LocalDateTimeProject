@@ -1,4 +1,4 @@
-package current_2025.LottoGameGPT.output;
+package current_2025.Lotto.output;
 
 import java.util.Set;
 

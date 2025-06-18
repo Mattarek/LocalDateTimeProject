@@ -1,4 +1,4 @@
-package current_2025.LottoGameGPT.game;
+package current_2025.Lotto.game;
 
 import current_2025.LottoGameGPT.generator.NumberGenerator;
 import current_2025.LottoGameGPT.input.PlayerNumberProvider;
@@ -8,17 +8,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class LottoGame {
-	private final NumberGenerator generator;
-	private final PlayerNumberProvider playerProvider;
-	private final ResultPrinter printer;
+	private NumberGenerator generator;
+	private PlayerNumberProvider playerProvider;
+	private ResultPrinter printer;
 
-	public LottoGame(final NumberGenerator generator, final PlayerNumberProvider playerProvider, final ResultPrinter printer) {
-		this.generator = generator;
-		this.playerProvider = playerProvider;
-		this.printer = printer;
-	}
-
-	public void play() {
+	public LottoGame(final NumberGenerator generator,
+					 final PlayerNumberProvider playerProvider,
+					 final ResultPrinter printer) {
 		final Set<Integer> playerNumbers = playerProvider.getNumbers();
 		final Set<Integer> drawnNumbers = generator.generate();
 

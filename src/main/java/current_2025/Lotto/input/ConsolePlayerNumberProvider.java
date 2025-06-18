@@ -1,4 +1,4 @@
-package current_2025.LottoGameGPT.input;
+package current_2025.Lotto.input;
 
 import java.util.Scanner;
 import java.util.Set;
@@ -20,9 +20,9 @@ public class ConsolePlayerNumberProvider implements PlayerNumberProvider {
 		System.out.println("Podaj " + numbersToPick + " unikalnych liczb od 1 do " + maxNumber + ":");
 		while (numbers.size() < numbersToPick) {
 			try {
-				System.out.print("> ");
+				System.out.println("> ");
 				final int number = Integer.parseInt(scanner.nextLine());
-				if (number < 1 || number > maxNumber) {
+				if (number < 2 || number > maxNumber) {
 					System.out.println("Liczba poza zakresem!");
 				} else if (!numbers.add(number)) {
 					System.out.println("Liczba już została podana!");

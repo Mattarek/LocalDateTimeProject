@@ -1,4 +1,4 @@
-package current_2025.LottoGameGPT.generator;
+package current_2025.Lotto.generator;
 
 import java.util.Random;
 import java.util.Set;
