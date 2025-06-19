@@ -49,15 +49,21 @@ public class Main {
 			// Najpierw porównujemy nazwami, a zaraz potem porównujemy idkami
 			@Override
 			public int compare(final Cat o1, final Cat o2) {
+				if (o1 == null) {
+					return 1;
+				}
+				if (o2 == null) {
+					return -1;
+				}
+
+				final int result = o2.getName().compareTo(o1.getName());
 				// jeśli używamy compare, to ważne aby equals też zwracał ten sam wynik
-				return o2.getName().compareTo(o1.getName());
+				if (result != 0) {
+					return result;
+				}
+				return o1.getId() - o2.getId();
 			}
-		}.thenComparing(new Comparator<Cat>() {
-			@Override
-			public int compare(final Cat o1, final Cat o2) {
-				return o2.getId() - o1.getId();
-			}
-		});
+		};
 
 		cats.sort(myFirstComparator);
 		System.out.println(cats);
