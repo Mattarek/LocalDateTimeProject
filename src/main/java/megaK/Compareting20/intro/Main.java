@@ -38,34 +38,37 @@ public class Main {
 		cats.add(new Cat(6, "Karol"));
 		System.out.println(cats);
 
-		final Comparator<Cat> myFirstComparator = new Comparator<Cat>() {
-			// Na numberach
-			//			@Override
-			//			public int compare(final Cat o1, final Cat o2) {
-			//				// jeśli używamy compare, to ważne aby equals też zwracał ten sam wynik
-			//				return o2.getId() - o1.getId();
-			//			}
+		//		final Comparator<Cat> myFirstComparator = new Comparator<Cat>() {
+		//			// Na numberach
+		//			//			@Override
+		//			//			public int compare(final Cat o1, final Cat o2) {
+		//			//				// jeśli używamy compare, to ważne aby equals też zwracał ten sam wynik
+		//			//				return o2.getId() - o1.getId();
+		//			//			}
+		//
+		//			// Najpierw porównujemy nazwami, a zaraz potem porównujemy idkami
+		//			@Override
+		//			public int compare(final Cat o1, final Cat o2) {
+		//				if (o1 == null) {
+		//					return 1;
+		//				}
+		//				if (o2 == null) {
+		//					return -1;
+		//				}
+		//
+		//				final int result = o2.getName().compareTo(o1.getName());
+		//				// jeśli używamy compare, to ważne aby equals też zwracał ten sam wynik
+		//				if (result != 0) {
+		//					return result;
+		//				}
+		//				return o1.getId() - o2.getId();
+		//			}
+		//		};
 
-			// Najpierw porównujemy nazwami, a zaraz potem porównujemy idkami
-			@Override
-			public int compare(final Cat o1, final Cat o2) {
-				if (o1 == null) {
-					return 1;
-				}
-				if (o2 == null) {
-					return -1;
-				}
+		final Comparator<Cat> mySecondComparator = Comparator.comparing(Cat::getName).reversed();
+		mySecondComparator.thenComparing((o1, o2) -> o1.getId() - o2.getId());
 
-				final int result = o2.getName().compareTo(o1.getName());
-				// jeśli używamy compare, to ważne aby equals też zwracał ten sam wynik
-				if (result != 0) {
-					return result;
-				}
-				return o1.getId() - o2.getId();
-			}
-		};
-
-		cats.sort(myFirstComparator);
+		cats.sort(mySecondComparator);
 		System.out.println(cats);
 	}
 }
