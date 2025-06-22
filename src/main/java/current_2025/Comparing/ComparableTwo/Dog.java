@@ -1,4 +1,4 @@
-package current_2025.ComparableTwo;
+package current_2025.Comparing.ComparableTwo;
 
 public class Dog implements Comparable<Dog> {
 	private final String name;

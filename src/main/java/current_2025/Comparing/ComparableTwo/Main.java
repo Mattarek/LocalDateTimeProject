@@ -1,4 +1,4 @@
-package current_2025.ComparableTwo;
+package current_2025.Comparing.ComparableTwo;
 
 import java.util.ArrayList;
 import java.util.Collections;
