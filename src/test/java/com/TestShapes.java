@@ -1,7 +1,7 @@
 package org;
 
-import current_2025.SOLID.L.Rectangle;
-import current_2025.SOLID.L.Square;
+import SOLID.L.Rectangle;
+import SOLID.L.Square;
 import org.junit.Assert;
 import org.junit.Test;
 

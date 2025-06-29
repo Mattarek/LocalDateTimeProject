@@ -1,5 +1,5 @@
 [{
-    "dateOfEvent": "current_2025-12-31T23:59",
+    "dateOfEvent": "current_2025_maj-12-31T23:59",
     "name": "Sylwester",
-    "description": "31-12-current_2025"
+    "description": "31-12-current_2025_maj"
 }]
