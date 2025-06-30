@@ -2,6 +2,7 @@ package current_2025_czerwiec.Compare.exercise1;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,9 +10,9 @@ public class Employee implements Comparable<Employee> {
 	private final String name;
 	private final String lastName;
 	private final int age;
-	private final double salary;
+	private final BigDecimal salary;
 
-	public Employee(final String name, final String lastName, final int age, final double salary) {
+	public Employee(final String name, final String lastName, final int age, final BigDecimal salary) {
 		this.name = name;
 		this.salary = salary;
 		this.lastName = lastName;
@@ -22,7 +23,7 @@ public class Employee implements Comparable<Employee> {
 		return name;
 	}
 
-	public double getSalary() {
+	public BigDecimal getSalary() {
 		return salary;
 	}
 
@@ -40,13 +41,37 @@ public class Employee implements Comparable<Employee> {
 	//	Comparator.reverseOrder() – zmiana porządku z rosnącego na malejący
 
 	@Override
-	public int compareTo(@NotNull final Employee o) {
+	public int compareTo(@NotNull final Employee e) {
+
+		// Bardziej ręcznie:
+		//		final int nameComparisionResult = name.compareTo(o.name);
+		//		if (nameComparisionResult != 0) {
+		//			return nameComparisionResult;
+		//		}
+		//
+		//		final int lastNameComparisionResult = lastName.compareTo(o.lastName);
+		//		if (lastNameComparisionResult != 0) {
+		//			return lastNameComparisionResult;
+		//		}
+		//
+		//		final int ageComparisionResult = age - o.age;
+		//		if (ageComparisionResult != 0) {
+		//			return ageComparisionResult;
+		//		}
+		//
+		//		final int salaryComparisionResult = salary.compareTo(o.salary);
+		//		if (salaryComparisionResult != 0) {
+		//			return salaryComparisionResult;
+		//		}
+		//		return 0;
+
+		// Jako Comparator:
 		return Comparator
 				.comparing(Employee::getName)                       // imię rosnąco
 				.thenComparing(Employee::getLastName, Comparator.reverseOrder()) // nazwisko malejąco
 				.thenComparingInt(Employee::getAge)                      // wiek rosnąco
 				.thenComparing(Employee::getSalary, Comparator.reverseOrder()) // wypłata malejąco
-				.compare(this, o); // porównaj ten obiekt(this) i obiekt który zostanie przekazany: o
+				.compare(this, e); // porównaj ten obiekt(this) i obiekt który zostanie przekazany: o
 	}
 
 	@Override
