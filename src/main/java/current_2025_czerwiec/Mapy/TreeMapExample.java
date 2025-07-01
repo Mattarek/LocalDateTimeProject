@@ -31,7 +31,6 @@ public class TreeMapExample {
 		System.out.println(treeMap);
 
 		final NavigableMap<Integer, Integer> navigableMap = new TreeMap<>();
-		navigableMap.
 	}
 
 	private static class Dog implements Comparable<Dog> {
