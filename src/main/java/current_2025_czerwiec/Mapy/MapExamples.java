@@ -14,7 +14,6 @@ public class MapExamples {
 		//		stringMap.put("5", "DEF");// nadpisze element o kluczu "5"
 
 		//		System.out.println(stringMap);
-
 		System.out.println(stringMap.containsKey("2"));
 		System.out.println(stringMap.containsValue("ZXC"));
 		System.out.println(stringMap.containsValue("ZXCE"));
