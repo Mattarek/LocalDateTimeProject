@@ -1,13 +1,16 @@
 package current_2025_czerwiec.megakExercises.Exercise1;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Car {
+public class Car implements Comparable<Car> {
 	private final String brand;
 	private final String model;
-	private final String year;
+	private final Integer year;
 
-	public Car(final String brand, final String model, final String year) {
+	public Car(final String brand, final String model, final Integer year) {
 		this.year = year;
 		this.model = model;
 		this.brand = brand;
@@ -34,8 +37,18 @@ public class Car {
 		return model;
 	}
 
-	public String getYear() {
+	public Integer getYear() {
 		return year;
+	}
+
+	@Override
+	public int compareTo(@NotNull final Car car) {
+		// Sposób nr.1
+		return Comparator
+				.comparingInt(Car::getYear)
+				.thenComparing(Car::getBrand)
+				.thenComparing(Car::getModel)
+				.compare(this, car); // uzywamy aby zwrócić int który jest wymagany przez compareTo
 	}
 
 	@Override
