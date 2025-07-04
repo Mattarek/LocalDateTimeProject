@@ -1,7 +1,5 @@
 package current_2025_czerwiec.megakExercises.Exercise1;
 
-import old_2024.staticInheritence.A.A;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;

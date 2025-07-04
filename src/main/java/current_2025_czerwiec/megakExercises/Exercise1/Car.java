@@ -8,9 +8,9 @@ import java.util.Objects;
 public class Car implements Comparable<Car> {
 	private final String brand;
 	private final String model;
-	private final Integer year;
+	private final String year;
 
-	public Car(final String brand, final String model, final Integer year) {
+	public Car(final String brand, final String model, final String year) {
 		this.year = year;
 		this.model = model;
 		this.brand = brand;
@@ -37,7 +37,7 @@ public class Car implements Comparable<Car> {
 		return model;
 	}
 
-	public Integer getYear() {
+	public String getYear() {
 		return year;
 	}
 
@@ -45,7 +45,7 @@ public class Car implements Comparable<Car> {
 	public int compareTo(@NotNull final Car car) {
 		// Sposób nr.1
 		return Comparator
-				.comparingInt(Car::getYear)
+				.comparing(Car::getYear)
 				.thenComparing(Car::getBrand)
 				.thenComparing(Car::getModel)
 				.compare(this, car); // uzywamy aby zwrócić int który jest wymagany przez compareTo
