@@ -37,6 +37,11 @@ public class InvoiceStack {
 	}
 
 	private void processAccountantInput(final String commond) {
+		if (invoiceStack.isEmpty()) {
+			System.out.println("Stack empty. No work for Accountant.");
+			return;
+		}
+
 		final Invoice invoice = invoiceStack.pop();
 		System.out.printf("%n%s%n", commond);
 		System.out.printf("ACCOUNTANT addded invoice ID: %s%n", invoice);
