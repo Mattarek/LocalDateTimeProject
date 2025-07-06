@@ -1,7 +1,5 @@
 package current_2025_czerwiec.KolekcjePlusMapy.ProjektKoncowyBigKurs;
 
-import org.jetbrains.annotations.NotNull;
-
 public class PersonCommandProcessor {
 	private final CustomQueue customQueue;
 
@@ -34,8 +32,9 @@ public class PersonCommandProcessor {
 		//				"PROCESS",
 		//				"PROCESS",
 		//				"PROCESS"
+
 		if (command.contains("ADD PERSON")) {
-			handleAddPerson(command);
+			handleAddPerson(command, command.contains("VIP"));
 			return;
 		}
 		if (command.contains("LEAVE PERSON")) {
@@ -49,7 +48,7 @@ public class PersonCommandProcessor {
 		throw new RuntimeException("Zła komenda: " + command);
 	}
 
-	private void handleAddPerson(final String command) {
+	private void handleAddPerson(final String command, final Boolean isVip) {
 		// Sposób nr.1
 		//		final String fullName = command.substring(command.indexOf('(') + 1, command.indexOf(')'));
 		//		final String[] split = fullName.split("_");
@@ -78,15 +77,26 @@ public class PersonCommandProcessor {
 		//		}
 
 		// Sposób nr.3 - z wyciągnieciem do incomingPerson
-		final Person incomingPerson = createIncomingPerson(command);
+		final Person incomingPerson = createIncomingPerson(command, isVip);
+
+		// Ternary operator musi być w Javie do czegoś przypisany, dlatego nie robie:
+		// isVip ? customQueue.addVip(incomingPerson) : customQueue.add(incomingPerson);
+
+		// Jeśli nie przypisujemy, to wykorzystajmy zwykł if:
+		if (isVip) {
+			customQueue.addVip(incomingPerson);
+			return;
+		}
 		customQueue.add(incomingPerson);
 	}
 
-	private Person createIncomingPerson(final String command) {
+	private Person createIncomingPerson(final String command, final Boolean isVip) {
 		final String personKey = command
 				.replace("ADD PERSON(", "")
-				.replace(")", "");
+				.replace(isVip ? ", VIP)" : ")", "");
 
+		System.out.println("personKey: " + personKey);
+		System.out.println(personKey + "is VIP:" + isVip);
 		final String[] split = personKey.split("_");
 
 		if (split.length == 2) {

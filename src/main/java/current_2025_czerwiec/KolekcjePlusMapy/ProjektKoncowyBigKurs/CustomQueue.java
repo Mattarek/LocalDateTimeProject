@@ -1,21 +1,39 @@
 package current_2025_czerwiec.KolekcjePlusMapy.ProjektKoncowyBigKurs;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CustomQueue<T> {
 	private final Deque<T> queue;
+	private final Deque<T> queueVip;
 	private final Map<String, Integer> counterMap = new HashMap<>();
 
-	public CustomQueue(final Deque<T> queue) {
+	public CustomQueue(final Deque<T> queue, final Deque<T> queueVip) {
 		this.queue = queue;
+		this.queueVip = queueVip;
 	}
 
 	public void add(final T item) { // W kursie jest welcome
 		final boolean isAdded = queue.offer(item);
 		System.out.printf("%s came to the queue: %s%n", item, isAdded);
 		System.out.println(queue);
+		System.out.println();
+	}
+
+	public void addVip(final T item) {
+		queueVip.offer(item);
+		System.out.printf("%s came to the queue: %s%n", item, queueVip.contains(item));
+		printMergeList();
+	}
+
+	private void printMergeList() {
+		final List mergeList = new ArrayList<>(queueVip);
+		final List commonList = new ArrayList<>(queue);
+		mergeList.addAll(commonList);
+		System.out.println("mergeList: " + mergeList);
 		System.out.println();
 	}
 
