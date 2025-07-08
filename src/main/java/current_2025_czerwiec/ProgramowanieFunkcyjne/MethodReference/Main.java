@@ -54,17 +54,27 @@ public class Main {
 		//		Optional.of(new Dog("Next Burek"))
 		//				.ifPresent(dogPrinter::printDoggy);
 
-		final List<Dog> dogs = new ArrayList<>();
-		dogs.add(new Dog("Burek"));
-		dogs.add(new Dog("Arek"));
-		dogs.add(new Dog("Curel"));
-		dogs.add(new Dog("Starek"));
+		//===========================================================================
+		// Optional with lambda
+		//		final List<Dog> dogs = new ArrayList<>();
+		//		dogs.add(new Dog("Burek"));
+		//		dogs.add(new Dog("Arek"));
+		//		dogs.add(new Dog("Curel"));
+		//		dogs.add(new Dog("Starek"));
+		//
+		//		Optional.of(new Dog("Burkę")).ifPresent(this::printDoggy);
 
-		Optional.of(new Dog("Burkę")).ifPresent(this::printDoggy);
-	}
+		//	private void printDoggy(final Dog dog) {
+		//		System.out.println("Static dog Printing");
+		//		System.out.println(dog);
+		//	}
+		//===========================================================================
 
-	private void printDoggy(final Dog dog) {
-		System.out.println("Static dog Printing");
-		System.out.println(dog);
+		final StreeringWheel streeringWheel = new StreeringWheel(12.5);
+
+		final Car car = Optional.of(streeringWheel).map(sw -> new Car(sw))
+				.orElse(new Car(new StreeringWheel(8.5)));
+
+		System.out.println(car);
 	}
 }
