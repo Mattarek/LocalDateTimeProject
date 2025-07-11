@@ -1,7 +1,9 @@
 package current_2025_czerwiec.ProgramowanieFunkcyjne.WbudowaneInterfaceFunkcyjneJava.DuzyProjekt;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.math.BigDecimal;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class Main {
 	/*
@@ -18,15 +20,35 @@ public class Main {
 	*/
 
 	public static void main(final String[] args) {
-		final Producer<String> myProducer = new Producer<>();
-		final Supplier<String> mySupplier = myProducer.getSupplierImpl("my awesome string");
-		final String a = mySupplier.get();
-		System.out.println(a);
+		// Part 1:
+		//		final Producer<String> myProducer = new Producer<>();
+		//		final Supplier<String> mySupplier = myProducer.getSupplierImpl("my awesome string");
+		//		final String a = mySupplier.get();
+		//		System.out.println(a);
+		//
+		//		myProducer
+		//				.getConsumerImpl()
+		//				.accept("qwe");// Faktyczne wywoanie lambdy występuje podczas użycia accept
+		//
+		//		System.out.println(myProducer.getFunctionImpl("String4").apply("String2"));
 
-		myProducer
-				.getConsumerImpl()
-				.accept("qwe");// Faktyczne wywoanie lambdy występuje podczas użycia accept
+		// Part 2:
+		final Function<String, Integer> myFunction = Transformer.getFunctionImpl();
 
-		System.out.println(myProducer.getFunctionImpl("String4").apply("String2"));
+		//Optional.of("myStrring").map(myFunction) - to opakowane i bezpieczne przekazanie
+		// "myStrring do myFunction. W Przypadku jesli nasza wartość to null, nie poleci NullPointerException.
+		// Co dzieje się w mapie krok po kroku:
+		//	1. Tworzysz Optional<String> z "myStrring".
+		//	2. Wewnątrz .map(...) przekazujesz "myStrring" do myFunction.
+		//	3. Wynik myFunction.apply("myStrring") == 9 jest opakowany z powrotem w Optional<Integer>.
+		final Optional<Integer> myOptional = Optional.of("myStrring").map(myFunction);
+		final Integer myTest = myFunction.apply("myStrring");
+		System.out.println(myTest);
+		System.out.println(myOptional);
+
+		final UnaryOperator<BigDecimal> myUnaryOperator = Transformer.getUnaryOperatorImpl();
+		final Optional<BigDecimal> myResult = Optional.of(BigDecimal.valueOf(3.14)).map(myUnaryOperator);
+		// Mamy t.intValue, więc mamy 3.14 skrócone na inta, więc na 3 * 2;
+		System.out.println(myResult);
 	}
 }
