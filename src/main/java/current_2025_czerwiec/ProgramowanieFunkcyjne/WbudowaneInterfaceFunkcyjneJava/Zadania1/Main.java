@@ -1,4 +1,4 @@
-package current_2025_czerwiec.ProgramowanieFunkcyjne.Zadania1;
+package current_2025_czerwiec.ProgramowanieFunkcyjne.WbudowaneInterfaceFunkcyjneJava.Zadania1;
 
 import java.util.function.BiFunction;
 
