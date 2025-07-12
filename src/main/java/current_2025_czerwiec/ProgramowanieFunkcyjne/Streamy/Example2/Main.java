@@ -42,5 +42,15 @@ public class Main {
 		//
 		//		final Optional<String> min = stringList.stream().min(String::compareTo);
 		//		System.out.println(min);
+
+		// allMatch | anyMatch | noneMatch
+		final List<String> stringList = List.of("v1", "v2", "v3");
+		final boolean vContains = stringList.stream()
+				.allMatch(element -> element.contains("v")); // Czy wszystkie elementy mają v?
+		System.out.println(vContains);
+
+		final boolean vAnyMatch = stringList.stream()
+				.anyMatch(element -> element.contains("v")); // Czy wszystkie elementy mają v?
+		System.out.println(vAnyMatch);
 	}
 }
