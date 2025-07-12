@@ -9,6 +9,8 @@ import java.util.stream.Stream;
 
 public class Main {
 	public static void main(final String[] args) {
+		final List<String> stringList = List.of("v1", "v2", "v3");
+
 		// Wyświetlanie i zwracanie nowej listy
 		// Odfiltrowywanie po pierwszym elemencie.
 		//		final List<String> stringList = List.of("v1", "v2", "v3");
@@ -43,14 +45,30 @@ public class Main {
 		//		final Optional<String> min = stringList.stream().min(String::compareTo);
 		//		System.out.println(min);
 
-		// allMatch | anyMatch | noneMatch
-		final List<String> stringList = List.of("v1", "v2", "v3");
-		final boolean vContains = stringList.stream()
-				.allMatch(element -> element.contains("v")); // Czy wszystkie elementy mają v?
-		System.out.println(vContains);
+		// // allMatch | anyMatch | noneMatch
+		//		final boolean vContains = stringList.stream()
+		//				.allMatch(element -> element.contains("v")); // Czy wszystkie elementy mają v?
+		//		System.out.println(vContains);
+		//
+		//		final boolean vAnyMatch = stringList.stream()
+		//				.anyMatch(element -> element.contains("v")); // Czy wszystkie elementy mają v?
+		//		System.out.println(vAnyMatch);
 
-		final boolean vAnyMatch = stringList.stream()
-				.anyMatch(element -> element.contains("v")); // Czy wszystkie elementy mają v?
-		System.out.println(vAnyMatch);
+		//		// noneMatch - true jeśli żadne z elementów ni epasuje
+		//		final boolean result = stringList.stream()
+		//				.noneMatch(element -> {
+		//					System.out.println(element);
+		//					return element.contains("1");
+		//				});
+		//		System.out.println(result);
+		//
+		// forEach - przechodzi po kazdym elemencie ale nie zwracamy nowe listy
+		final List<String> forEachArrayList = new ArrayList<>();
+		stringList.forEach(el -> {
+			forEachArrayList.add(el);
+		});
+
+		System.out.println("StringList: " + stringList);
+		System.out.println("forEachArrayList: " + forEachArrayList);
 	}
 }
