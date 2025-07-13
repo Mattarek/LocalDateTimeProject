@@ -1,9 +1,12 @@
 package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.Example2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,13 +65,46 @@ public class Main {
 		//				});
 		//		System.out.println(result);
 		//
-		// forEach - przechodzi po kazdym elemencie ale nie zwracamy nowe listy
-		final List<String> forEachArrayList = new ArrayList<>();
-		stringList.forEach(el -> {
-			forEachArrayList.add(el);
-		});
+		//		// forEach - przechodzi po kazdym elemencie ale nie zwracamy nowe listy
+		//		// forEach - nie gwarantuje nam kolejnosci
+		//		final List<String> forEachArrayList = new ArrayList<>();
+		//		stringList.forEach(el -> {
+		//			forEachArrayList.add(el);
+		//		});
+		//		stringList.stream().forEachOrdered(e -> {
+		//			System.out.println(e);
+		//		});
+		//		//		System.out.println("StringList: " + stringList);
+		//		//		System.out.println("forEachArrayList: " + forEachArrayList);
 
-		System.out.println("StringList: " + stringList);
-		System.out.println("forEachArrayList: " + forEachArrayList);
+		//		// reduce - redukuje cała listę do jednej wartosci
+		//		final String[] someChars = {
+		//				"z", "a", "k", " ", "a", "w", " ", "q", "e", "t", "u"
+		//		};
+		//
+		//		//musi byc optional aby zapobieac NullPointerExceptions
+		//		final String resultArr = Arrays.stream(someChars).reduce("start", (a, b) -> a + ":" + b);
+		//		System.out.println(resultArr);
+
+		// Collect
+		final String[] someChars = {"z", "a", "k", " ", "a", "w", " ", "q", "e", "t", "u"};
+		//		// z streama robimy kolekcje
+		//		final List<String> collectList = Stream.of(someChars).collect(Collectors.toList());
+		//		System.out.println(collectList);
+		//
+		//		// z streama robimy set ale
+		//		// nie mamy gwarancji jakiego typu bedzie to set, jeśli chcemy to sprawdzić to użymy: collectSet.getClass()
+		//		// Jeśli chcemy konkretną implementację, możemy to wymusić: .collect(Collectors.toCollection(() -> newTreeSet<>())
+		//		//		final Set<String> collectSet = Stream.of(someChars).collect(Collectors.toSet());
+		//		final Set<String> collectSet = Stream.of(someChars).collect(Collectors.toCollection(TreeSet::new));
+		//		System.out.println(collectSet.getClass()); // HashSet
+
+		final List<String> collect = Stream.of(someChars)
+				.collect(() -> new ArrayList<>(),
+						(existingList, nextElement) -> existingList.add(nextElement),
+						(leftColl, rightColl) -> leftColl.addAll(rightColl)
+				);
+		
+		System.out.println(collect);
 	}
 }
