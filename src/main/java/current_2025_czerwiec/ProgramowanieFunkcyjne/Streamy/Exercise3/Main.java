@@ -1,29 +1,33 @@
 package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.Exercise3;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class Main {
 	public static void main(final String[] args) {
-		final List<Person> people = Arrays.asList(
-				new Person("Andrzej", new City("Warszawa")),
-				new Person("Tomek", new City("Gdańsk")),
-				new Person("Marek", new City("Łódź")),
-				new Person("Arek", new City("Szczecin")),
-				new Person("Olek", new City("Zakopane")),
-				new Person("Dagmara", new City("Zawierciewa"))
-		);
+		// Part.1
+		//		final List<Person> people = Arrays.asList(
+		//				new Person("Andrzej", new City("Warszawa")),
+		//				new Person("Tomek", new City("Gdańsk")),
+		//				new Person("Marek", new City("Łódź")),
+		//				new Person("Arek", new City("Szczecin")),
+		//				new Person("Olek", new City("Zakopane")),
+		//				new Person("Dagmara", new City("Zawierciewa"))
+		//		);
+		//
+		//		final AtomicInteger counter = new AtomicInteger(0);// domyślnie 0
+		//
+		//		final String collect = people.stream()
+		//				.map(Person::getCity)
+		//				.map(city -> city.getName() + counter.incrementAndGet())
+		//				.map(String::toUpperCase)
+		//				.reduce("", (a, b) -> String.format("%s-%s", a, b));
+		//		System.out.println(collect);
 
-		final AtomicInteger counter = new AtomicInteger(0);// domyślnie 0
-
-		final String collect = people.stream()
-				.map(Person::getCity)
-				.map(city -> city.getName() + counter.incrementAndGet())
-				.map(String::toUpperCase)
-				.reduce("", (a, b) -> String.format("%s-%s", a, b));
-		System.out.println(collect);
-
+		// Part.2
 		//		final List<Person> strAO = strings.stream()
 		//				.filter(city -> city.name.contains("a"))
 		//				.filter(city -> city.name.contains("o"))
@@ -34,6 +38,19 @@ public class Main {
 		//				.filter(city -> city.name.contains("a") || city.name.contains("o"))
 		//				.toList();
 		//		System.out.println(strAorO);
+
+		// Part.3 - flatMap
+		final List<String> citiesOne = Arrays.asList("Warszawa", "Gdańsk", "Łódź", "Wrocław");
+		final List<String> citiesTwo = Arrays.asList("Białystok", "Gdańsk", "Łódź", "Kraków");
+		final List<String> citiesThree = Arrays.asList("Warszawa", "Rzeszów", "Szczecin", "Gdynia", "Grańsk");
+		final List<List<String>> citiesList = List.of(citiesOne, citiesTwo, citiesThree);
+		System.out.println(citiesList);
+
+		// Spłaszczamy [[],[],[]] do []
+		final List<String> stream = citiesList.stream() //
+				.flatMap(Collection::stream).toList();
+
+		System.out.println(stream);
 	}
 
 	static class Person {
