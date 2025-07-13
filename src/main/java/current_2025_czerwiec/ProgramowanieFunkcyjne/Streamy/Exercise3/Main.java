@@ -39,18 +39,37 @@ public class Main {
 		//				.toList();
 		//		System.out.println(strAorO);
 
-		// Part.3 - flatMap
-		final List<String> citiesOne = Arrays.asList("Warszawa", "Gdańsk", "Łódź", "Wrocław");
-		final List<String> citiesTwo = Arrays.asList("Białystok", "Gdańsk", "Łódź", "Kraków");
-		final List<String> citiesThree = Arrays.asList("Warszawa", "Rzeszów", "Szczecin", "Gdynia", "Grańsk");
-		final List<List<String>> citiesList = List.of(citiesOne, citiesTwo, citiesThree);
-		System.out.println(citiesList);
+		//		// Part.3 - flatMap - spłaszczanie tablic
+		//		final List<String> citiesOne = Arrays.asList("Warszawa", "Gdańsk", "Łódź", "Wrocław");
+		//		final List<String> citiesTwo = Arrays.asList("Białystok", "Gdańsk", "Łódź", "Kraków");
+		//		final List<String> citiesThree = Arrays.asList("Warszawa", "Rzeszów", "Szczecin", "Gdynia", "Grańsk");
+		//		final List<List<String>> citiesList = List.of(citiesOne, citiesTwo, citiesThree);
+		//		System.out.println(citiesList);
+		//
+		//		// Spłaszczamy [[],[],[]] do []
+		//		final List<String> stream = citiesList.stream() //
+		//				.flatMap(Collection::stream).toList();
+		//
+		//		System.out.println(stream);
 
-		// Spłaszczamy [[],[],[]] do []
-		final List<String> stream = citiesList.stream() //
-				.flatMap(Collection::stream).toList();
-
-		System.out.println(stream);
+		// Part.4 Peek -
+		final List<Person> people = Arrays.asList(
+				new Person("Andrzej", new City("Warszawa")),
+				new Person("Tomek", new City("Gdańsk")),
+				new Person("Marek", new City("Łódź")),
+				new Person("Arek", new City("Szczecin")),
+				new Person("Olek", new City("Zakopane")),
+				new Person("Dagmara", new City("Zawierciewa"))
+		);
+		final List<Integer> collect = people.stream()
+				.peek(el -> System.out.println("Step1: " + el))
+				.map(Person::getCity)
+				.peek(c -> System.out.println("Step2: " + c))
+				.map(City::getName)
+				.peek(el -> System.out.println("Step3: " + el))
+				.map(String::length)
+				.toList();
+		System.out.println(collect);
 	}
 
 	static class Person {
