@@ -2,6 +2,7 @@ package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.Exercise3;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -94,6 +95,89 @@ public class Main {
 		//
 		//		System.out.println(collect);
 
+		//		// Limit
+		//		final List<String> cities = Arrays.asList(
+		//				"Warszawa",
+		//				"Gdańsk",
+		//				"Łódź",
+		//				"Szczecin",
+		//				"Szczecin",
+		//				"Szczecin",
+		//				"Zakopane",
+		//				"Zawierciewa"
+		//		);
+		//
+		//		final Stream<String> citiesOne = Stream.iterate("Start:    ", a -> a + 1); // 10 liter więc a to 10
+		//
+		//		citiesOne
+		//				.peek(element -> System.out.println(1 + element))
+		//				.map(String::length)
+		//				.peek(elem -> System.out.println("Step2: " + elem))
+		//				.limit(3) // ograniczamy ilość elementów które przeprocesowywane
+		//				.forEach(e -> System.out.println("Step3: " + e));
+		//
+		//		System.out.println(citiesOne);
+
+		//	// Skip
+		//		final List<String> cities = Arrays.asList(
+		//				"Warszawa",
+		//				"Gdańsk",
+		//				"Łódź",
+		//				"Szczecin",
+		//				"Szczecin",
+		//				"Szczecin",
+		//				"Zakopane",
+		//				"Zawierciewa"
+		//		);
+		//
+		//		final Stream<String> citiesOne = Stream.iterate("Start", elem -> elem + ";");
+		//
+		//		citiesOne
+		//				.peek(elem -> System.out.println("Step: " + elem))
+		//				.map(String::length)
+		//				.peek(elem -> System.out.println("Elem2: " + elem))
+		//				.skip(2)
+		//				// skipujemy pierwsze n (w tym przykladzie 2 elementy, czyli nie przechodzimy do kolejnych
+		//				// kroków, a po prostu przechodzimy do kolejnego elementu
+		//				.peek(elem -> System.out.println("Step3: " + elem))
+		//				.forEach(elem -> System.out.println("Step4: " + elem));
+
+		//		// sorted - sortowanie
+		//		final List<String> cities = Arrays.asList(
+		//				"Warszawa",
+		//				"Gdańsk",
+		//				"Łódź",
+		//				"Szczecin",
+		//				"Szczecin",
+		//				"Szczecin",
+		//				"Zakopane",
+		//				"Zawierciewa"
+		//		);
+		//
+		//		final Stream<String> citiesOne = Stream.iterate("Start", elem -> elem + ";");
+		//
+		//		citiesOne
+		//				.peek(el -> System.out.println("Step1: " + el))
+		//				.limit(10)
+		//				.sorted() // domyślne sortowanie: cyfry, duże litery, małe litery, polskie znaki, operacja sorted
+		//				// musi poczekać na wszystkie elementy w streamie, aby móc je zebrać w jednym miejscu
+		//				// metoda sorted czeka, aż wszysatkie elementy do niej dotrą.
+		//				// więc jeśli uzywamy go z stream.iterate, to musimy ograniczyć ten iterate, bo sorted nie wykona się
+		//				// nigdy
+		//				.forEach(elem -> System.out.println("Elem2: " + elem));
+
+		// Sortowanie na liście obiektów
+		final List<Person> people = Arrays.asList(
+				new Person("Andrzej", new City("Warszawa")),
+				new Person("Tomek", new City("Gdańsk")),
+				new Person("Marek", new City("Łódź")),
+				new Person("Arek", new City("Szczecin")),
+				new Person("Olek", new City("Zakopane")),
+				new Person("Dagmara", new City("Zawierciewa"))
+		);
+		people.stream()
+				.sorted(Comparator.comparing(Person::getName))
+				.toList();
 	}
 
 	static class Person {
@@ -103,6 +187,10 @@ public class Main {
 		public Person(final String name, final City city) {
 			this.name = name;
 			this.city = city;
+		}
+
+		public String getName() {
+			return name;
 		}
 
 		public City getCity() {
