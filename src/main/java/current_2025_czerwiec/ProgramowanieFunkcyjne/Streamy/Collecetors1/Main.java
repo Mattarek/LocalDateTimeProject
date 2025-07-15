@@ -13,7 +13,8 @@ import java.util.stream.Collectors;
 
 public class Main {
 	public static void main(final String[] args) {
-		final List<String> cities = Arrays.asList("Warszawa", "Lublin", "Wrocław", "Wrocław", "Kraków", "Poznań");
+		final List<String> cities = Arrays.asList("Warszawa", "Lublin", "Wrocław", "Wrocław", "Kraków", "Poznań",
+				"Łódź", "Krosno");
 
 		// counting - zliczanie ilości elementó w tablicy
 		final long countResult = cities.stream()
@@ -82,6 +83,34 @@ public class Main {
 		});
 
 		// groupiingBy
+		// Przyklad 1
+		final Map<Integer, Set<String>> intMap = cities.stream()
+				.collect(Collectors.groupingBy(String::length, TreeMap::new, Collectors.toCollection(TreeSet::new)));
+		System.out.println(intMap.getClass()); // {4=[Łódź], 6=[Lublin, Kraków, Poznań, Krosno], 7=[Wrocław, Wrocław],
+		// 8=[Warszawa]}
+
+		// Przyklad 2 .collect(Collectors.groupingBy(String::length, Collectors.joining()));
+		// Stwórz klucze, które będągrupować nam elementy, według długosci, gdzie klucz to String::length
+		// w drugim agrumencie wstawiamy, co chcemy zrobić z naszymi values, tutaj .joining, czyli je łączymy
+		final Map<Integer, String> resultIntStr = cities.stream()
+				.collect(Collectors.groupingBy(String::length, Collectors.joining()));
+		System.out.println(resultIntStr); // {4=Łódź, 6=LublinKrakówPoznańKrosno, 7=WrocławWrocław, 8=Warszawa}
+
+		// Przykłąd 3
+		final Map<Integer, Long> resultIntLong = cities.stream()
+				.collect(Collectors.groupingBy(String::length, Collectors.counting()));
+		System.out.println(resultIntLong); // {4=1, 6=4, 7=2, 8=1}
+
+		// Przykłąd 4 - mapping, dodatkowa warstwa na operacje
+		final Map<Integer, Optional<String>> citiesStream = cities.stream()
+				.collect(Collectors.groupingBy(
+						String::length,
+						Collectors.mapping(
+								(String s) -> s.toUpperCase(),
+								Collectors.maxBy(Comparator.naturalOrder())
+						)
+				));
+		System.out.println(citiesStream);
 	}
 
 	private static List<String> merge(final List<String> left, final List<String> right) {
