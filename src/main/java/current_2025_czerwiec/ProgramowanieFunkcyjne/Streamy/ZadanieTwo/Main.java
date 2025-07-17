@@ -19,7 +19,7 @@ public class Main {
 		final String example = Stream.of(letters).map(String::toUpperCase)
 				.filter(letter -> !letter.equals("X"))
 				.sorted(Comparator.<String>naturalOrder().reversed())
-				.reduce("", (letterA, letterB) -> letterA + letterB);
+				.reduce(String::concat).orElse("");
 		System.out.println(example);
 	}
 }
