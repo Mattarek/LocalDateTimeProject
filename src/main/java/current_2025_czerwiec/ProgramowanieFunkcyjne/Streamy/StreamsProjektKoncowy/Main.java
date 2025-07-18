@@ -1,10 +1,14 @@
 package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.StreamsProjektKoncowy;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -59,6 +63,35 @@ public class Main {
 								Collectors.reducing(BigDecimal.ZERO, BigDecimal::add))
 				));
 
-		PrintingUtils.printingMap(clientListMap);
+		//		PrintingUtils.printingMap(clientListMap);
+
+		// 7. Przygotuj metodę, która przyjmie konkretną kategorię i dla tej kategorii zwróci mapę,
+		//		gdzie kluczem będzie id klienta, a wartością ilość kupionych przez niego produktów
+		//		z podanej kategorii (weź pod uwagę tylko transakcje, w których ilość kupionych produktów jest większa
+		//		niż 1).
+		final List<Purchase> purchaseList1 = DataFactory.produce();
+		final Map<String, ? extends Number> categoryStats = getCategoryStats(Product.Category.HOBBY, purchaseList1);
+		PrintingUtils.printingMap(categoryStats);
+	}
+
+	private static Map<String, ? extends Number> getCategoryStats(final Product.Category category,
+																  final List<Purchase> purchases) {
+		if (Objects.isNull(category)) {
+			throw new RuntimeException("Provided " + category + " is null!");
+		}
+
+		return purchases.stream()
+				.filter(p -> getPurchasePredicate(category, p))
+				.collect(Collectors.groupingBy(
+						p -> p.getBuyer().getId(),
+						Collectors.mapping(
+								Purchase::getQuantity,
+								Collectors.reducing(0L, Long::sum)
+						)
+				));
+	}
+
+	private static @NotNull Boolean getPurchasePredicate(final Product.Category category, final Purchase purchase) {
+		return purchase.getQuantity() > 1 && category.equals(purchase.getProduct().getCategory());
 	}
 }
