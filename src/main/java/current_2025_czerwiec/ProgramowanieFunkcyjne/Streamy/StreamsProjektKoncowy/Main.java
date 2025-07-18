@@ -1,6 +1,11 @@
 package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.StreamsProjektKoncowy;
 
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class Main {
 	public static void main(final String[] args) {
@@ -32,6 +37,28 @@ public class Main {
 		final long purchaseCount = DataFactory.produce().stream()
 				.filter(p -> Money.Currency.EUR.equals(p.getProduct().getPrice().getCurrency()))
 				.count();
-		System.out.println(purchaseCount);
+
+		// 5. Oblicz ile unikalnych kupionych produktów zostało zakupionych w EURO.
+		final List<Product> list1 = DataFactory.produce().stream()
+				.map(Purchase::getProduct)// Wyciągamy tylko elementy z product
+				.distinct() // usuwa elementy na podstawie equals i hashCode
+				.filter(p -> Money.Currency.EUR.equals(p.getPrice().getCurrency()))
+				.toList();
+
+		// 6. Oblicz ile PLN wydała w sklepie każda z osób które dokonał u nas zakupu. Uwzględnij tylko zakupy w PLN.
+		final List<Purchase> purchaseList = DataFactory.produce();
+
+		// Najlepiej jest używać Stringów, w przypadku klasy, mogą powstać dziwne odhyły przez to że ktos coś zapomniał
+		final Map<String, BigDecimal> clientListMap = purchaseList.stream()
+				.filter(p -> Money.Currency.PLN.equals(p.getProduct().getPrice().getCurrency()))
+				.collect(Collectors.groupingBy(
+						p -> p.getBuyer().getId(),
+						TreeMap::new,
+						Collectors.mapping(
+								purchase -> purchase.getProduct().getPrice().getValue().multiply(BigDecimal.valueOf(purchase.getQuantity())),
+								Collectors.reducing(BigDecimal.ZERO, BigDecimal::add))
+				));
+
+		PrintingUtils.printingMap(clientListMap);
 	}
 }
