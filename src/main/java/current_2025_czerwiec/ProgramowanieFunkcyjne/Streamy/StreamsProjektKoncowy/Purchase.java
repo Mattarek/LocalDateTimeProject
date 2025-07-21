@@ -20,6 +20,15 @@ public class Purchase {
 		this.when = when;
 	}
 
+	public Purchase(final Purchase purchase, final Status status) {
+		buyer = purchase.buyer;
+		product = purchase.product;
+		quantity = purchase.quantity;
+		delivery = purchase.delivery;
+		payment = purchase.payment;
+		when = purchase.when;
+	}
+
 	public Client getBuyer() {
 		return buyer;
 	}

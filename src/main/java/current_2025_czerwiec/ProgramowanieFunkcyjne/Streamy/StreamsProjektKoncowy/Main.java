@@ -3,13 +3,12 @@ package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.StreamsProjektKonco
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 	public static void main(final String[] args) {
@@ -71,7 +70,28 @@ public class Main {
 		//		niż 1).
 		final List<Purchase> purchaseList1 = DataFactory.produce();
 		final Map<String, ? extends Number> categoryStats = getCategoryStats(Product.Category.HOBBY, purchaseList1);
-		PrintingUtils.printingMap(categoryStats);
+		//		PrintingUtils.printingMap(categoryStats);
+
+		// 8. Każde zamówienie początkowo ma status PAID. Zaktualizuj status wszystkich zamówień, wykorzystująć
+		// sprawdzenie satusu każdego konkretnego zamówienia wykorzystująć kod klasy OrderService podany niżej.
+		// Aby sprawdzić status każdego zamówienia wykorzystaj kod klasy OrderService podany poniżej.
+		// Na koniec oblicz ile zamówień zostało przetworzonych, czyli status DONE.
+
+		// forEacha zwykle używa się, aby coś wyświetlić, a raczej do wyświetlenia wszystkich elementów.
+		// Możemy zmodyfikować niż istniejącą już wcześniej tablice ale lepiej jest zwracać nowa z zmienionymi
+		// wartościami, aby nie modyfikować starej.
+		final Map<Purchase.Status, List<Purchase>> collect = DataFactory.produce().stream()
+				.map(p -> new Purchase(p, OrderService.checkOrderStatus(p)))
+				.collect(Collectors.toMap(
+						Purchase::getStatus,
+						List::of,
+						(List<Purchase> cL, List<Purchase> nL) -> Stream.concat(cL.stream(), nL.stream()).collect(Collectors.toList()))
+				);
+		System.out.println(collect);
+
+		// 9. Oblicz ilu unikalnych klientów kupiło produkt wyceniony w EUR (klienci nie mogą się powtarzać,
+		// pamiętaj, że jeden mógł kupic kilka produktów).
+
 	}
 
 	private static Map<String, ? extends Number> getCategoryStats(final Product.Category category,
