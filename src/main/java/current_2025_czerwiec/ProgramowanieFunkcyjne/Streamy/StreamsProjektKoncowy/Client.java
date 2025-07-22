@@ -55,6 +55,12 @@ public class Client implements Comparable<Client> {
 		return id.compareTo(o.id);
 	}
 
+	public int getYearOfBirth() {
+		final String year = pesel.toString().substring(0, 2);
+		final String yearInNineteen = "19" + year;
+		return Integer.parseInt(yearInNineteen);
+	}
+
 	@Override
 	public boolean equals(final Object o) {
 		if (this == o) {

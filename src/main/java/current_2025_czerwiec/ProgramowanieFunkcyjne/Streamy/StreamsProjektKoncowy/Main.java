@@ -101,9 +101,22 @@ public class Main {
 				p -> p.getBuyer().getId()
 		));
 
-		PrintingUtils.printingMap(purchasesInEurByClient);
+		//		PrintingUtils.printingMap(purchasesInEurByClient);
+		// 10. Przygotuj mapę, gdzie kluczem będzie rocznik klienta, a wartościami, lista wszystkich produktów
+		// jakie klient z danego rocznika kupił. Rocznik weźz numeru PESEL, nie musi być to pełne 1987, może
+		// być przykładowo 87 (na potrzeby tegozadania upraszczamy model świata). Posortuj mapę po kluczu rosnąco.
+		// masz już purchaseList
+		final Map<Integer, List<Product>> uniqueClients = purchaseList.stream()
+				.collect(Collectors.groupingBy(
+						p -> p.getBuyer().getYearOfBirth(),
+						TreeMap::new,
+						Collectors.mapping(Purchase::getProduct, Collectors.toList())
+				));
+
+		PrintingUtils.printingMap(uniqueClients);
 	}
 
+	//purchase.getBuyer().getYear()
 	private static Map<String, ? extends Number> getCategoryStats(final Product.Category category,
 																  final List<Purchase> purchases) {
 		if (Objects.isNull(category)) {
