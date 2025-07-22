@@ -3,9 +3,11 @@ package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.StreamsProjektKonco
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -112,8 +114,20 @@ public class Main {
 						TreeMap::new,
 						Collectors.mapping(Purchase::getProduct, Collectors.toList())
 				));
+		//		PrintingUtils.printingMap(uniqueClients);
 
-		PrintingUtils.printingMap(uniqueClients);
+		// 11. Stwórz mapę, gdzie kluczem będą roczniki, a wartością unikalną zestaw kategorii produktów kupionych
+		// prze dany rocznik.
+		final Map<Integer, Set<Product.Category>> collect1 = DataFactory.produce().stream()
+				.collect(Collectors.toMap(
+								(Purchase p) -> p.getBuyer().getYearOfBirth(),
+								p -> Set.of(p.getProduct().getCategory()),
+								(curr, next) -> Stream.concat(curr.stream(), next.stream())
+										.collect(Collectors.toSet())
+						)
+				);
+
+		System.out.println(collect1);
 	}
 
 	//purchase.getBuyer().getYear()
