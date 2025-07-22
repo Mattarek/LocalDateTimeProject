@@ -87,11 +87,21 @@ public class Main {
 						List::of,
 						(List<Purchase> cL, List<Purchase> nL) -> Stream.concat(cL.stream(), nL.stream()).collect(Collectors.toList()))
 				);
-		System.out.println(collect);
+		//		System.out.println(collect);
 
 		// 9. Oblicz ilu unikalnych klientów kupiło produkt wyceniony w EUR (klienci nie mogą się powtarzać,
 		// pamiętaj, że jeden mógł kupic kilka produktów).
+		// Dodatkowo uzyskaj mapę w której kluczem jest id klienta, a wartością lista zakupów, produktów tego klienta
+		// w EURO.
+		final List<Purchase> count1 = DataFactory.produce().stream()
+				.filter(p -> Money.Currency.EUR.equals(p.getProduct().getPrice().getCurrency()))
+				.collect(Collectors.toList());
 
+		final Map<String, List<Purchase>> purchasesInEurByClient = count1.stream().collect(Collectors.groupingBy(
+				p -> p.getBuyer().getId()
+		));
+
+		PrintingUtils.printingMap(purchasesInEurByClient);
 	}
 
 	private static Map<String, ? extends Number> getCategoryStats(final Product.Category category,
