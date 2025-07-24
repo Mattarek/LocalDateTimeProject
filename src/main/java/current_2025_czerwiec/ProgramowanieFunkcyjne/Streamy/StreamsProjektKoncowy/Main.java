@@ -128,6 +128,21 @@ public class Main {
 				);
 
 		System.out.println(collect1);
+
+		// 12. Jaki jest drugi najczęściej kupowany produkt? Jeżeli kilka produktów jest kupionych w takiej same
+		// ilości, posortuj je alfabetycznie po id i nadal weź drugi. Czyli sortujesz najpierw po największej ilości
+		// wystąpień danego produktu, a potem po id.
+		final Map<String, Long> collectTuple = DataFactory.produce().stream()
+				.collect(
+						Collectors.groupingBy(
+								p -> p.getProduct().getId(),
+								TreeMap::new,
+								Collectors.mapping(
+										Purchase::getQuantity,
+										Collectors.reducing(0L, Long::sum)
+								)
+						));
+		PrintingUtils.printingMap(collectTuple);
 	}
 
 	//purchase.getBuyer().getYear()
