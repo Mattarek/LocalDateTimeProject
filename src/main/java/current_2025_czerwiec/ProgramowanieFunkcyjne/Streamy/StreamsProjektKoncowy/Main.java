@@ -3,6 +3,8 @@ package current_2025_czerwiec.ProgramowanieFunkcyjne.Streamy.StreamsProjektKonco
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
+import java.util.AbstractMap;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
+	static final Integer CURRENT_YEAR = 2020;
+
 	public static void main(final String[] args) {
 		// Unikalne usuwamy duplikaty, tak aby zebrać listę użytkowników.
 		final List<Client> list = DataFactory.produce().stream()
@@ -127,7 +131,7 @@ public class Main {
 						)
 				);
 
-		System.out.println(collect1);
+		//System.out.println(collect1);
 
 		// 12. Jaki jest drugi najczęściej kupowany produkt? Jeżeli kilka produktów jest kupionych w takiej same
 		// ilości, posortuj je alfabetycznie po id i nadal weź drugi. Czyli sortujesz najpierw po największej ilości
@@ -142,7 +146,58 @@ public class Main {
 										Collectors.reducing(0L, Long::sum)
 								)
 						));
-		PrintingUtils.printingMap(collectTuple);
+		//		PrintingUtils.printingMap(collectTuple);
+
+		final Comparator<? super Pair<String, Long>> pairComparator =
+				Comparator.comparing((Pair<String, Long> a) -> a.getV())
+						.reversed()
+						.thenComparing(Pair::getU);
+
+		final Pair<String, Long> aDefault = collectTuple.entrySet().stream()
+				.map(e -> new Pair<>(e.getKey(), e.getValue()))
+				.sorted(pairComparator)
+				.skip(1)
+				.findFirst()
+				.orElse(new Pair<>("Default", 0L));
+
+		//		System.out.println(aDefault);
+
+		// 13. Dla ludzi starszych niz 50lat, stwórz strukturę, w której zawrzesz informacje:
+		//	rocznik, najmniej popularna kategoria dla danego rocznia, ilość transakcji dla danego rocznika w obrębie
+		//	danek kategorii
+		// Mówiąc najmniej popularną mamy na myśli, najmniejszą ilość dokonanych zakupów w obrębie danej kategorii,
+		// np: "rocznik: 62, najmniej popularna kategoria: GAARDEN, transakcje: 5"
+		final Map<Integer, Map<Product.Category, Long>> coll = DataFactory.produce().stream()
+				.filter(p -> CURRENT_YEAR - (p.getBuyer().getYearOfBirth() + 1900) > 50)
+				.collect(Collectors.groupingBy(
+						p -> p.getBuyer().getYearOfBirth(),
+						Collectors.groupingBy(
+								p -> p.getProduct().getCategory(),
+								Collectors.counting()
+						)
+				));
+		//		PrintingUtils.printingMap(coll);
+
+		// 14. Który rocznik kupił najwięcej produktów
+		final List<Purchase> col = DataFactory.produce();
+		final Map<Integer, Long> quantityByYear = col.stream().collect(Collectors.groupingBy(
+				p -> p.getBuyer().getYearOfBirth(),
+				Collectors.mapping(
+						Purchase::getQuantity,
+						Collectors.reducing(0L, Long::sum)
+				)
+		));
+		final Map<Long, Set<Integer>> collect2 = quantityByYear.entrySet().stream().collect(Collectors.toMap(
+				Map.Entry::getValue,
+				e -> Set.of(e.getKey()),
+				(currentList, nextList) -> Stream.concat(currentList.stream(), nextList.stream())
+						.collect(Collectors.toSet()),
+				TreeMap::new
+		));
+
+		final Map.Entry<Long, Set<Integer>> noPurchesInTheShop = collect2.entrySet().stream().max(Comparator.comparing(Map.Entry::getKey))
+				.orElseThrow(() -> new RuntimeException("No purches in the shop"));
+		System.out.println(noPurchesInTheShop);
 	}
 
 	//purchase.getBuyer().getYear()
