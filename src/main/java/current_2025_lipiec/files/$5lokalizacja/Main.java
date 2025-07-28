@@ -62,8 +62,24 @@ public class Main {
 		//		System.out.println(dateTimeFormatterMedium);
 		//		System.out.println(dateTimeFormatterShort);
 
+		// // OffsetDateTime - określa przesunięcia
+		final LocalDate localDate = LocalDate.of(2010, Month.AUGUST, 2);
+		final LocalTime localTime = LocalTime.of(12, 52, 10);
 		final LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
+
+		// zone +3h
 		final OffsetDateTime offsetDateTime = OffsetDateTime.of(localDateTime, ZoneOffset.ofHours(3));
 		System.out.println(offsetDateTime);
+
+		// DateTimeFormatter
+		//		final DateTimeFormatter dateTimeFormatterFull = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL); //  Unsupported field: DayOfWeek
+		//		final DateTimeFormatter dateTimeFormatterLong = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG); // Unsupported field: DayOfMonth
+		//		final DateTimeFormatter dateTimeFormatterMedium = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM); // Unsupported field: DayOfMonth
+		final DateTimeFormatter dateTimeFormatterShort = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT); // Unsupported field: DayOfMonth
+
+		//		System.out.println("FULL: " + localTime.format(dateTimeFormatterFull));
+		//		System.out.println("LONG: " + localTime.format(dateTimeFormatterLong));
+		//		System.out.println("MEDIUM: " + localTime.format(dateTimeFormatterMedium));
+		System.out.println("SHORT: " + localTime.format(dateTimeFormatterShort));
 	}
 }
