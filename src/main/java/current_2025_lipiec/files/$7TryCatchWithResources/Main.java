@@ -33,4 +33,6 @@ public class Main {
 			out.write(line);
 		}
 	}
+
+	// AutoCloseable
 }
