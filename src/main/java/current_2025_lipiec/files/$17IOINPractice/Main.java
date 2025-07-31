@@ -22,7 +22,7 @@ public class Main {
 			while (value != -1) { // wejdz do petli jesli nie jest -1, czyli cos masz
 				outputStream.write(value); // wpisz do pliku docelowego
 				value = inputStream.read(); // przypisz kolejną wartosc i sprawdź czy ona jest (-1 jesli nie ma)
-				System.out.println(value);
+				System.out.println((char) value);
 			}
 		} catch (final FileNotFoundException e) {
 			e.printStackTrace();
