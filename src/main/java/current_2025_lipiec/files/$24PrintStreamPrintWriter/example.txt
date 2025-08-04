@@ -1,0 +1,4 @@
+11Car{name='Stefan'}
+zajavka
+Some value: [Car{name='Stefan'}]
+Some value: [Car{name='Stefan'}]
