@@ -36,9 +36,13 @@ public class Main {
 			writer.println();
 
 			writer.println("zajavka");
-			
+
 			writer.printf("Some value: [%s]%n", car);
 			writer.printf("Some value: [%s]%n", car);
+			try (final PrintWriter printWriter = new PrintWriter(System.out)) {
+				printWriter.println("Something");
+			} catch (final Exception e) {
+			}
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}

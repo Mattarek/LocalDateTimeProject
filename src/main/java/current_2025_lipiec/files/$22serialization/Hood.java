@@ -1,4 +1,6 @@
 package current_2025_lipiec.files.$22serialization;
 
-public class Hood {
+import java.io.Serializable;
+
+public class Hood implements Serializable {
 }
