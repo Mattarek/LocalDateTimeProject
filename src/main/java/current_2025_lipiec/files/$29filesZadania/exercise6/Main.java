@@ -1,6 +1,6 @@
 package current_2025_lipiec.files.$29filesZadania.exercise6;
 
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,29 +14,28 @@ public class Main {
 	// Do wygenerowania zawartości pliku wykorzystać: httpd://pl.lipsum.com
 	static void main() throws IOException {
 		final Path path = Paths.get("src/main/java/current_2025_lipiec/files/$29filesZadania/exercise6/text.txt");
-		final String list = convertFileTextToUppercase(path);
-		final String list2 = convertFileTextToUppercase2(path);
-		//		System.out.println(list);
-		System.out.println(list2);
+		final Path path2 = Paths.get("src/main/java/current_2025_lipiec/files/$29filesZadania/exercise6/text2.txt");
+		final String list = convertFileTextToUppercase(path, path2);
+		System.out.println(list);
 	}
 
 	// sposób nr.1
-	private static String convertFileTextToUppercase(final Path path) throws IOException {
-		final List<String> lineList = Files.readAllLines(path);
-		final List<String> list = new ArrayList<>();
-		for (final String s : lineList) {
-			list.add(s.toUpperCase());
+	private static String convertFileTextToUppercase(final Path path, final Path path2) throws IOException {
+		final List<String> stringsList;
+
+		try (final Stream<String> lineList = Files.lines(path)) {
+			stringsList = lineList
+					.map(String::toUpperCase)
+					.toList();
 		}
 
-		return String.join("", list);
-	}
-
-	private static String convertFileTextToUppercase2(final Path path) throws IOException {
-		try (final Stream<String> list = Files.lines(path)) {
-			return String.join("", list.map(String::toUpperCase).toList());
-		} catch (final IOException e) {
-			e.printStackTrace();
+		try (final BufferedWriter writer = Files.newBufferedWriter(path2)) {
+			for (final String line : stringsList) {
+				writer.write(line);
+				writer.newLine();
+			}
 		}
-		return "";
+
+		return String.join("", stringsList);
 	}
 }
