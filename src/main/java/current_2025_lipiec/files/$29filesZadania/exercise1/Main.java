@@ -21,7 +21,8 @@ public class Main {
 	//
 	static void main() {
 		final Path path = Paths.get("src/main/java/current_2025_lipiec/files/$29filesZadania/exercise1");
-		listFilesRecursive(path);
+		//		listFilesRecursive(path);
+		listFilesWalk(path);
 	}
 
 	static void listFilesRecursive(final Path dir) {
@@ -33,6 +34,14 @@ public class Main {
 				}
 			});
 		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void listFilesWalk(final Path path) {
+		try {
+			Files.walk(path).filter(p -> Files.isRegularFile(p)).forEach(System.out::println);
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
