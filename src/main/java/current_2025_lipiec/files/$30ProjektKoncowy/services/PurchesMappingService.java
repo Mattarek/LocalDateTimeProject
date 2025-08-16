@@ -1,6 +1,7 @@
 package current_2025_lipiec.files.$30ProjektKoncowy.services;
 
 import current_2025_lipiec.files.$30ProjektKoncowy.domain.Car;
+import current_2025_lipiec.files.$30ProjektKoncowy.domain.Location;
 import current_2025_lipiec.files.$30ProjektKoncowy.domain.Person;
 import current_2025_lipiec.files.$30ProjektKoncowy.domain.Purchase;
 
@@ -26,16 +27,17 @@ public class PurchesMappingService {
 		final String modelYear = row[9];
 
 		// nie parsujemy na longa aby nie trafić liczb po przecinku
-		final BigDecimal price = new BigDecimal(row[10].substring(1));
+		final BigDecimal price = new BigDecimal(row[10].replaceAll("[€\"]", ""));
 		final String country = row[11];
 		final String city = row[12];
 		final LocalDate date = LocalDate.parse(row[13]);
 
-		Long.valueOf(row[0]);
 		return new Purchase(
 				id,
 				new Person(firstName, lastName, email, ipAddress),
-				new Car(color, modelYear, model, company, vin, price)
+				new Car(color, modelYear, model, company, vin, price),
+				new Location(country, city),
+				date
 		);
 	}
 }

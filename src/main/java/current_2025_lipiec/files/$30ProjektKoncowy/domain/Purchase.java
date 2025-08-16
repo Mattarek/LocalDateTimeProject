@@ -5,24 +5,27 @@ import java.time.LocalDate;
 
 public class Purchase {
 	final long id;
-	final String firstName;
-	final String lastName;
+	final Person person;
 	final Car car;
 	final Location location;
 	final LocalDate date;
 
-	public Purchase(final long id,
-					final String firstName,
-					final String lastName,
-					final LocalDate date,
-					final Location location,
-					final Car car
-	) {
+	public Purchase(final long id, final Person person, final Car car, final Location location, final LocalDate date) {
 		this.id = id;
-		this.firstName = firstName;
-		this.date = date;
-		this.location = location;
+		this.person = person;
 		this.car = car;
-		this.lastName = lastName;
+		this.location = location;
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Purchase{" +
+				"id=" + id +
+				", person=" + person +
+				", car=" + car +
+				", location=" + location +
+				", date=" + date +
+				'}';
 	}
 }
