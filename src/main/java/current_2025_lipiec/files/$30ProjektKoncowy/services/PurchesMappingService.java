@@ -8,10 +8,6 @@ import current_2025_lipiec.files.$30ProjektKoncowy.domain.Purchase;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-//id,first_name,last_name,email,ip_address,color,car_vin,car_company,car_model,car_m
-// odel_year,car_price,country,city,date
-//1,Marsh,Polon,mpolon0@google.de,155.43.28.214,#255a97,3D7TT2HT8BG370793,Chevrolet,Cobalt,2006,"€67487.58",Czech Republic,Bořetice,2020-09-03
-
 public class PurchesMappingService {
 	public static Purchase myPurcahse(final String inputDataLine) {
 		final String[] row = inputDataLine.split(",");
@@ -38,6 +34,25 @@ public class PurchesMappingService {
 				new Car(color, modelYear, model, company, vin, price),
 				new Location(country, city),
 				date
+		);
+	}
+
+	public static String toCSV(final Purchase purchase) {
+		return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
+				purchase.id(),
+				purchase.person().firstName(),
+				purchase.person().lastName(),
+				purchase.person().email(),
+				purchase.person().ipAddress(),
+				purchase.car().color(),
+				purchase.car().vin(),
+				purchase.car().company(),
+				purchase.car().model(),
+				purchase.car().year(),
+				purchase.car().price(),
+				purchase.location().getCountry(),
+				purchase.location().getCity(),
+				purchase.date()
 		);
 	}
 }
