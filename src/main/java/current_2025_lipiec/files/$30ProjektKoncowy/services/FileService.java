@@ -41,6 +41,7 @@ public class FileService {
 
 		try (final BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset())) {
 			writer.write(header);
+			writer.newLine();
 			for (final String row : data) {
 				writer.write(row);
 				writer.newLine();
