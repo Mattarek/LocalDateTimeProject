@@ -11,6 +11,8 @@ import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class Main {
 	public static final String EX_2 = "./src/main/java/current_2025_lipiec/files/$30ProjektKoncowy/ex2/";
 	public static final String EX_3 = "./src/main/java/current_2025_lipiec/files/$30ProjektKoncowy/ex3/";
+	public static final String EX_4 = "./src/main/java/current_2025_lipiec/files/$30ProjektKoncowy/ex4/";
 
 	static void main() {
 
@@ -56,10 +59,35 @@ public class Main {
 				)
 				.toList();
 
-		generateEx3Report(ex3ReportData);
+		// EX4
+		final TreeMap<LocalDate, Long> mapByDate = purchaseList.stream().collect(Collectors.groupingBy(
+						Purchase::date,
+						TreeMap::new,
+						Collectors.counting()
+				)
+		);
 
+		final AtomicInteger counterex4 = new AtomicInteger(1);
+		final List<String> dataByDate = mapByDate.entrySet().stream()
+				.map(e -> String.format("%s, %s, %s,", counterex4.getAndIncrement(), e.getKey(), e.getValue()))
+				.toList();
+
+		final List<String> dataByCount =
+				mapByDate.entrySet().stream()
+						.map(e -> new Pair<>(e.getValue(), e.getKey()))
+						.sorted(Comparator.comparing(Pair::t))
+						.map(p -> String.format("%s, %s, %s,", counterex4.getAndIncrement(), p.u(), p.t()))
+						.toList();
+		generateEx4Report(dataByCount, "byDate");
+
+		//		generateEx3Report(ex3ReportData);
 		//		createFilesGroupedByCompany(mapByCompany);
 		//		printSortedByCompany();
+	}
+
+	private static void generateEx4Report(final List<String> data, final String suffix) {
+		final Path path = Paths.get(EX_4 + suffix + "report.csv");
+		FileService.saveToFile(path, data, "id,company,model");
 	}
 
 	private static void generateEx3Report(final List<String> ex3ReportData) {
