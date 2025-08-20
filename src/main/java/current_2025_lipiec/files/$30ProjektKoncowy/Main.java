@@ -72,13 +72,9 @@ public class Main {
 				.map(e -> String.format("%s, %s, %s,", counterex4.getAndIncrement(), e.getKey(), e.getValue()))
 				.toList();
 
-		final List<String> dataByCount =
-				mapByDate.entrySet().stream()
-						.map(e -> new Pair<>(e.getValue(), e.getKey()))
-						.sorted(Comparator.comparing(Pair::t))
-						.map(p -> String.format("%s, %s, %s,", counterex4.getAndIncrement(), p.u(), p.t()))
-						.toList();
-		generateEx4Report(dataByCount, "byDate");
+		for (int i = 0; i < ex3ReportData.size(); i++) {
+			ex3ReportData.set(i, (i + 1) + "," + ex3ReportData.get(i));
+		}
 
 		//		generateEx3Report(ex3ReportData);
 		//		createFilesGroupedByCompany(mapByCompany);
@@ -96,7 +92,7 @@ public class Main {
 	}
 
 	private static String getRawRow(final int counter, final String company, final String model, final Pair<BigDecimal, Long> pair) {
-		return String.format("%s,%s,%s,%s,%s", counter, company, model, pair.t(), pair.u());
+		return String.format("%s,%s,%s,%s", company, model, pair.t(), pair.u());
 	}
 
 	private static Pair<BigDecimal, Long> buildPair(final List<Purchase> purchaseList) {
