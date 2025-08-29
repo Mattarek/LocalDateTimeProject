@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Main {
@@ -24,8 +25,12 @@ public class Main {
 				final List<Customer> customers = CustomerMapper.mapToCustomers(resultSet);
 				customers.forEach(customer -> System.out.println("Customer: " + customer));
 			}
-		} catch (final Exception e) {
-			System.out.println("Error while working on database: " + e.getMessage());
+		} catch (final SQLException e) {
+			System.err.printf("Error, sqlState: [%s], errorCode: [%s], message: [%s]%n",
+					e.getSQLState(),
+					e.getSQLState(),
+					e.getMessage()
+			);
 		}
 	}
 }
