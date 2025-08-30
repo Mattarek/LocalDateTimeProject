@@ -12,6 +12,14 @@ public class Command {
 		this.toDoItem = toDoItem;
 	}
 
+	@Override
+	public String toString() {
+		return "Command{" +
+				"type=" + type +
+				", toDoItem=" + toDoItem +
+				'}';
+	}
+
 	public enum Type {
 		CREATE("CREATE"),
 		UPDATE("UPDATE"),
@@ -31,7 +39,17 @@ public class Command {
 			//					W Javie każdy enum automatycznie dostaje statyczną metodę values(),
 			//			która zwraca tablicę wszystkich elementów tego enuma w kolejności ich deklaracji.
 			return Stream.of(values())
-					.map(Type::getName).toList();
+					.map(Type::getName)
+					.toList();
+		}
+
+		public static Type from(final String commandType) {
+			for (final Type type : values()) {
+				if (type.name.equals(commandType)) {
+					return type;
+				}
+			}
+			throw new IllegalArgumentException(commandType);
 		}
 
 		public String getName() {

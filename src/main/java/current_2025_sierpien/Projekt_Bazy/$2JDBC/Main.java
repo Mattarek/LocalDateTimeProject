@@ -25,5 +25,7 @@ public class Main {
 				.filter(Optional::isPresent)
 				.map(Optional::get)
 				.toList();
+
+		commands.forEach(System.out::println);
 	}
 }
