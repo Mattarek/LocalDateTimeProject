@@ -3,14 +3,7 @@ package current_2025_sierpien.Projekt_Bazy.$2JDBC;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Command {
-	private final Type type;
-	private final ToDoItem toDoItem;
-
-	public Command(final Type type, final ToDoItem toDoItem) {
-		this.type = type;
-		this.toDoItem = toDoItem;
-	}
+public record Command(Type type, ToDoItem toDoItem) {
 
 	@Override
 	public String toString() {
@@ -18,6 +11,14 @@ public class Command {
 				"type=" + type +
 				", toDoItem=" + toDoItem +
 				'}';
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public ToDoItem getToDoItem() {
+		return toDoItem;
 	}
 
 	public enum Type {

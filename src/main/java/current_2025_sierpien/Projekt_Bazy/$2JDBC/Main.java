@@ -1,5 +1,6 @@
 package current_2025_sierpien.Projekt_Bazy.$2JDBC;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class Main {
 				.map(Optional::get)
 				.toList();
 
-		commands.forEach(System.out::println);
+		final DatabaseRunner databaseRunner = new DatabaseRunner();
+		commands.forEach(databaseRunner::run);
 	}
 }
