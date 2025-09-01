@@ -41,6 +41,7 @@ public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortD
 		UPDATE("UPDATE"),
 		READ("READ"),
 		READ_ALL("READ ALL"),
+		READ_GROUPED("READ GROUPED"),
 		DELETE("DELETE"),
 		DELETE_ALL("DELETE ALL");
 
