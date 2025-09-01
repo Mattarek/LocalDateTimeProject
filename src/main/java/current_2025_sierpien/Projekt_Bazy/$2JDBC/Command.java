@@ -17,6 +17,21 @@ public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortD
 		return type;
 	}
 
+	@Override
+	public Type type() {
+		return type;
+	}
+
+	@Override
+	public SortDir sortDir() {
+		return sortDir;
+	}
+
+	@Override
+	public ToDoItem toDoItem() {
+		return toDoItem;
+	}
+
 	public ToDoItem getToDoItem() {
 		return toDoItem;
 	}

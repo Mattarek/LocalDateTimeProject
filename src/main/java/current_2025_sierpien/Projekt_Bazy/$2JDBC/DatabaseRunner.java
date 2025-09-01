@@ -23,7 +23,13 @@ public class DatabaseRunner {
 			= "UPDATE TODOLIST SET DESCRIPTION = ?, DEADLINE = ?, PRIORITY = ? WHERE NAME = ?;";
 
 	private static final String SQL_READ_WHERE = "SELECT * FROM TODOLIST WHERE NAME = ?;";
-	private static final String SQL_READ_ALL = "SELECT * FROM TODOLIST;";
+
+	// W ten sposób nie możemy przygotować statementu, ponieważ wtedy podstawiane są wartości
+	// w 'ciapkach', przez co zapytanie jest niepoprawne. Pytajniki służą głównie do zapytań
+	// typu WHERE, do ORDER BY musimy podejść inaczej.
+	//	private static final String SQL_READ_ALL = "SELECT * FROM TODOLIST ORDER BY ? ?;";
+
+	private static final String SQL_READ_ALL = "SELECT * FROM TODOLIST ORDER BY ?1 ?2;";
 
 	private static final String SQL_DELETE = "DELETE FROM TODOLIST WHERE NAME = ?;";
 	private static final String SQL_DELETE_ALL = "DELETE FROM TODOLIST;";
@@ -81,9 +87,12 @@ public class DatabaseRunner {
 
 		try (
 				final Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				final PreparedStatement statement = connection.prepareStatement(SQL_READ_ALL)
+				final PreparedStatement statement = connection.prepareStatement(
+						SQL_READ_ALL
+								.replace("?1", command.sortBy().name())
+								.replace("?2", command.sortDir().name())
+				)
 		) {
-
 			try (final ResultSet resultSet = statement.executeQuery()) {
 				final List<ToDoItem> readItems = mapMapToDoItem(resultSet);
 				print(readItems);
@@ -136,11 +145,9 @@ public class DatabaseRunner {
 		) {
 			statement.setString(1, command.getToDoItem().getName());
 			statement.setString(2, command.getToDoItem().getDescription());
-			System.out.println(command);
 			statement.setTimestamp(3, Timestamp.valueOf(command.getToDoItem().getDeadline()));
 			statement.setInt(4, command.getToDoItem().getPriority());
 
-			System.out.println(command);
 			final int count = statement.executeUpdate();
 			System.out.printf("Run: [%s] successfully, changed: [%s] rows%n ", command.getType(), count);
 		} catch (final SQLException e) {
