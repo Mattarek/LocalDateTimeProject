@@ -35,9 +35,9 @@ public class DatabaseRunner {
 				Command.Type.CREATE, this::runAdd,
 				Command.Type.UPDATE, this::runEdit,
 				Command.Type.READ_ALL, this::runReadAll,
+				Command.Type.READ, this::runRead,
 				Command.Type.DELETE_ALL, this::runDeleteAll,
-				Command.Type.DELETE, this::runDelete,
-				Command.Type.READ, this::runRead
+				Command.Type.DELETE, this::runDelete
 		);
 	}
 
@@ -61,8 +61,8 @@ public class DatabaseRunner {
 				final Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				final PreparedStatement statement = connection.prepareStatement(SQL_READ_WHERE)
 		) {
+			statement.setString(1, command.getToDoItem().getName());
 
-			//			statement.setString(1, command.getToDoItem().getName());
 			try (final ResultSet resultSet = statement.executeQuery()) {
 				statement.setString(1, command.getToDoItem().getName());
 				final List<ToDoItem> readItems = mapMapToDoItem(resultSet);
@@ -130,15 +130,17 @@ public class DatabaseRunner {
 		if (!Command.Type.CREATE.equals(command.getType())) {
 			throw new IllegalArgumentException(command.getType().getName());
 		}
-
 		try (
 				final Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				final PreparedStatement statement = connection.prepareStatement(SQL_INSERT)
 		) {
 			statement.setString(1, command.getToDoItem().getName());
 			statement.setString(2, command.getToDoItem().getDescription());
+			System.out.println(command);
 			statement.setTimestamp(3, Timestamp.valueOf(command.getToDoItem().getDeadline()));
 			statement.setInt(4, command.getToDoItem().getPriority());
+
+			System.out.println(command);
 			final int count = statement.executeUpdate();
 			System.out.printf("Run: [%s] successfully, changed: [%s] rows%n ", command.getType(), count);
 		} catch (final SQLException e) {

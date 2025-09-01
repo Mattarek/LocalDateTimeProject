@@ -3,7 +3,7 @@ package current_2025_sierpien.Projekt_Bazy.$2JDBC;
 import java.util.List;
 import java.util.stream.Stream;
 
-public record Command(Type type, ToDoItem toDoItem) {
+public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortDir sortDir) {
 
 	@Override
 	public String toString() {
@@ -56,5 +56,10 @@ public record Command(Type type, ToDoItem toDoItem) {
 		public String getName() {
 			return name;
 		}
+	}
+
+	public enum SortDir {
+		ASC,
+		DESC
 	}
 }
