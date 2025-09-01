@@ -20,12 +20,7 @@ public class CommandBuilder {
 		}
 
 		final List<String> stringCommandWithParamsExtracted = Arrays.asList(split).subList(1, split.length);
-
-		final Map<String, String> collect = stringCommandWithParamsExtracted.stream()
-				.map(item -> item.split("="))
-				.filter(paramsSplit -> ToDoItem.Field.SORT.name().equals(paramsSplit[0]))
-				.collect(Collectors.toMap(itemSplit -> itemSplit[0], itemSplit -> itemSplit[1]));
-
+		
 		final Map<String, String> parametersMap = stringCommandWithParamsExtracted.stream()
 				.map(item -> item.split("="))
 				.collect(Collectors.toMap(itemSplit -> itemSplit[0], itemSplit -> itemSplit[1]));
@@ -35,7 +30,7 @@ public class CommandBuilder {
 						.map(params -> List.of(params.split(",")))
 						.orElse(Collections.emptyList());
 
-		final ToDoItem toDoItem = buildToDoItem(collect);
+		final ToDoItem toDoItem = buildToDoItem(parametersMap);
 		return Optional.of(
 				new Command(
 						Command.Type.from(commandType),
