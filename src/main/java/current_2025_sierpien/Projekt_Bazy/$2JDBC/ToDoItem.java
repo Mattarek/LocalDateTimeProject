@@ -4,11 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ToDoItem {
+
 	public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
 	private String name;
 	private String description;
 	private LocalDateTime deadline;
 	private Integer priority;
+	private Status status;
+
+	public ToDoItem() {
+		status = Status.TODO;
+	}
 
 	public String getName() {
 		return name;
@@ -16,14 +23,6 @@ public class ToDoItem {
 
 	public void setName(final String name) {
 		this.name = name;
-	}
-
-	public Integer getPriority() {
-		return priority;
-	}
-
-	public void setPriority(final Integer priority) {
-		this.priority = priority;
 	}
 
 	public String getDescription() {
@@ -42,6 +41,22 @@ public class ToDoItem {
 		this.deadline = deadline;
 	}
 
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(final Integer priority) {
+		this.priority = priority;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(final Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "ToDoItem{" +
@@ -57,6 +72,12 @@ public class ToDoItem {
 		DESCRIPTION,
 		DEADLINE,
 		PRIORITY,
-		SORT
+		SORT,
+		STATUS
+	}
+
+	public enum Status {
+		TODO,
+		COMPLETED
 	}
 }

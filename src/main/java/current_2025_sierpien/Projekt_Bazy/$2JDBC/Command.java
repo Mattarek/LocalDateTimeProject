@@ -1,6 +1,7 @@
 package current_2025_sierpien.Projekt_Bazy.$2JDBC;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortDir sortDir) {
@@ -13,29 +14,6 @@ public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortD
 				'}';
 	}
 
-	public Type getType() {
-		return type;
-	}
-
-	@Override
-	public Type type() {
-		return type;
-	}
-
-	@Override
-	public SortDir sortDir() {
-		return sortDir;
-	}
-
-	@Override
-	public ToDoItem toDoItem() {
-		return toDoItem;
-	}
-
-	public ToDoItem getToDoItem() {
-		return toDoItem;
-	}
-
 	public enum Type {
 		CREATE("CREATE"),
 		UPDATE("UPDATE"),
@@ -43,7 +21,8 @@ public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortD
 		READ_ALL("READ ALL"),
 		READ_GROUPED("READ GROUPED"),
 		DELETE("DELETE"),
-		DELETE_ALL("DELETE ALL");
+		DELETE_ALL("DELETE ALL"),
+		COMPLETED("COMPLETED");
 
 		private final String name;
 
@@ -52,21 +31,18 @@ public record Command(Type type, ToDoItem toDoItem, ToDoItem.Field sortBy, SortD
 		}
 
 		public static List<String> valuesAsList() {
-			//			👉 values() nie jest zwykłą metodą, którą sam musisz napisać.
-			//					W Javie każdy enum automatycznie dostaje statyczną metodę values(),
-			//			która zwraca tablicę wszystkich elementów tego enuma w kolejności ich deklaracji.
 			return Stream.of(values())
 					.map(Type::getName)
-					.toList();
+					.collect(Collectors.toList());
 		}
 
-		public static Type from(final String commandType) {
+		public static Type from(final String input) {
 			for (final Type type : values()) {
-				if (type.name.equals(commandType)) {
+				if (type.name.equals(input)) {
 					return type;
 				}
 			}
-			throw new IllegalArgumentException(commandType);
+			throw new IllegalArgumentException(input);
 		}
 
 		public String getName() {
